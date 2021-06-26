@@ -1,0 +1,38 @@
+{
+  "IsaacExt:Planetarium": {
+    "NAME": "Planetarium",
+    "DESCRIPTIONS": [
+      "You come to a room made of glass all around and on the ground. NL Through the room, you can see the #b~endless sea of stars~ NL In the middle of the room, there is a relic. NL What are you going to do?",
+      "Maybe it's just waiting for you.",
+      "You think it's better not to touch this thing for the sake of caution. After all, this room alone is weird enough."
+    ],
+    "OPTIONS": [
+      "[Take away the relic] #gGain #ga #grandom #gplanetarium #grelic.",
+      "[Leave]"
+    ]
+  },
+  "IsaacExt:HiddenRoomEvent": {
+    "NAME": "Hidden Room",
+    "DESCRIPTIONS": [
+      "",
+      "#r~bang！~ NL  NL It's really a hidden room, worthy of being a master of Feng Shui.",
+      "#r~bang！~ NL  NL Nothing happens, the fall of Feng Shui master."
+    ],
+    "OPTIONS": [
+      "[Angry shout] Drain the Larynx charge and enter the hidden room.",
+      "[Locked] Need: Larynx. And the Larynx charge number should be greater than or equal to 2."
+    ]
+  },
+  "IsaacExt:AngelRoomEvent": {
+    "NAME": "Angel Room",
+    "DESCRIPTIONS": [
+      "\"Congratulations on your winning the boss combat. Take one of these relics you like.\"",
+      "You think this one is good.",
+      "You don't think there's a single relic fits you."
+    ],
+    "OPTIONS": [
+      "[Take this one] #gObtain #g!R!。",
+      "[Leave]"
+    ]
+  }
+}

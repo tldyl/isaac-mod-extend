@@ -1,0 +1,16 @@
+[
+  {
+    "NAMES": [
+      "fungal spores"
+    ],
+    "PROPER_NAME": "Fungal Spores",
+    "DESCRIPTION": "Upon apply, apply #b4 #yPoison to ALL enemies. After #b2 turns, deal #b5 damage to owner and transfer this effect to up to #b2 random enemies."
+  },
+  {
+    "NAMES": [
+      "spore cloud"
+    ],
+    "PROPER_NAME": "Spore Cloud",
+    "DESCRIPTION": "When this enemy dies, give you the effect amount of #yVulnerable ."
+  }
+]

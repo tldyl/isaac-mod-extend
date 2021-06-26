@@ -1,0 +1,247 @@
+{
+  "IsaacExt:RedStew": {
+    "NAME": "红豆汤",
+    "FLAVOR": "以扫轻看了他长子的名分。他让出了自己的长子权，换来了这份红豆汤。",
+    "DESCRIPTIONS": [
+      "拾起时，将最大生命提升 #b7 并回复 #b15 点生命。 NL 此遗物的初始计数为 #b22 。 NL 每进入一个房间，计数减少 #b2 ；在你的回合结束时，计数减少 #b2 并失去 #b2 点 #y力量 。 NL 在战斗开始时，获得计数层数的 #y力量 。 NL 每 #y斩杀 一个敌人，计数增加 #b1 并获得 #b1 点 #y力量 。 NL 当计数归零时本遗物失效。"
+    ]
+  },
+  "IsaacExt:Mucormycosis": {
+    "NAME": "毛霉菌病",
+    "FLAVOR": "毛霉菌病是由毛霉目真菌引发的真菌感染。通常引发这种疾病的真菌多为毛霉属、根霉属、犁头霉属或小克银汉霉属。",
+    "DESCRIPTIONS": [
+      "你每打出一张攻击牌，有 #b25% 的几率给予敌人 #b1 层 #y真菌孢子 或 #y孢子云 。"
+    ]
+  },
+  "IsaacExt:GoldenRazor": {
+    "NAME": "金刀片",
+    "FLAVOR": "有付出有收获。",
+    "DESCRIPTIONS": [
+      "战斗中右键此遗物，失去 #b20 金币，获得 #b1 点 #y力量 。"
+    ]
+  },
+  "IsaacExt:Sulfur": {
+    "NAME": "硫磺",
+    "FLAVOR": "低配硫磺火。",
+    "DESCRIPTIONS": [
+      "#b3 充能，满充能时右击在手牌中加入一张 #y鲜血硫磺火 。"
+    ]
+  },
+  "IsaacExt:RockBottom": {
+    "NAME": "石头底座",
+    "FLAVOR": "其实它叫谷底的……",
+    "DESCRIPTIONS": [
+      "你无法再获得负面效果。 NL 你获得的 #y力量 、 #y敏捷 、 #y集中 层数不会降低且不会被移除。"
+    ]
+  },
+  "IsaacExt:BloodPuppy": {
+    "NAME": "血腥小狗",
+    "FLAVOR": "多么可爱的小家伙！",
+    "DESCRIPTIONS": [
+      "战斗开始时，召唤一只血腥小狗为你战斗。 NL 血腥小狗每造成 #b100 点伤害就进入下一阶段(最高三阶段)，第二、第三阶段会对所有人造成伤害。 NL 第二阶段下每造成 #b100 点伤害将为你回复 #b20 点生命；第三阶段下每造成 #b100 点伤害将为你回复 #b40 点生命。 NL 此时将其血条打到零即可回到第一阶段。"
+    ]
+  },
+  "IsaacExt:Sol": {
+    "NAME": "太阳",
+    "FLAVOR": "耀眼的胜利。",
+    "DESCRIPTIONS": [
+      "你每赢得一场Boss战斗的胜利：回复全部生命(无视绽放印记)、移除牌组中的所有 #r诅咒 、每场战斗开始时，获得 #b2 点 #y力量 。"
+    ]
+  },
+  "IsaacExt:Luna": {
+    "NAME": "月亮",
+    "FLAVOR": "月之祝福照耀着你。",
+    "DESCRIPTIONS": [
+      "从下一层开始，？房间的出现概率翻倍。 NL 你每走过一个？房间，获得 #b5 #y魂心 并在下场战斗开始时，获得 #b1 点 #y敏捷 。"
+    ]
+  },
+  "IsaacExt:Mercurius": {
+    "NAME": "水星",
+    "FLAVOR": "你感到神出鬼没。",
+    "DESCRIPTIONS": [
+      "在每场战斗开始时，获得 #b3 点 #y敏捷 。 NL 在战斗中可以随时离开房间。"
+    ]
+  },
+  "IsaacExt:Venus": {
+    "NAME": "金星",
+    "FLAVOR": "你感到美丽。",
+    "DESCRIPTIONS": [
+      "拾起时，获得 #b7 点最大生命。 NL 每场战斗开始时，给予所有敌人 #b3 层 #y虚弱 。 NL 当你受到未被 #y格挡 的 #y攻击 伤害时，使攻击者失去 #b3 点 #y力量 。"
+    ]
+  },
+  "IsaacExt:Terra": {
+    "NAME": "地球",
+    "FLAVOR": "生而为岩。",
+    "DESCRIPTIONS": [
+      "每场战斗开始时，获得 #b1 点 #y力量 。 NL 你造成的基础 #y攻击 伤害减半。 NL 你每打出两张攻击牌，下一张攻击牌的基础伤害翻 #b4 倍。"
+    ]
+  },
+  "IsaacExt:Mars": {
+    "NAME": "火星",
+    "FLAVOR": "右击冲刺。",
+    "DESCRIPTIONS": [
+      "#b3 充能，满充能时右击进行一次冲刺，对所有敌人造成 #b32 点伤害。 NL 冲刺期间无敌。"
+    ]
+  },
+  "IsaacExt:Jupiter": {
+    "NAME": "木星",
+    "FLAVOR": "你是个气体巨星！",
+    "DESCRIPTIONS": [
+      "每场战斗开始时，失去 #b2 点 #y敏捷 。 NL 你每打出一张 #y技能牌 ，计数加 #b1 并获得 #b1 点 #y敏捷 。 NL 你每打出一张 #y攻击牌 ，如果计数不为 #b0 ，计数减 #b1 并失去 #b1 点 #y敏捷 ，给予所有受到未被 #y格挡 的 #y攻击 伤害的敌人 #b3 层 #y中毒 ，多段攻击会施加多次 #y中毒 。"
+    ]
+  },
+  "IsaacExt:FourPointFiveVolt": {
+    "NAME": "4.5伏特",
+    "FLAVOR": "把他们打出汁！",
+    "DESCRIPTIONS": [
+      "清理房间不再会为充能类遗物充能。 NL 每造成 #b70 点伤害，为遗物列表中的第一个充能类遗物增加一格充能。 NL 单次攻击最多只能增加一格充能。"
+    ]
+  },
+  "IsaacExt:BatteryPack": {
+    "NAME": "电池包",
+    "FLAVOR": "暂时性能量！",
+    "DESCRIPTIONS": [
+      "拾起时，为所有充能类遗物充满能并将 #b3 张 #y电池 加入到你的牌组中。"
+    ]
+  },
+  "IsaacExt:Suplex": {
+    "NAME": "背摔！",
+    "FLAVOR": "叹为观止！",
+    "DESCRIPTIONS": [
+      "#b3 充能，满充能时右击选择一名敌人进行一次背摔，对其造成 #b50 点伤害。"
+    ]
+  },
+  "IsaacExt:Neptunus": {
+    "NAME": "海王星",
+    "FLAVOR": "开闸放水。",
+    "DESCRIPTIONS": [
+      "如果你在回合中不打出任何 #y攻击牌 ，你在下个回合造成的 #y攻击 伤害翻倍。"
+    ]
+  },
+  "IsaacExt:Larynx": {
+    "NAME": "喉咙",
+    "FLAVOR": "聆听我的痛楚。",
+    "DESCRIPTIONS": [
+      "#b12 充能，有充能时即可右击使用。 NL 对所有敌人造成充能层数 #b3 倍的伤害。 NL 受伤时增加 #b1 格充能。"
+    ]
+  },
+  "IsaacExt:BloodOath": {
+    "NAME": "血誓",
+    "FLAVOR": "抽干我的血。",
+    "DESCRIPTIONS": [
+      "在每层的第一场战斗开始时，吸取你的生命值直到 #b1 。 NL 每吸取 #b10 点生命值，在当前层的每场战斗开始时，获得 #b2 点 #y力量 、 #y格挡 和 #b1 点 #y敏捷 (向上取整)。"
+    ]
+  },
+  "IsaacExt:RKey": {
+    "NAME": "R键",
+    "FLAVOR": "是时候重新开始了。",
+    "DESCRIPTIONS": [
+      "一次性遗物，右击使用。 NL 传送到第一层。"
+    ]
+  },
+  "IsaacExt:Eraser": {
+    "NAME": "橡皮擦",
+    "FLAVOR": "删除一名敌人。",
+    "DESCRIPTIONS": [
+      "每层可对一名敌人使用一次。 NL 如果目标是非Boss敌人，立刻将其消灭；如果是Boss敌人，对其造成 #b15 点伤害。 NL 被橡皮擦消灭的敌人不会在本局游戏中出现。"
+    ]
+  },
+  "IsaacExt:GlitchedCrown": {
+    "NAME": "故障王冠",
+    "FLAVOR": "？？？？？",
+    "DESCRIPTIONS": [
+      "奖励界面掉落的遗物、商店中出售的遗物和在Boss遗物选择界面的遗物会在 #b5 个随机遗物中循环切换。"
+    ]
+  },
+  "IsaacExt:KeepersSack": {
+    "NAME": "店长袋",
+    "FLAVOR": "消费的力量。",
+    "DESCRIPTIONS": [
+      "每当你在商店内花费一次 #y金币 ，在每场战斗开始时，获得 #b1 点 #y力量 或 #b1 点 #y敏捷 或 #b1 点 #y集中 。"
+    ]
+  },
+  "IsaacExt:TMTrainer": {
+    "NAME": "TM训练家",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "醚畬烫恻鐳彖烫甿邈鐗烫唒烫縰飌欷烫癅妸皜缞懈烫揯齌舾鬉烫敻慰揲貔拣枚薁峗埇虫烫锟斤拷窏奅墕皠辆嫫峓舃筈钡适幟痶仪亘獟?尊H?U⊙/鰒O苧眓飜?_8?儺u殟f关剾禌Tzz〤掋*綍叔簌Bqhhxbb袶娭悬'覍 椿黝弽?傾魪荃麕弽騚棼纩歌齴殀锳嫭難6艙葚?Q?値鵔負澽z?Z?d??峫t怋?扭?巿v?㈱鴔W坅n幣扸a?螴??蓢Lm C怦?_?荕Fgu	媖7?O2澤y?|顊壁($饣胠h?@)椝贿kJ絻敕饞p担W.鎷? ?+鯺Ld._刌徿韀穳馠KwA?R寧崚;錼Y壻 ??@{h?V0m?a??ET凫瓃7呢zpwテSF徏C墹@o?檂'ntk霙?琯憸:潀n朒D-妱€Y誗S?FgY{?(A?M鈨R]^諚$?訋■鏖?遂縮介惣鵇D悒LSB?隶裍溓ｅ鵄F喓鋒Wt坒羆杌}$)?届庥?浓?赡8)G顸$鑫澔媼?鼡颿▅伲i{E? 牞?鼒/q"
+    ]
+  },
+  "IsaacExt:RedKey": {
+    "NAME": "红钥匙",
+    "FLAVOR": "探索异界。",
+    "DESCRIPTIONS": [
+      "#b4 充能，满充能时右击创建一个与当前房间相连的新房间。"
+    ]
+  },
+  "IsaacExt:TheWafer": {
+    "NAME": "圣饼",
+    "FLAVOR": "伤害抵抗。",
+    "DESCRIPTIONS": [
+      "将受到的大于 #b6 点的未被 #y格挡 的伤害变为 #b6 点。"
+    ]
+  },
+  "IsaacExt:TheRelic": {
+    "NAME": "圣髑",
+    "FLAVOR": "魂心生成器。",
+    "DESCRIPTIONS": [
+      "每清理 #b5 个房间，获得 #b10 #y魂心 。"
+    ]
+  },
+  "IsaacExt:SacredHeart": {
+    "NAME": "圣心",
+    "FLAVOR": "天使房最强道具！",
+    "DESCRIPTIONS": [
+      "拾起时，获得 #b7 点最大生命并回复所有生命。 NL 每场战斗开始时，获得 #b1 点 #y力量 。 NL 你的攻击造成 #b2.3 倍伤害。"
+    ]
+  },
+  "IsaacExt:HolyGrail": {
+    "NAME": "圣杯",
+    "FLAVOR": "飞行 + 血量上升",
+    "DESCRIPTIONS": [
+      "拾起时，获得 #b7 点最大生命。 NL 每场战斗开始时，获得 #b1 层 #y飞行 。"
+    ]
+  },
+  "IsaacExt:TheBody": {
+    "NAME": "肉体",
+    "FLAVOR": "我感万物。",
+    "DESCRIPTIONS": [
+      "拾起时，获得 #b21 点最大生命。"
+    ]
+  },
+  "IsaacExt:CrownOfLight": {
+    "NAME": "蓝皇冠",
+    "FLAVOR": "无暇带来力量。",
+    "DESCRIPTIONS": [
+      "拾起时，获得 #b20 #y魂心 。 NL 当你生命值为满且没有受到未被 #y格挡 的伤害时，在每回合的开始获得 #y双倍伤害 。"
+    ]
+  },
+  "IsaacExt:Revelation": {
+    "NAME": "启示",
+    "FLAVOR": "唤醒你的信仰。",
+    "DESCRIPTIONS": [
+      "拾起时，获得 #b20 #y魂心 。 NL 每场战斗开始时，获得 #b1 层 #y飞行 。 NL 右击此遗物，花费所有 [E] ，对所有敌人造成花费 [E] 点数的伤害 #b15 次。"
+    ]
+  },
+  "IsaacExt:HolyMantle": {
+    "NAME": "神圣斗篷",
+    "FLAVOR": "神圣护盾。",
+    "DESCRIPTIONS": [
+      "阻止你在每场战斗中第一次受到的生命值损伤。"
+    ]
+  },
+  "IsaacExt:AlabasterBox": {
+    "NAME": "雪花石膏盒",
+    "FLAVOR": "神圣祭品。",
+    "DESCRIPTIONS": [
+      "你所有的 #y魂心 和 #y黑心 将存进这件遗物中，直至存到 #b30 点。 NL 存至 #b30 点后可右击获得 #b2 个天使房道具和 #b15 #y魂心 (如果进行过恶魔交易则只能获得 #b10 #y魂心 和 #b1 个天使房道具)。"
+    ]
+  },
+  "IsaacExt:TheStairway": {
+    "NAME": "神圣天梯",
+    "FLAVOR": "愿你寻得来处。",
+    "DESCRIPTIONS": [
+      "商店有 #b50% 的概率出售 #y天使房 中的 #y遗物 。"
+    ]
+  }
+}

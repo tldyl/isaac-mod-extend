@@ -1,0 +1,15 @@
+{
+  "IsaacExt:MucormycosisPower": {
+    "NAME": "Fungal Spores",
+    "DESCRIPTIONS": [
+      "Upon apply, apply #b4 #yPoison to ALL enemies. After #b",
+      " turns, deal #b5 damage to owner and transfer this effect to up to #b2 random enemies."
+    ]
+  },
+  "IsaacExt:SacredHeartPower": {
+    "NAME": "Sacred Heart",
+    "DESCRIPTIONS": [
+      "Attack damage increased by #b230% in this combat."
+    ]
+  }
+}

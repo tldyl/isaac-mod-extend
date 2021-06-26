@@ -1,0 +1,15 @@
+{
+  "IsaacExt:MucormycosisPower": {
+    "NAME": "真菌孢子",
+    "DESCRIPTIONS": [
+      "给予时，给予所有敌人 #b4 层 #y中毒 。 #b",
+      " 回合后，对目标造成 #b5 点伤害并将此效果转移至最多 #b2 个随机敌人上。"
+    ]
+  },
+  "IsaacExt:SacredHeartPower": {
+    "NAME": "圣心",
+    "DESCRIPTIONS": [
+      "在本场战斗，造成的攻击伤害增加 #b230% 。"
+    ]
+  }
+}

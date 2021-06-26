@@ -1,0 +1,247 @@
+{
+  "IsaacExt:RedStew": {
+    "NAME": "Red Stew",
+    "FLAVOR": "Esau despised his birthright. He gave up the birthright in exchange for the red stew.",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b7 and heal #b15. NL The initial counter of this relic is #b22. NL Once you enter a room, the counter decreases by #b2 ; At the end of your turn, the counter decreases by #b2 and lose #b2 #yStrength. NL At the start of each combat, gain #yStrength equal to the counter. NL When #yFatal, the counter increases by #b1 and gain #b1 #yStrength. NL When the counter returns to zero, the relic is used up."
+    ]
+  },
+  "IsaacExt:Mucormycosis": {
+    "NAME": "Mucormycosis",
+    "FLAVOR": "Mucormycosis is a fungal infection triggered by the fungus Trichoderma.The fungi that usually cause the disease are mostly Mucor spp., Rhizopus spp., furrows, or picornithiasis spp.",
+    "DESCRIPTIONS": [
+      "Whenever you play an #yAttack , #b25% chance to apply #b1 #yFungal #ySpores or #ySpore #yCloud to an enemy."
+    ]
+  },
+  "IsaacExt:GoldenRazor": {
+    "NAME": "Golden Razor",
+    "FLAVOR": "Pain from gain.",
+    "DESCRIPTIONS": [
+      "Right-click to use in a combat. NL Lose #b20 gold, gain #b1 #yStrength."
+    ]
+  },
+  "IsaacExt:Sulfur": {
+    "NAME": "Sulfur",
+    "FLAVOR": "Budget Brimstone.",
+    "DESCRIPTIONS": [
+      "#b3 charges, when fully charged, right-click to add a #yBloody #yBrimstone in your hand."
+    ]
+  },
+  "IsaacExt:RockBottom": {
+    "NAME": "Rock Bottom",
+    "FLAVOR": "It's only up from there.",
+    "DESCRIPTIONS": [
+      "You can no longer gain negative effects. NL The amount of #yStrength , #yDexterity and #yFocus will not be able to decrease and can't be remove."
+    ]
+  },
+  "IsaacExt:BloodPuppy": {
+    "NAME": "Blood Puppy",
+    "FLAVOR": "What a cute little thing!",
+    "DESCRIPTIONS": [
+      "At the start of each combat, spawn a #yBlood #yPuppy pet."
+    ]
+  },
+  "IsaacExt:Sol": {
+    "NAME": "Sol",
+    "FLAVOR": "Radiant victory.",
+    "DESCRIPTIONS": [
+      "Every time you victory in a boss combat: Heal all HP(Ignore Mark of the Bloom), remove all #yCurses in your deck, at the start of each combat, gain #b2 #yStrength."
+    ]
+  },
+  "IsaacExt:Luna": {
+    "NAME": "Luna",
+    "FLAVOR": "The moon's blessing shines upon you.",
+    "DESCRIPTIONS": [
+      "Starting from the next act, the probability of an ? room doubling. NL Whenever you passed a ? room, gain #b5 #ySoul #yHeart and at the start of the next combat, gain #b1 #yDexterity."
+    ]
+  },
+  "IsaacExt:Mercurius": {
+    "NAME": "Mercurius",
+    "FLAVOR": "You feel elusive.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, gain #b3 #yDexterity. NL You can leave the room at any time during the combat."
+    ]
+  },
+  "IsaacExt:Venus": {
+    "NAME": "Venus",
+    "FLAVOR": "You feel pretty.",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise you Max HP by #b7. NL At the start of each combat, apply #b3 #yWeak to ALL enemies. NL Whenever you take an unblocked #yAttack damage, the attacker lose #b3 #yStrength."
+    ]
+  },
+  "IsaacExt:Terra": {
+    "NAME": "Terra",
+    "FLAVOR": "Born to rock.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, gain #b1 #yStrength. NL Your base #yAttack damage is halved. NL Whenever you play two attack cards, the base damage of the next attack card is quadrupled."
+    ]
+  },
+  "IsaacExt:Mars": {
+    "NAME": "Mars",
+    "FLAVOR": "Double tap dash.",
+    "DESCRIPTIONS": [
+      "#b3 charges, when fully charged, right-click to dash, deal #b32 damage to ALL enemies. NL You are #yInvincible during the dash."
+    ]
+  },
+  "IsaacExt:Jupiter": {
+    "NAME": "Jupiter",
+    "FLAVOR": "You're a gas giant!",
+    "DESCRIPTIONS": [
+      "At the start of each combat, lose #b2 #yDexterity. NL Whenever you play a #ySkill, the counter increases by #b1 and gain #b1 #yDexterity. NL Whenever you play an #yAttack, if the counter is not equal to zero, decrease the counter by #b1 and lose #b1 #yDexterity, apply #b3 #yPoison to the enemy who takes the unblocked #yAttack damage."
+    ]
+  },
+  "IsaacExt:FourPointFiveVolt": {
+    "NAME": "4.5 Volt",
+    "FLAVOR": "Beat the juice out of them!",
+    "DESCRIPTIONS": [
+      "Cleaning the room will no longer charge the chargeable relics. NL For every #b70 damage done, charge the first chargeable relic in the relic list. NL A single attack can only increase charge by one at most."
+    ]
+  },
+  "IsaacExt:BatteryPack": {
+    "NAME": "Battery Pack",
+    "FLAVOR": "Instant energy!",
+    "DESCRIPTIONS": [
+      "Upon pickup, fully charged ALL chargeable relic and add #b3 #yBattery to your deck."
+    ]
+  },
+  "IsaacExt:Suplex": {
+    "NAME": "Suplex!",
+    "FLAVOR": "As the acme of perfection!",
+    "DESCRIPTIONS": [
+      "#b3 charges, when fully charged, right-click to deal #b50 damage to an enemy."
+    ]
+  },
+  "IsaacExt:Neptunus": {
+    "NAME": "Neptunus",
+    "FLAVOR": "Open the floodgates.",
+    "DESCRIPTIONS": [
+      "If you do not play any #yAttacks during your turn, gain #yDouble #yDamage next turn."
+    ]
+  },
+  "IsaacExt:Larynx": {
+    "NAME": "Larynx",
+    "FLAVOR": "Hear my pain.",
+    "DESCRIPTIONS": [
+      "#b12 charges, right-click to use even not fully charged. NL Deals #b3 times the number of charged levels of damage to ALL enemies. NL Increase the charge by #b1 when takes an unblocked damage."
+    ]
+  },
+  "IsaacExt:BloodOath": {
+    "NAME": "Blood Oath",
+    "FLAVOR": "Blood me dry.",
+    "DESCRIPTIONS": [
+      "At the start of the first combat on each act, Drain your health to #b1. NL At the start of each combat at the current act, for each #b10 HP drained, gain #b2 #yStrength, #yBlock and #b1 #yDexterity (Round up)."
+    ]
+  },
+  "IsaacExt:RKey": {
+    "NAME": "R Key",
+    "FLAVOR": "Time to start over.",
+    "DESCRIPTIONS": [
+      "One time use relic, right click to use. NL Teleport to Exordium."
+    ]
+  },
+  "IsaacExt:Eraser": {
+    "NAME": "Eraser",
+    "FLAVOR": "Erase thy enemy.",
+    "DESCRIPTIONS": [
+      "Each act can be used once against an enemy. NL If the target is a non-boss enemy, kill it instantly; If it's a boss enemy, deal #b15 damage. NL The enemies killed by Eraser will not appear in this game."
+    ]
+  },
+  "IsaacExt:GlitchedCrown": {
+    "NAME": "Glitched Crown",
+    "FLAVOR": "?????",
+    "DESCRIPTIONS": [
+      "Relics dropped from the combat reward screen; Relics sold in the shop; And relics in the boss relic select screen will be cycled among #b5 random relics."
+    ]
+  },
+  "IsaacExt:KeepersSack": {
+    "NAME": "Keeper's Sack",
+    "FLAVOR": "Spending power.",
+    "DESCRIPTIONS": [
+      "Whenever you spend gold in the shop, at the start of each combat, gain #b1 #yStrength or #b1 #yDexterity or #b1 #yFocus."
+    ]
+  },
+  "IsaacExt:TMTrainer": {
+    "NAME": "TMTRAINER",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "AzZ  BZzZCDEz ZZFGzzZZ  HzIZZz zZJZZZz zKLMNOZ ZPzQRS TzzUVWZ  zzXYZab ZZZZ  cdeZZfg hZZZijkl ZZmnoZ ZZ pqrsZZ tuv wxyz1 2345 67890/ *-+!@# $%^&* ()`~<>,./? ;:'\"{}[] -="
+    ]
+  },
+  "IsaacExt:RedKey": {
+    "NAME": "Red Key",
+    "FLAVOR": "Explore the other side.",
+    "DESCRIPTIONS": [
+      "#b4 charges, when fully charged, right-click to create a new room connected with the current room."
+    ]
+  },
+  "IsaacExt:TheWafer": {
+    "NAME": "The Wafer",
+    "FLAVOR": "Damage resistance.",
+    "DESCRIPTIONS": [
+      "Whenever you would receive #b7 or more unblocked damage, reduce it to #b6."
+    ]
+  },
+  "IsaacExt:TheRelic": {
+    "NAME": "The Relic",
+    "FLAVOR": "Soul generator.",
+    "DESCRIPTIONS": [
+      "Every #b5 combats, gain #b10 #ySoul #yHeart."
+    ]
+  },
+  "IsaacExt:SacredHeart": {
+    "NAME": "Sacred Heart",
+    "FLAVOR": "DMG UP!",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b7 and heal all of your HP. NL At the start of each combat, gain #b1 #yStrength. NL Your attack deals #b2.3x damage."
+    ]
+  },
+  "IsaacExt:HolyGrail": {
+    "NAME": "Holy Grail",
+    "FLAVOR": "Flight + HP up",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise you Max HP by #b7. NL At the start of each combat, gain #b1 #yFlight."
+    ]
+  },
+  "IsaacExt:TheBody": {
+    "NAME": "The Body",
+    "FLAVOR": "I feel all.",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b21."
+    ]
+  },
+  "IsaacExt:CrownOfLight": {
+    "NAME": "Crown Of Light",
+    "FLAVOR": "The untainted gain power.",
+    "DESCRIPTIONS": [
+      "Upon pickup, gain #b20 #ySoul #yHeart. NL If your HP is full and didn't take any unblocked damage, gain #yDouble #yDamage at the start of your turn."
+    ]
+  },
+  "IsaacExt:Revelation": {
+    "NAME": "Revelation",
+    "FLAVOR": "Awaken your faith.",
+    "DESCRIPTIONS": [
+      "Upon pickup, gain #b20 #ySoul #yHearts. NL At the start of each combat, gain #b1 #yFlight. NL Right click to use all [E] , deals damage to ALL enemies equal to the amount of [E] spent #b15 times."
+    ]
+  },
+  "IsaacExt:HolyMantle": {
+    "NAME": "Holy Mantle",
+    "FLAVOR": "Holy shield.",
+    "DESCRIPTIONS": [
+      "Prevent the first time you would lose HP each combat."
+    ]
+  },
+  "IsaacExt:AlabasterBox": {
+    "NAME": "Alabaster Box",
+    "FLAVOR": "A sacred offering.",
+    "DESCRIPTIONS": [
+      "Alabaster Box has to be charged by picking up #ySoul #yHearts or #yBlack #yHearts. NL It requires #b30 charges, when fully charged, right click to obtain #b2 Angel Room relics and #b15 #ySoul #yHearts (If a Devil Deal was taken previously, gain #b10 #ySoul #yHearts and one Angel Room relic instead)."
+    ]
+  },
+  "IsaacExt:TheStairway": {
+    "NAME": "The Stairway",
+    "FLAVOR": "May you get what you came for.",
+    "DESCRIPTIONS": [
+      "The shop has a #b50% chance of selling the #yrelics from the #yAngel #yRoom."
+    ]
+  }
+}
