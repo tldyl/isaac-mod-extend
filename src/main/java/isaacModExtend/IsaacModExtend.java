@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.Circlet;
 import com.megacrit.cardcrawl.relics.IncenseBurner;
 import isaacModExtend.events.Planetarium;
 import isaacModExtend.relics.*;
@@ -99,6 +100,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.addAudio("RELIC_BLOOD_OATH_STAB", "IsaacAudio/sfx/relic_blood_oath_stab.wav");
         BaseMod.addAudio("RELIC_RED_KEY", "IsaacAudio/sfx/relic_red_key.wav");
         BaseMod.addAudio("RELIC_REVELATION", "IsaacAudio/sfx/relic_revelation.wav");
+        BaseMod.addAudio("SOUL_WISP_IGNITE", "IsaacAudio/sfx/soul_wisp_ignite.wav");
+        BaseMod.addAudio("SOUL_WISP_EXTINCT", "IsaacAudio/sfx/soul_wisp_extinct.wav");
     }
 
     @Override
@@ -135,6 +138,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
         angelOnlyRelics.add(new Revelation());
         angelOnlyRelics.add(new HolyMantle());
         angelOnlyRelics.add(new TheStairway());
+        angelOnlyRelics.add(new BookOfVirtues());
     }
 
     public static AbstractRelic getRandomPlanetariumRelic(Random rng) {
@@ -147,8 +151,14 @@ public class IsaacModExtend implements EditStringsSubscriber,
         } else {
             List<AbstractRelic> ret = new ArrayList<>();
             List<AbstractRelic> cpy = new ArrayList<>(relics);
-            for (int i=0;i<amount;i++) {
-                ret.add(cpy.remove(rng.random(cpy.size() - 1)));
+            while (ret.size() < amount) {
+                AbstractRelic relic;
+                if (cpy.size() > 0) {
+                    relic = cpy.remove(rng.random(cpy.size() - 1));
+                } else {
+                    relic = new Circlet();
+                }
+                if (relic.canSpawn()) ret.add(relic);
             }
             return ret;
         }

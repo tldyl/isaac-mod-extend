@@ -39,4 +39,9 @@ public class TheStairway extends CustomRelic {
             this.stopPulse();
         }
     }
+
+    @Override
+    public boolean canSpawn() {
+        return AbstractDungeon.floorNum <= 55;
+    }
 }

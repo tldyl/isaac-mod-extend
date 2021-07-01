@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import isaacModExtend.IsaacModExtend;
+import isaacModExtend.interfaces.SpecialActiveItem;
 import isaacModExtend.patches.HushsDoorPatch;
 import patches.ui.SoulHeartPatch;
 import relics.abstracrt.ClickableRelic;
@@ -12,10 +13,11 @@ import relics.abstracrt.ClickableRelic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlabasterBox extends ClickableRelic {
+public class AlabasterBox extends ClickableRelic implements SpecialActiveItem {
     public static final String ID = IsaacModExtend.makeID("AlabasterBox");
     public static final String IMG_PATH = "relics/alabasterBox.png";
     private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
+    private boolean triggered = false;
 
     public AlabasterBox() {
         super(ID, IMG, RelicTier.SHOP, LandingSound.HEAVY);
@@ -83,5 +85,17 @@ public class AlabasterBox extends ClickableRelic {
                 }
             });
         }
+    }
+
+    @Override
+    public void preUse() {
+        if (this.counter >= 30) {
+            triggered = true;
+        }
+    }
+
+    @Override
+    public boolean triggered() {
+        return triggered;
     }
 }

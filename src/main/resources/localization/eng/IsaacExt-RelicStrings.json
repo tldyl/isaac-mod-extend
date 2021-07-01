@@ -243,5 +243,12 @@
     "DESCRIPTIONS": [
       "The shop has a #b50% chance of selling the #yrelics from the #yAngel #yRoom."
     ]
+  },
+  "IsaacExt:BookOfVirtues": {
+    "NAME": "Book Of Virtues",
+    "FLAVOR": "Spiritual companionship.",
+    "DESCRIPTIONS": [
+      "#b4 charges, when fully charged, right click to summon a wisp. NL When you have any other chargeable relic, this relic cannot be used by right clicking directly. NL When you right click to use any other chargeable relics, summon a wisp with corresponding special effects."
+    ]
   }
 }

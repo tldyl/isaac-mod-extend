@@ -1,6 +1,7 @@
 package isaacModExtend.screens;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Circlet;
@@ -38,6 +39,9 @@ public class AngelShopScreen extends ShopScreen {
             }
             for (int i=0;i<3;i++) {
                 relics.add(new StoreRelic(angelRelics.get(i), i, this));
+                if (!Settings.isDailyRun) {
+                    relics.get(i).price *= AbstractDungeon.merchantRng.random(0.95F, 1.05F);
+                }
             }
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();

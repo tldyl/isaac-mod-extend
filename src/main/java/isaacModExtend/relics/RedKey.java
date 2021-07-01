@@ -54,7 +54,7 @@ public class RedKey extends ChargeableRelic implements CustomSavable<Map<String,
         }
     }
 
-    private void createNewRoom(MapRoomNode currNode, boolean loadingData) {
+    public void createNewRoom(MapRoomNode currNode, boolean loadingData) {
         List<MapRoomNode> availableNodes = new ArrayList<>();
         for (MapRoomNode node : AbstractDungeon.map.get(Math.min(currNode.y + 1, AbstractDungeon.map.size() - 1))) {
             if (node.getRoom() == null) {

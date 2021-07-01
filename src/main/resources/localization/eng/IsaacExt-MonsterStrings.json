@@ -3,5 +3,85 @@
     "NAME": "Blood Puppy",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "IsaacExt:SoulWisp": {
+    "NAME": "Soul Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:NecronomiconSoulWisp": {
+    "NAME": "Necronomicon Soul Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:AnarchistCookbookWisp": {
+    "NAME": "AnarchistCookbook Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:BelialSoulWisp": {
+    "NAME": "Belial Soul Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:BlankCardSoulWisp": {
+    "NAME": "Blank Card Soul Wisp",
+    "DIALOG": ["Obtained a card reward"],
+    "MOVES": [""]
+  },
+  "IsaacExt:ShadowsSoulWisp": {
+    "NAME": "Shadows Soul Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:RedKeyWisp": {
+    "NAME": "Red Key Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:SatanicBibleWisp": {
+    "NAME": "Satanic Bible Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:IVBagWisp": {
+    "NAME": "IV Bag Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:DiplopiaWisp": {
+    "NAME": "Diplopia Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:GuppysPawWisp": {
+    "NAME": "Guppy's Paw Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:TheBibleWisp": {
+    "NAME": "The Bible Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:BeanSoulWisp": {
+    "NAME": "Bean Soul Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:MagicFingerWisp": {
+    "NAME": "Magic Finger Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:LarynxWisp": {
+    "NAME": "Larynx Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:YumHeartWisp": {
+    "NAME": "Yum Heart Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
   }
 }

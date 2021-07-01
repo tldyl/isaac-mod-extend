@@ -3,5 +3,85 @@
     "NAME": "血腥小狗",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "IsaacExt:SoulWisp": {
+    "NAME": "魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:NecronomiconSoulWisp": {
+    "NAME": "死灵魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:AnarchistCookbookWisp": {
+    "NAME": "A书魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:BelialSoulWisp": {
+    "NAME": "恶魔魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:BlankCardSoulWisp": {
+    "NAME": "白卡魂火",
+    "DIALOG": ["获得卡牌奖励"],
+    "MOVES": [""]
+  },
+  "IsaacExt:ShadowsSoulWisp": {
+    "NAME": "阴影魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:RedKeyWisp": {
+    "NAME": "红钥匙魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:SatanicBibleWisp": {
+    "NAME": "黑书魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:IVBagWisp": {
+    "NAME": "卖血袋魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:DiplopiaWisp": {
+    "NAME": "复眼魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:GuppysPawWisp": {
+    "NAME": "猫爪魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:TheBibleWisp": {
+    "NAME": "圣经魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:BeanSoulWisp": {
+    "NAME": "屁豆魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:MagicFingerWisp": {
+    "NAME": "魔法手指魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:LarynxWisp": {
+    "NAME": "喉咙魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:YumHeartWisp": {
+    "NAME": "美味心魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
   }
 }

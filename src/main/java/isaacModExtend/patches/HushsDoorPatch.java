@@ -4,8 +4,12 @@ import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import isaacModExtend.monsters.pet.SatanicBibleWisp;
 import isaacModExtend.rooms.AngelRoom;
+import patches.player.PlayerAddFieldsPatch;
 import relics.HushsDoor;
 
 @SuppressWarnings("unused")
@@ -20,6 +24,12 @@ public class HushsDoorPatch {
 
         @SpireInsertPatch(rloc = 22, localvars = {"chanceToDevil"})
         public static void Insert(HushsDoor hushsDoor, @ByRef int[] chanceToDevil) {
+            MonsterGroup minions = PlayerAddFieldsPatch.f_minions.get(AbstractDungeon.player);
+            for (AbstractMonster m : minions.monsters) {
+                if (m instanceof SatanicBibleWisp) {
+                    chanceToDevil[0] += 1;
+                }
+            }
             if (dealWithDevil) {
                 chanceToAngel = 0;
             } else {

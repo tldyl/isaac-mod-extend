@@ -60,6 +60,6 @@ public class CrownOfLight extends CustomRelic {
 
     @Override
     public int getPrice() {
-        return 350;
+        return 300;
     }
 }

@@ -54,7 +54,7 @@ public class RedStew extends CustomRelic {
     public void onPlayerEndTurn() {
         this.counter -= 2;
         if (!this.usedUp) {
-            addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, -2)));
+            addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, -Math.min(2, this.counter))));
             this.flash();
             addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
         }
