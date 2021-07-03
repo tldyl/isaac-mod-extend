@@ -15,6 +15,7 @@ import isaacModExtend.IsaacModExtend;
 import isaacModExtend.interfaces.PostGenerateDungeonMapSubscriber;
 import isaacModExtend.map.RedMapEdge;
 import isaacModExtend.map.RedMapRoomNode;
+import isaacModExtend.rooms.AngelRoom;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import relics.abstracrt.ChargeableRelic;
@@ -100,11 +101,13 @@ public class RedKey extends ChargeableRelic implements CustomSavable<Map<String,
         int roll = AbstractDungeon.mapRng.random(99);
         if (roll < 5) {
             newNode.room = new BloodShopRoom();
-        } else if (roll < 15) {
+        } else if (roll < 10) {
+            newNode.room = new AngelRoom();
+        } else if (roll < 20) {
             newNode.room = new TreasureRoom();
         } else if (roll < 45) {
             newNode.room = new CustomEventRoom();
-        } else if (roll < 60) {
+        } else if (roll < 65) {
             newNode.room = new ShopRoom();
         } else if (roll < 80) {
             newNode.room = new MonsterRoom();
