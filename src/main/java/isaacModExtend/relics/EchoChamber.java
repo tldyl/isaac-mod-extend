@@ -61,10 +61,10 @@ public class EchoChamber extends CustomRelic {
     @Override
     public void onVictory() {
         this.cardsToRepeat.clear();
-        EchoChamber.this.description = getUpdatedDescription();
-        EchoChamber.this.tips.clear();
-        EchoChamber.this.tips.add(new PowerTip(EchoChamber.this.name, EchoChamber.this.description));
-        EchoChamber.this.initializeTips();
+        this.description = getUpdatedDescription();
+        this.tips.clear();
+        this.tips.add(new PowerTip(this.name, this.description));
+        this.initializeTips();
         sb.delete(0, sb.length());
     }
 }
