@@ -47,6 +47,7 @@ public class IsaacModPatch {
         IsaacMod.relics.add(AlabasterBox.ID);
         IsaacMod.relics.add(TheStairway.ID);
         IsaacMod.relics.add(BookOfVirtues.ID);
+        IsaacMod.relics.add(EchoChamber.ID);
     }
 
     @SpirePatch(

@@ -250,5 +250,12 @@
     "DESCRIPTIONS": [
       "#b4 charges, when fully charged, right click to summon a wisp. NL When you have any other chargeable relic, this relic cannot be used by right clicking directly. NL When you right click to use any other chargeable relics, summon a wisp with corresponding special effects."
     ]
+  },
+  "IsaacExt:EchoChamber": {
+    "NAME": "Echo Chamber",
+    "FLAVOR": "I can see see the future future future...",
+    "DESCRIPTIONS": [
+      "The first card you play in each turn will trigger the effect of the first card you play in each turn of the combat once."
+    ]
   }
 }
