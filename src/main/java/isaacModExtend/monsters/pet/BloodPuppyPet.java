@@ -384,6 +384,10 @@ public class BloodPuppyPet extends AbstractPet {
         return leftSide;
     }
 
+    public void setLeftSide(boolean leftSide) {
+        this.leftSide = leftSide;
+    }
+
     public float getOriginalX() {
         return originalX;
     }

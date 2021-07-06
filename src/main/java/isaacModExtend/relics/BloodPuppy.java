@@ -5,9 +5,11 @@ import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import helpers.SummonHelper;
 import isaacModExtend.IsaacModExtend;
+import isaacModExtend.actions.SuplexRushAction;
 import isaacModExtend.interfaces.NeutralCreature;
 import isaacModExtend.monsters.pet.BloodPuppyPet;
 import isaacModExtend.saves.BloodPuppySaveData;
@@ -49,6 +51,8 @@ public class BloodPuppy extends CustomRelic implements NeutralCreature, CustomSa
                 bloodPuppyPet.currentHealth = saveData.health;
             }
         }
+        this.bloodPuppyPet.setLeftSide(true);
+        SuplexRushAction.movePosition(Settings.WIDTH * 0.75F + (float) point.x * Settings.xScale, AbstractDungeon.floorY + (float) point.y * Settings.yScale, this.bloodPuppyPet);
         this.bloodPuppyPet.powers.clear();
         SummonHelper.summonMinion(this.bloodPuppyPet);
     }

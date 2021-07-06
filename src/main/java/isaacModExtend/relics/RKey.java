@@ -1,20 +1,21 @@
 package isaacModExtend.relics;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.curses.AscendersBane;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.dungeons.Exordium;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.vfx.GameSavedEffect;
 import isaacModExtend.IsaacModExtend;
 import relics.abstracrt.ClickableRelic;
+
+import java.lang.reflect.Field;
 
 public class RKey extends ClickableRelic {
     public static final String ID = IsaacModExtend.makeID("RKey");
@@ -62,6 +63,20 @@ public class RKey extends ClickableRelic {
                     isDone = true;
                 }
             });
+
+            if (Loader.isModLoaded("actlikeit")) {
+                try {
+                    Class<?> cls = Class.forName("actlikeit.savefields.BehindTheScenesActNum");
+                    Field field = cls.getDeclaredField("bc");
+                    field.setAccessible(true);
+                    Object bc = field.get(null);
+                    field = cls.getDeclaredField("actNum");
+                    field.setAccessible(true);
+                    field.set(bc, 0);
+                } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

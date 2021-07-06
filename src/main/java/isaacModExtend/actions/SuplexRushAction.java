@@ -105,7 +105,7 @@ public class SuplexRushAction extends AbstractGameAction {
         }
     }
 
-    private void movePosition(float x, float y, AbstractCreature creature) {
+    public static void movePosition(float x, float y, AbstractCreature creature) {
         creature.drawX = x;
         creature.drawY = y;
         creature.dialogX = creature.drawX + 0.0F * Settings.scale;
