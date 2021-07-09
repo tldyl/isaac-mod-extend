@@ -8,11 +8,14 @@ import com.megacrit.cardcrawl.actions.common.InstantKillAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import isaacModExtend.IsaacModExtend;
 import isaacModExtend.interfaces.AbstractTargetingRelic;
+import isaacModExtend.interfaces.SpecialActiveItem;
 import relics.abstracrt.ClickableRelic;
 
 import java.util.ArrayList;
@@ -21,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Eraser extends ClickableRelic implements CustomSavable<Map<String, Object>>,
-                                                      AbstractTargetingRelic {
+                                                      AbstractTargetingRelic,
+                                                      SpecialActiveItem {
     public static final String ID = IsaacModExtend.makeID("Eraser");
     public static final String IMG_PATH = "relics/eraser.png";
     private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
@@ -125,25 +129,29 @@ public class Eraser extends ClickableRelic implements CustomSavable<Map<String, 
         if (m != null) {
             this.counter--;
             this.flash();
-            if (m.type != AbstractMonster.EnemyType.BOSS) {
-                this.erasedMonsters.add(m.id);
-                eraseEnemy(m.id);
-            } else {
-                m.damage(new DamageInfo(AbstractDungeon.player, 15, DamageInfo.DamageType.THORNS));
-                if (m.isDying) {
-                    this.erasedMonsters.add(m.id);
-                    eraseEnemy(m.id);
-                }
+            eraseEnemy(m.id);
+            if (AbstractDungeon.player.hasRelic(BookOfVirtues.ID)) {
+                BookOfVirtues bookOfVirtues = (BookOfVirtues) AbstractDungeon.player.getRelic(BookOfVirtues.ID);
+                bookOfVirtues.use(ID);
             }
         }
     }
 
-    private void eraseEnemy(String id) {
+    public void eraseEnemy(String id) {
         for (AbstractMonster monster : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!monster.isDeadOrEscaped()) {
                 if (monster.id.equals(id)) {
-                    IsaacModExtend.addToBot(new RelicAboveCreatureAction(monster, this));
-                    addToBot(new InstantKillAction(monster));
+                    if (monster.type != AbstractMonster.EnemyType.BOSS) {
+                        IsaacModExtend.addToBot(new RelicAboveCreatureAction(monster, this));
+                        addToBot(new InstantKillAction(monster));
+                        this.erasedMonsters.add(monster.id);
+                    } else {
+                        monster.damage(new DamageInfo(AbstractDungeon.player, 15, DamageInfo.DamageType.THORNS));
+                        if (monster.isDying) {
+                            IsaacModExtend.addToBot(new RelicAboveCreatureAction(monster, this));
+                            this.erasedMonsters.add(monster.id);
+                        }
+                    }
                 }
             }
         }
@@ -197,7 +205,7 @@ public class Eraser extends ClickableRelic implements CustomSavable<Map<String, 
 
     @Override
     public float getCurrentX() {
-        return this.currentX;
+        return this.hb.cX;
     }
 
     @Override
@@ -221,5 +229,15 @@ public class Eraser extends ClickableRelic implements CustomSavable<Map<String, 
         if (!this.isHidden()) {
             this.renderArrows(sb);
         }
+    }
+
+    @Override
+    public void preUse() {
+
+    }
+
+    @Override
+    public boolean triggered() {
+        return false;
     }
 }

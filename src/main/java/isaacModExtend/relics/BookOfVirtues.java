@@ -70,7 +70,7 @@ public class BookOfVirtues extends ChargeableRelic implements PreRightClickRelic
         soulWisps.removeAll(toRemove);
     }
 
-    private void use(String relicId) {
+    public void use(String relicId) {
         this.flash();
         SoulWisp wisp;
         CardCrawlGame.sound.play("SOUL_WISP_IGNITE");
@@ -165,6 +165,12 @@ public class BookOfVirtues extends ChargeableRelic implements PreRightClickRelic
                 break;
             case "IsaacExt:GoldenRazor": //金刀片
                 wisp = new MagicFingerWisp();
+                break;
+            case "IsaacExt:Sulfur": //硫磺
+                wisp = new SulfurSoulWisp();
+                break;
+            case "IsaacExt:Eraser": //橡皮擦
+                wisp = new EraserSoulWisp();
                 break;
             case "UnicornStump": //断角
                 if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() > 0) return;

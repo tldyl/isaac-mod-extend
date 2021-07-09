@@ -23,10 +23,10 @@ public class TheWafer extends CustomRelic {
 
     @Override
     public int onAttacked(DamageInfo info, int damageAmount) {
-        if (damageAmount > 6) {
+        if (damageAmount > 7) {
             this.flash();
             this.addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-            return 6;
+            return 7;
         } else {
             return damageAmount;
         }

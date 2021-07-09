@@ -178,7 +178,7 @@
     "NAME": "The Wafer",
     "FLAVOR": "Damage resistance.",
     "DESCRIPTIONS": [
-      "Whenever you would receive #b7 or more unblocked damage, reduce it to #b6."
+      "Whenever you would receive #b8 or more unblocked damage, reduce it to #b7."
     ]
   },
   "IsaacExt:TheRelic": {

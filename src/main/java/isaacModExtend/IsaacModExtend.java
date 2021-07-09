@@ -10,6 +10,7 @@ import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,12 +18,15 @@ import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Circlet;
 import com.megacrit.cardcrawl.relics.IncenseBurner;
+import helpers.MinionHelper;
 import isaacModExtend.events.Planetarium;
 import isaacModExtend.relics.*;
+import patches.player.PlayerAddFieldsPatch;
 import relics.Habit;
 import relics.TheBible;
 import relics.Void;
@@ -37,7 +41,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
                                        AddAudioSubscriber,
                                        PostInitializeSubscriber,
                                        EditKeywordsSubscriber,
-                                       PostUpdateSubscriber {
+                                       PostUpdateSubscriber,
+                                       PostRenderSubscriber {
 
     private static List<AbstractGameAction> actionList = new ArrayList<>();
     private static List<AbstractRelic> planetariumRelics = new ArrayList<>();
@@ -196,19 +201,32 @@ public class IsaacModExtend implements EditStringsSubscriber,
         }
     }
 
-    public static Texture getPlayerSnapshot(FrameBuffer frameBuffer) {
+    public static Texture getCreatureSnapshot(AbstractCreature creature, FrameBuffer frameBuffer) {
         frameBuffer.begin();
         Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
         Gdx.gl.glClear(16384);
-        if (sb != null && AbstractDungeon.player != null) {
+        if (sb != null && creature != null) {
             sb.begin();
             boolean t = Settings.hideCombatElements;
             Settings.hideCombatElements = true;
-            AbstractDungeon.player.render(sb);
+            creature.render(sb);
             Settings.hideCombatElements = t;
             sb.end();
         }
         frameBuffer.end();
         return frameBuffer.getColorBufferTexture();
+    }
+
+    @Override
+    public void receivePostRender(SpriteBatch sb) {
+        if (AbstractDungeon.getCurrMapNode() != null && AbstractDungeon.getCurrRoom() != null && AbstractDungeon.player != null) {
+            MonsterGroup minions = PlayerAddFieldsPatch.f_minions.get(AbstractDungeon.player);
+            switch (AbstractDungeon.getCurrRoom().phase) {
+                case COMBAT:
+                    if (MinionHelper.hasMinions(AbstractDungeon.player)) {
+                        minions.render(sb);
+                    }
+            }
+        }
     }
 }

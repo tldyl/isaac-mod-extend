@@ -83,5 +83,15 @@
     "NAME": "Yum Heart Wisp",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "IsaacExt:SulfurSoulWisp": {
+    "NAME": "Sulfur Soul Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:EraserSoulWisp": {
+    "NAME": "Eraser Soul Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
   }
 }

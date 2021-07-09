@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import isaacModExtend.IsaacModExtend;
 
@@ -15,7 +16,7 @@ public class BlurEffect extends AbstractGameEffect {
 
     public BlurEffect(float alpha, float duration) {
         this.frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
-        this.img = IsaacModExtend.getPlayerSnapshot(this.frameBuffer);
+        this.img = IsaacModExtend.getCreatureSnapshot(AbstractDungeon.player, this.frameBuffer);
         this.a = alpha;
         this.duration = duration;
         this.startingDuration = this.duration;

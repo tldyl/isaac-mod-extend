@@ -83,5 +83,15 @@
     "NAME": "美味心魂火",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "IsaacExt:SulfurSoulWisp": {
+    "NAME": "硫磺魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:EraserSoulWisp": {
+    "NAME": "橡皮擦魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
   }
 }
