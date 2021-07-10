@@ -93,5 +93,10 @@
     "NAME": "Eraser Soul Wisp",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "Monstro": {
+    "NAME": "Monstro",
+    "DIALOG": [""],
+    "MOVES": [""]
   }
 }

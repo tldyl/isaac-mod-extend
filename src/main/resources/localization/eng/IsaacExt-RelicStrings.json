@@ -257,5 +257,12 @@
     "DESCRIPTIONS": [
       "The first card you play in each turn will trigger the effect of the first card you play in each turn of the combat once."
     ]
+  },
+  "IsaacExt:Damocles": {
+    "NAME": "Damocles",
+    "FLAVOR": "A king’sfortune... but at what cost?",
+    "DESCRIPTIONS": [
+      "An extra relic is gained after battle, but have chance to die when you lose HP #yfrom #yenemies, #b10% at the beginning and gain #b4% chance whenever you gain damage. If your next hp loss will cause death, it will begin to pulse to remind you. NL When resurrected, lose this relic."
+    ]
   }
 }

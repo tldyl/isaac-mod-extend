@@ -93,5 +93,10 @@
     "NAME": "橡皮擦魂火",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "Monstro": {
+    "NAME": "萌死戳",
+    "DIALOG": [""],
+    "MOVES": [""]
   }
 }

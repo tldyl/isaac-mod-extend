@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -17,13 +18,16 @@ import isaacModExtend.IsaacModExtend;
 import mymod.IsaacMod;
 import relics.Damocles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class DamoclesPatch {
     @SpirePatch(
             clz = Damocles.class,
             method = SpirePatch.CLASS
     )
-    public static class AddField implements CustomSavable<Boolean> {
+    public static class AddField implements CustomSavable<List<Boolean>> {
         public static SpireField<Boolean> dieNextTime = new SpireField<>(() -> false);
 
         private AddField() {
@@ -31,22 +35,35 @@ public class DamoclesPatch {
         }
 
         @Override
-        public Boolean onSave() {
+        public List<Boolean> onSave() {
             if (AbstractDungeon.player.getRelic(Damocles.ID) == null) {
-                return false;
+                return new ArrayList<>();
             }
-            return dieNextTime.get(AbstractDungeon.player.getRelic(Damocles.ID));
+            List<Boolean> ret = new ArrayList<>();
+            for (AbstractRelic relic : AbstractDungeon.player.relics) {
+                if (relic.relicId.equals(Damocles.ID)) {
+                    ret.add(dieNextTime.get(relic));
+                }
+            }
+            return ret;
         }
 
         @Override
-        public void onLoad(Boolean dieNextTime) {
+        public void onLoad(List<Boolean> dieNextTimeList) {
             if (AbstractDungeon.player.getRelic(Damocles.ID) == null) {
                 return;
             }
-            if (dieNextTime != null) {
-                AddField.dieNextTime.set(AbstractDungeon.player.getRelic(Damocles.ID), dieNextTime);
-                if (dieNextTime) {
-                    AbstractDungeon.player.getRelic(Damocles.ID).beginLongPulse();
+            if (dieNextTimeList != null) {
+                int index = 0;
+                for (AbstractRelic relic : AbstractDungeon.player.relics) {
+                    if (relic.relicId.equals(Damocles.ID)) {
+                        AddField.dieNextTime.set(relic, dieNextTimeList.get(index));
+                        if (dieNextTimeList.get(index)) {
+                            relic.beginLongPulse();
+                        }
+                        index++;
+                    }
+                    if (index >= dieNextTimeList.size()) break;
                 }
             }
         }
@@ -91,6 +108,16 @@ public class DamoclesPatch {
                 relic.setCounter(relic.counter + 4);
             }
             return SpireReturn.Return(damageAmount);
+        }
+    }
+
+    @SpirePatch(
+            clz = Damocles.class,
+            method = "getUpdatedDescription"
+    )
+    public static class PatchGetUpdatedDescription {
+        public static SpireReturn<String> Prefix(Damocles relic) {
+            return SpireReturn.Return(CardCrawlGame.languagePack.getRelicStrings(IsaacModExtend.makeID(Damocles.ID)).DESCRIPTIONS[0]);
         }
     }
 }

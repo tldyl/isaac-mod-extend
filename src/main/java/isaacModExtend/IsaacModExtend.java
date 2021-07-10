@@ -1,12 +1,16 @@
 package isaacModExtend;
 
 import basemod.BaseMod;
+import basemod.ModLabeledToggleButton;
+import basemod.ModPanel;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -14,10 +18,13 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.EventStrings;
-import com.megacrit.cardcrawl.localization.MonsterStrings;
-import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.dungeons.Exordium;
+import com.megacrit.cardcrawl.dungeons.TheBeyond;
+import com.megacrit.cardcrawl.dungeons.TheCity;
+import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -26,6 +33,7 @@ import com.megacrit.cardcrawl.relics.IncenseBurner;
 import helpers.MinionHelper;
 import isaacModExtend.events.Planetarium;
 import isaacModExtend.relics.*;
+import monsters.Monstro;
 import patches.player.PlayerAddFieldsPatch;
 import relics.Habit;
 import relics.TheBible;
@@ -47,6 +55,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
     private static List<AbstractGameAction> actionList = new ArrayList<>();
     private static List<AbstractRelic> planetariumRelics = new ArrayList<>();
     private static SpriteBatch sb;
+    private static boolean enableMonstro = true;
     public static final List<AbstractRelic> angelOnlyRelics = new ArrayList<>();
 
     public static void initialize() {
@@ -88,6 +97,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.loadCustomStrings(MonsterStrings.class, monsterStrings);
         String eventStrings = Gdx.files.internal("localization/" + language + "/IsaacExt-EventStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(EventStrings.class, eventStrings);
+        String uiStrings = Gdx.files.internal("localization/" + language + "/IsaacExt-UIStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(UIStrings.class, uiStrings);
     }
 
     @Override
@@ -144,6 +155,58 @@ public class IsaacModExtend implements EditStringsSubscriber,
         angelOnlyRelics.add(new HolyMantle());
         angelOnlyRelics.add(new TheStairway());
         angelOnlyRelics.add(new BookOfVirtues());
+
+        BaseMod.addMonster("Monstro" , Monstro.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+                new Monstro(-50, 0)
+        }));
+        BaseMod.addMonster("2_Monstro" , Monstro.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+                new Monstro(-150.0F, 0.0F),
+                new Monstro(150.0F, 0.0F, 1)
+        }));
+        BaseMod.addMonster("4_Monstro" , Monstro.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+                new Monstro(-300.0F, 0.0F, 0.5F),
+                new Monstro(-100.0F, 0.0F, 0.5F, 1),
+                new Monstro(100F, 0.0F, 0.5F),
+                new Monstro(300.0F, 0.0F, 0.5F, 1)
+        }));
+        loadSettings();
+        if (enableMonstro) {
+            BaseMod.addBoss(Exordium.ID, "Monstro", getResourcePath("map/monstro.png"), getResourcePath("map/monstroOutline.png"));
+            BaseMod.addBoss(TheCity.ID, "2_Monstro", getResourcePath("map/monstro.png"), getResourcePath("map/monstroOutline.png"));
+            BaseMod.addBoss(TheBeyond.ID, "4_Monstro", getResourcePath("map/monstro.png"), getResourcePath("map/monstroOutline.png"));
+        }
+        UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModPanel"));
+        ModPanel settingsPanel = new ModPanel();
+        ModLabeledToggleButton enableMonstroOption = new ModLabeledToggleButton(uiStrings.TEXT[0], 350.0F, 700.0F, Color.WHITE, FontHelper.buttonLabelFont, enableMonstro, settingsPanel, (me) -> {},
+            (me) -> {
+                enableMonstro = me.enabled;
+                saveSettings();
+            }
+        );
+        settingsPanel.addUIElement(enableMonstroOption);
+        BaseMod.registerModBadge(ImageMaster.loadImage(getResourcePath("ui/badge.png")), "IsaacMod Extend", "Everyone", "TODO", settingsPanel);
+    }
+
+    private static void saveSettings() {
+        try {
+            SpireConfig config = new SpireConfig("IsaacModExtend", "settings");
+            config.setBool("enableMonstro", enableMonstro);
+            config.save();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadSettings() {
+        try {
+            SpireConfig config = new SpireConfig("IsaacModExtend", "settings");
+            config.load();
+            if (config.has("enableMonstro")) {
+                enableMonstro = config.getBool("enableMonstro");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static AbstractRelic getRandomPlanetariumRelic(Random rng) {
