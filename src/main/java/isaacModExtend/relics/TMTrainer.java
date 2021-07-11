@@ -26,11 +26,8 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.map.MapEdge;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.monsters.beyond.Deca;
-import com.megacrit.cardcrawl.monsters.beyond.Donu;
 import com.megacrit.cardcrawl.monsters.city.ShelledParasite;
 import com.megacrit.cardcrawl.monsters.city.SnakePlant;
-import com.megacrit.cardcrawl.monsters.ending.CorruptHeart;
 import com.megacrit.cardcrawl.monsters.exordium.*;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.*;
@@ -40,6 +37,7 @@ import com.megacrit.cardcrawl.stances.*;
 import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
 import isaacModExtend.IsaacModExtend;
 import isaacModExtend.patches.RewardItemPatch;
+import monsters.Monstro;
 import relics.AnarchistCookbook;
 import relics.Damocles;
 
@@ -628,17 +626,17 @@ public class TMTrainer extends CustomRelic implements CustomSavable<Map<String, 
         });
         totalEffects.add(() -> {
             if (isInCombat()) {
-                spawnMonster(new Donu());
+                spawnMonster(new Monstro(MathUtils.random(-200.0F, 400.0F), MathUtils.random(-100.0F, 400.0F), 0.5F));
             }
         });
         totalEffects.add(() -> {
             if (isInCombat()) {
-                spawnMonster(new Deca());
+                spawnMonster(new Monstro(MathUtils.random(-200.0F, 400.0F), MathUtils.random(-100.0F, 400.0F), 0.5F));
             }
         });
         totalEffects.add(() -> {
             if (isInCombat()) {
-                spawnMonster(new CorruptHeart());
+                spawnMonster(new Monstro(MathUtils.random(-200.0F, 400.0F), MathUtils.random(-100.0F, 400.0F), 0.5F));
             }
         });
         totalEffects.add(() -> {
