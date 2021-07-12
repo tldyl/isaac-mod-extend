@@ -2,9 +2,11 @@ package isaacModExtend.relics;
 
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
@@ -31,6 +33,7 @@ import com.megacrit.cardcrawl.monsters.city.SnakePlant;
 import com.megacrit.cardcrawl.monsters.exordium.*;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.*;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.TrueVictoryRoom;
 import com.megacrit.cardcrawl.stances.*;
@@ -697,7 +700,7 @@ public class TMTrainer extends CustomRelic implements CustomSavable<Map<String, 
         totalEffects.add(() -> {
             if (isInCombat()) {
                 AbstractPlayer p = AbstractDungeon.player;
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrawCardNextTurnPower(p, -1)));
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrawReductionPower(AbstractDungeon.player, 1)));
             }
         });
         totalEffects.add(() -> Settings.isDebug = !Settings.isDebug);
@@ -830,6 +833,80 @@ public class TMTrainer extends CustomRelic implements CustomSavable<Map<String, 
                 AbstractCard card = new Burn();
                 card.upgrade();
                 IsaacModExtend.addToBot(new MakeTempCardInHandAction(card, false));
+            }
+        });
+        totalEffects.add(() -> {
+            if (isInCombat()) {
+                AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(2));
+            }
+        });
+        totalEffects.add(() -> {
+            if (isInCombat()) {
+                AbstractDungeon.actionManager.actions.clear();
+            }
+        });
+        totalEffects.add(() -> {
+            if (isInCombat()) {
+                AbstractMonster m = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
+                if (m != null) {
+                    AbstractDungeon.actionManager.addToBottom(new InstantKillAction(m));
+                }
+            }
+        });
+        totalEffects.add(() -> {
+            if (isInCombat()) {
+                AbstractPlayer p = AbstractDungeon.player;
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new BufferPower(p, 3)));
+            }
+        });
+        totalEffects.add(() -> {
+            if (isInCombat()) {
+                for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                    if (!m.isDeadOrEscaped()) {
+                        AbstractDungeon.actionManager.addToBottom(new StunMonsterAction(m, AbstractDungeon.player, 3));
+                    }
+                }
+            }
+        });
+        totalEffects.add(() -> {
+            if (isInCombat()) {
+                AbstractPlayer p = AbstractDungeon.player;
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new IntangiblePlayerPower(p, 99)));
+            }
+        });
+        totalEffects.add(() -> {
+           for (AbstractRelic relic : AbstractDungeon.player.relics) {
+               IsaacModExtend.addToBot(new AbstractGameAction() {
+                   private float duration = 0.1F;
+
+                   @Override
+                   public void update() {
+                       if (duration == 0.1F) {
+                           relic.flash();
+                       }
+                       duration -= Gdx.graphics.getDeltaTime();
+                       if (duration <= 0) {
+                           isDone = true;
+                       }
+                   }
+               });
+           }
+        });
+        totalEffects.add(() -> {
+            if (isInCombat()) {
+                AbstractDungeon.actionManager.actions.clear();
+            }
+        });
+        totalEffects.add(() -> {
+            if (isInCombat()) {
+                AbstractPlayer p = AbstractDungeon.player;
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DexterityPower(p, 10)));
+            }
+        });
+        totalEffects.add(() -> {
+            if (isInCombat()) {
+                AbstractPlayer p = AbstractDungeon.player;
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FocusPower(p, 2)));
             }
         });
     }
