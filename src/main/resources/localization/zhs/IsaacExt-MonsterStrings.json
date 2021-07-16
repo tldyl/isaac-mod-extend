@@ -98,5 +98,15 @@
     "NAME": "萌死戳",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "IsaacExt:BabyPlum": {
+    "NAME": "梅子宝宝",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:PlumFluteWisp": {
+    "NAME": "唤梅笛魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
   }
 }

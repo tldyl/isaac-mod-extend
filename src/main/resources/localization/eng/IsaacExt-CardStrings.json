@@ -1,0 +1,14 @@
+{
+  "IsaacExt:OfCourse": {
+    "NAME": "Play time!",
+    "DESCRIPTION": "Why not?"
+  },
+  "IsaacExt:InNoMood": {
+    "NAME": "In No Mood",
+    "DESCRIPTION": "I'm in a hurry and not in the mood to play with you."
+  },
+  "IsaacExt:Guilt": {
+    "NAME": "Guilt",
+    "DESCRIPTION": "Unplayable. NL At the end of your turn, take damage equal to the number of cards in your hand. NL When drawn, if has another *Guilt in your hand, Exhaust all *Guilt in your hand and put a *Regret in your hand."
+  }
+}

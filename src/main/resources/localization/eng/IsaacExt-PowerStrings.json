@@ -11,5 +11,38 @@
     "DESCRIPTIONS": [
       "Attack damage increased by #b230% in this combat."
     ]
+  },
+  "IsaacExt:GoodbyePower": {
+    "NAME": "Goodbye",
+    "DESCRIPTIONS": [
+      "Leaves in #b",
+      " turn(s)."
+    ]
+  },
+  "IsaacExt:PlayTimePower": {
+    "NAME": "Play Time",
+    "DESCRIPTIONS": [
+      "No harm."
+    ]
+  },
+  "IsaacExt:SoftheartedPower": {
+    "NAME": "Softhearted",
+    "DESCRIPTIONS": [
+      "Put a #yGuilt in your hand after #b",
+      " damage dealt."
+    ]
+  },
+  "IsaacExt:FranticPower": {
+    "NAME": "Frantic",
+    "DESCRIPTIONS": [
+      "Increase the attack times of Baby Plum's diagonal attack by #b",
+      ". At the start of your turn, reduce #yFrantic by #b1."
+    ]
+  },
+  "IsaacExt:BarrageBlockadePower": {
+    "NAME": "Barrage Blockade",
+    "DESCRIPTIONS": [
+      "Whenever target receive attack damage from this enemy, apply #b1 #yFrantic."
+    ]
   }
 }

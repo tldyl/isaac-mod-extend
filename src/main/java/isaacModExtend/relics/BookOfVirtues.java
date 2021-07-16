@@ -44,7 +44,6 @@ public class BookOfVirtues extends ChargeableRelic implements PreRightClickRelic
     @Override
     public void onRightClick() {
         if (isUsable()) {
-            this.use(null);
             this.resetCharge();
             this.stopPulse();
         }
@@ -81,6 +80,9 @@ public class BookOfVirtues extends ChargeableRelic implements PreRightClickRelic
             return;
         }
         switch (relicId) {
+            case "IsaacExt:BookOfVirtues":
+                wisp = new SoulWisp();
+                break;
             case "DeathBook": //死灵书
                 wisp = new NecronomiconSoulWisp();
                 break;
@@ -172,6 +174,9 @@ public class BookOfVirtues extends ChargeableRelic implements PreRightClickRelic
             case "IsaacExt:Eraser": //橡皮擦
                 wisp = new EraserSoulWisp();
                 break;
+            case "IsaacExt:PlumFlute": //唤梅笛
+                wisp = new PlumFluteWisp();
+                break;
             case "UnicornStump": //断角
                 if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() > 0) return;
             default:
@@ -193,7 +198,7 @@ public class BookOfVirtues extends ChargeableRelic implements PreRightClickRelic
 
     @Override
     public boolean isUsable() {
-        return AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !hasAnyOtherChargeableRelic() && SoulWisp.wispAliveAmount < SoulWisp.wispAmount;
+        return AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !hasAnyOtherChargeableRelic() && SoulWisp.wispAliveAmount < SoulWisp.wispAmount && this.counter >= this.maxCharge;
     }
 
     @Override

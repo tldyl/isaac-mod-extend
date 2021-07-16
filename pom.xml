@@ -44,6 +44,13 @@
             <scope>system</scope>
             <systemPath>E:/Steam/steamapps/workshop/content/646570/1614223336/IsaacMod.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>demoMod</groupId>
+            <artifactId>anm2player</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>E:/Steam/steamapps/common/SlayTheSpire/mods/Anm2Player.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

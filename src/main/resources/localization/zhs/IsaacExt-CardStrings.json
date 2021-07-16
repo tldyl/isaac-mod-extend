@@ -1,0 +1,14 @@
+{
+  "IsaacExt:OfCourse": {
+    "NAME": "玩乐时间！",
+    "DESCRIPTION": "为什么不呢？"
+  },
+  "IsaacExt:InNoMood": {
+    "NAME": "没心思",
+    "DESCRIPTION": "劳资赶时间，没心情陪你玩。"
+  },
+  "IsaacExt:Guilt": {
+    "NAME": "内疚",
+    "DESCRIPTION": "不能被打出 。 NL 在你的回合结束时，受到相当于手牌数量的伤害。 NL 抽到这张牌时，如果手牌中已有 *内疚 ， 消耗 手牌中的所有 *内疚 ，将一张 *悔恨 放入你的手牌。"
+  }
+}

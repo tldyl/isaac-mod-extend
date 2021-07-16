@@ -31,7 +31,9 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Circlet;
 import com.megacrit.cardcrawl.relics.IncenseBurner;
 import helpers.MinionHelper;
+import isaacModExtend.cards.Guilt;
 import isaacModExtend.events.Planetarium;
+import isaacModExtend.monsters.BabyPlum;
 import isaacModExtend.relics.*;
 import monsters.Monstro;
 import patches.player.PlayerAddFieldsPatch;
@@ -50,12 +52,14 @@ public class IsaacModExtend implements EditStringsSubscriber,
                                        PostInitializeSubscriber,
                                        EditKeywordsSubscriber,
                                        PostUpdateSubscriber,
-                                       PostRenderSubscriber {
+                                       PostRenderSubscriber,
+                                       EditCardsSubscriber {
 
     private static List<AbstractGameAction> actionList = new ArrayList<>();
     private static List<AbstractRelic> planetariumRelics = new ArrayList<>();
     private static SpriteBatch sb;
     private static boolean enableMonstro = true;
+    public static boolean isPlumFluteUnlocked = false;
     public static final List<AbstractRelic> angelOnlyRelics = new ArrayList<>();
 
     public static void initialize() {
@@ -91,6 +95,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
         String language = getLanguageString();
         String relicStrings = Gdx.files.internal("localization/" + language + "/IsaacExt-RelicStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(RelicStrings.class, relicStrings);
+        String cardStrings = Gdx.files.internal("localization/" + language + "/IsaacExt-CardStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(CardStrings.class, cardStrings);
         String powerStrings = Gdx.files.internal("localization/" + language + "/IsaacExt-PowerStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(PowerStrings.class, powerStrings);
         String monsterStrings = Gdx.files.internal("localization/" + language + "/IsaacExt-MonsterStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
@@ -118,6 +124,10 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.addAudio("RELIC_REVELATION", "IsaacAudio/sfx/relic_revelation.wav");
         BaseMod.addAudio("SOUL_WISP_IGNITE", "IsaacAudio/sfx/soul_wisp_ignite.wav");
         BaseMod.addAudio("SOUL_WISP_EXTINCT", "IsaacAudio/sfx/soul_wisp_extinct.wav");
+        BaseMod.addAudio("BOSS_BABY_PLUM_DEATH", "IsaacAudio/sfx/boss_baby_plum_death.wav");
+        BaseMod.addAudio("MEAT_JUMPS_0", "IsaacAudio/sfx/meat_jumps_0.wav");
+        BaseMod.addAudio("BOSS_BABY_PLUM_BUBBLE_LOOP", "IsaacAudio/sfx/boss_baby_plum_bubble_loop.wav");
+        BaseMod.addAudio("RELIC_PLUM_FLUTE", "IsaacAudio/sfx/relic_plum_flute.wav");
     }
 
     @Override
@@ -169,12 +179,16 @@ public class IsaacModExtend implements EditStringsSubscriber,
                 new Monstro(100F, 0.0F, 0.5F),
                 new Monstro(300.0F, 0.0F, 0.5F, 1)
         }));
+        BaseMod.addMonster("BabyPlum", BabyPlum.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+                new BabyPlum(-50, 0)
+        }));
         loadSettings();
         if (enableMonstro) {
             BaseMod.addBoss(Exordium.ID, "Monstro", getResourcePath("map/monstro.png"), getResourcePath("map/monstroOutline.png"));
             BaseMod.addBoss(TheCity.ID, "2_Monstro", getResourcePath("map/monstro.png"), getResourcePath("map/monstroOutline.png"));
             BaseMod.addBoss(TheBeyond.ID, "4_Monstro", getResourcePath("map/monstro.png"), getResourcePath("map/monstroOutline.png"));
         }
+        BaseMod.addBoss(Exordium.ID, "BabyPlum", getResourcePath("map/babyPlum.png"), getResourcePath("map/babyPlumOutline.png"));
         UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModPanel"));
         ModPanel settingsPanel = new ModPanel();
         ModLabeledToggleButton enableMonstroOption = new ModLabeledToggleButton(uiStrings.TEXT[0], 350.0F, 700.0F, Color.WHITE, FontHelper.buttonLabelFont, enableMonstro, settingsPanel, (me) -> {},
@@ -187,10 +201,11 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.registerModBadge(ImageMaster.loadImage(getResourcePath("ui/badge.png")), "IsaacMod Extend", "Everyone", "TODO", settingsPanel);
     }
 
-    private static void saveSettings() {
+    public static void saveSettings() {
         try {
             SpireConfig config = new SpireConfig("IsaacModExtend", "settings");
             config.setBool("enableMonstro", enableMonstro);
+            config.setBool("isPlumFluteUnlocked", isPlumFluteUnlocked);
             config.save();
         } catch (Exception e) {
             e.printStackTrace();
@@ -203,6 +218,9 @@ public class IsaacModExtend implements EditStringsSubscriber,
             config.load();
             if (config.has("enableMonstro")) {
                 enableMonstro = config.getBool("enableMonstro");
+            }
+            if (config.has("isPlumFluteUnlocked")) {
+                isPlumFluteUnlocked = config.getBool("isPlumFluteUnlocked");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -291,5 +309,10 @@ public class IsaacModExtend implements EditStringsSubscriber,
                     }
             }
         }
+    }
+
+    @Override
+    public void receiveEditCards() {
+        BaseMod.addCard(new Guilt());
     }
 }

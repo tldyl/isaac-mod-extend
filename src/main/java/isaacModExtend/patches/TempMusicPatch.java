@@ -20,6 +20,9 @@ public class TempMusicPatch {
             if (key.equals("ANGEL_ROOM")) {
                 return SpireReturn.Return(MainMusic.newMusic("IsaacAudio/music/angel_room.ogg"));
             }
+            if (key.equals("ARCADE")) {
+                return SpireReturn.Return(MainMusic.newMusic("IsaacAudio/music/arcade.ogg"));
+            }
             return SpireReturn.Continue();
         }
     }

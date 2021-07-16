@@ -98,5 +98,15 @@
     "NAME": "Monstro",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "IsaacExt:BabyPlum": {
+    "NAME": "Baby Plum",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
+  "IsaacExt:PlumFluteWisp": {
+    "NAME": "Plum Flute Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
   }
 }

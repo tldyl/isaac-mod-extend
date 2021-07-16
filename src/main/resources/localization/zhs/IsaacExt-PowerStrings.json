@@ -11,5 +11,38 @@
     "DESCRIPTIONS": [
       "在本场战斗，造成的攻击伤害增加 #b230% 。"
     ]
+  },
+  "IsaacExt:GoodbyePower": {
+    "NAME": "马达内",
+    "DESCRIPTIONS": [
+      "#b",
+      " 回合后离开。"
+    ]
+  },
+  "IsaacExt:PlayTimePower": {
+    "NAME": "玩乐时间",
+    "DESCRIPTIONS": [
+      "不受任何伤害。"
+    ]
+  },
+  "IsaacExt:SoftheartedPower": {
+    "NAME": "于心不忍",
+    "DESCRIPTIONS": [
+      "再造成 #b",
+      " 点 #y攻击 伤害，将一张 #y内疚 放入你的手牌。"
+    ]
+  },
+  "IsaacExt:FranticPower": {
+    "NAME": "慌乱",
+    "DESCRIPTIONS": [
+      "梅子宝宝的弹跳攻击段数增加 #b",
+      " 。慌乱层数在你的回合开始时减少 #b1 。"
+    ]
+  },
+  "IsaacExt:BarrageBlockadePower": {
+    "NAME": "弹幕封锁",
+    "DESCRIPTIONS": [
+      "每对目标造成一次未被 #y格挡 的伤害，给予 #b1 层 #y慌乱 。"
+    ]
   }
 }

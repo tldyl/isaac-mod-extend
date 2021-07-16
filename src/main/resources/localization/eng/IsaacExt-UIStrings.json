@@ -1,7 +1,7 @@
 {
   "IsaacExt:ModPanel": {
     "TEXT": [
-      "Add Monstro to the boss pool of each act."
+      "Add Monstro to the boss pool of each act(It will take effect after the game is restarted)."
     ]
   }
 }
