@@ -44,6 +44,11 @@ public class BabyPlumPet extends AbstractPet {
 
     public BabyPlumPet(float x, float y) {
         super(NAME, ID, 234, -8.0F, 10.0F, 58.0F, 38.0F, null, x, y);
+        if (AbstractDungeon.ascensionLevel >= 9) {
+            this.setHp(250);
+        } else {
+            this.setHp(234);
+        }
         this.animation = new AnimatedActor(IsaacModExtend.getResourcePath("monsters/908.000_baby plum.xml"));
         animation.scale = Settings.scale * 4.0F;
         animation.setCurAnimation("Descend");
@@ -68,9 +73,10 @@ public class BabyPlumPet extends AbstractPet {
                         public void update() {
                             duration -= Gdx.graphics.getDeltaTime();
                             if (duration <= 1.4F && !t) {
-                                for (int i=0;i<5;i++) {
-                                    AbstractMonster target = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
-                                    actions.add(new DamageAction(target, BabyPlumPet.this.damage.get(0), AttackEffect.BLUNT_LIGHT));
+                                int multi = 5;
+                                if (AbstractDungeon.ascensionLevel >= 4) multi++;
+                                for (int i=0;i<multi;i++) {
+                                    actions.add(new DamageAction(AbstractDungeon.player, damage.get(0), AttackEffect.BLUNT_LIGHT));
                                 }
                                 t = true;
                             }
@@ -182,9 +188,15 @@ public class BabyPlumPet extends AbstractPet {
         });
         this.disposables.add(animation);
         this.deathTimer = 1.3F;
-        this.damage.add(new DamageInfo(this, 3, DamageInfo.DamageType.NORMAL));
-        this.damage.add(new DamageInfo(this, 24, DamageInfo.DamageType.NORMAL));
-        this.damage.add(new DamageInfo(this, 3, DamageInfo.DamageType.NORMAL));
+        if (AbstractDungeon.ascensionLevel >= 4) {
+            this.damage.add(new DamageInfo(this, 3, DamageInfo.DamageType.NORMAL));
+            this.damage.add(new DamageInfo(this, 26, DamageInfo.DamageType.NORMAL));
+            this.damage.add(new DamageInfo(this, 4, DamageInfo.DamageType.NORMAL));
+        } else {
+            this.damage.add(new DamageInfo(this, 3, DamageInfo.DamageType.NORMAL));
+            this.damage.add(new DamageInfo(this, 24, DamageInfo.DamageType.NORMAL));
+            this.damage.add(new DamageInfo(this, 3, DamageInfo.DamageType.NORMAL));
+        }
     }
 
     @Override
@@ -349,18 +361,20 @@ public class BabyPlumPet extends AbstractPet {
             }
         }
         if (lastMove((byte) 0)) {
-            setMove((byte) 1, Intent.ATTACK, 24);
+            setMove((byte) 1, Intent.ATTACK, this.damage.get(1).base);
         } else if (lastMove((byte) 1)) {
             int multi = 5;
-            for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                if (!m.isDeadOrEscaped() && m.hasPower(FranticPower.POWER_ID)) {
-                    AbstractPower power = m.getPower(FranticPower.POWER_ID);
-                    multi += power.amount;
-                }
+            if (AbstractDungeon.player.hasPower(FranticPower.POWER_ID)) {
+                AbstractPower power = AbstractDungeon.player.getPower(FranticPower.POWER_ID);
+                multi += power.amount;
             }
-            setMove((byte) 2, Intent.ATTACK, 3, multi, true);
+            setMove((byte) 2, Intent.ATTACK, this.damage.get(2).base, multi, true);
         } else {
-            setMove((byte) 0, Intent.ATTACK, 3, 5, true);
+            if (AbstractDungeon.ascensionLevel >= 4) {
+                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 6, true);
+            } else {
+                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 5, true);
+            }
         }
     }
 

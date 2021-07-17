@@ -22,6 +22,9 @@ public class SoftheartedPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = AbstractDungeon.player;
+        if (AbstractDungeon.ascensionLevel >= 19) {
+            defaultAmount = 40;
+        }
         this.amount = defaultAmount;
         this.loadRegion("vulnerable");
         updateDescription();

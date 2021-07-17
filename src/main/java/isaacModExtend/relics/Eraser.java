@@ -139,10 +139,10 @@ public class Eraser extends ClickableRelic implements CustomSavable<Map<String, 
         for (AbstractMonster monster : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!monster.isDeadOrEscaped()) {
                 if (monster.id.equals(id)) {
-                    if (monster.type != AbstractMonster.EnemyType.BOSS) {
+                    if (monster.type != AbstractMonster.EnemyType.BOSS || this.erasedMonsters.contains(monster.id)) {
                         IsaacModExtend.addToBot(new RelicAboveCreatureAction(monster, this));
                         addToBot(new InstantKillAction(monster));
-                        this.erasedMonsters.add(monster.id);
+                        if (!this.erasedMonsters.contains(monster.id)) this.erasedMonsters.add(monster.id);
                     } else {
                         monster.damage(new DamageInfo(AbstractDungeon.player, 15, DamageInfo.DamageType.THORNS));
                         if (monster.isDying) {

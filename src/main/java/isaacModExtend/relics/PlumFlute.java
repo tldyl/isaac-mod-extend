@@ -40,7 +40,7 @@ public class PlumFlute extends ChargeableRelic {
             CardCrawlGame.sound.play("RELIC_PLUM_FLUTE");
             AbstractPet babyPlum = new BabyPlumPet((float) point.x + MathUtils.random(128.0F) * Settings.scale, (float) point.y);
             addToBot(new AbstractGameAction() {
-                float duration = 1.5F;
+                float duration = 1.0F;
 
                 @Override
                 public void update() {
