@@ -15,10 +15,10 @@ import patches.ui.SoulHeartPatch;
 public class Luna extends CustomRelic {
     public static final String ID = IsaacModExtend.makeID("Luna");
     public static final String IMG_PATH = "relics/luna.png";
+    private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
 
     public Luna() {
-        super(ID, new Texture(IsaacModExtend.getResourcePath(IMG_PATH)),
-                RelicTier.SPECIAL, LandingSound.MAGICAL);
+        super(ID, IMG, RelicTier.SPECIAL, LandingSound.MAGICAL);
     }
 
     @Override

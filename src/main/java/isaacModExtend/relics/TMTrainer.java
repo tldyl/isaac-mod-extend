@@ -783,7 +783,7 @@ public class TMTrainer extends CustomRelic implements CustomSavable<Map<String, 
         totalEffects.add(() -> IsaacModExtend.addToBot(new AbstractGameAction() {
             @Override
             public void update() {
-                AbstractDungeon.player.relics.add(new Damocles());
+                AbstractDungeon.player.relics.add(0, new Damocles());
                 AbstractDungeon.player.reorganizeRelics();
                 isDone = true;
             }
@@ -796,7 +796,7 @@ public class TMTrainer extends CustomRelic implements CustomSavable<Map<String, 
         totalEffects.add(() -> IsaacModExtend.addToBot(new AbstractGameAction() {
             @Override
             public void update() {
-                AbstractDungeon.player.relics.add(AbstractDungeon.returnRandomRelic(RewardItemPatch.PatchConstructor.returnRandomRelicTier()));
+                AbstractDungeon.player.relics.add(0, AbstractDungeon.returnRandomRelic(RewardItemPatch.PatchConstructor.returnRandomRelicTier()));
                 AbstractDungeon.player.reorganizeRelics();
                 isDone = true;
             }

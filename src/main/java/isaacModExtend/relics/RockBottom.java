@@ -14,10 +14,10 @@ import isaacModExtend.IsaacModExtend;
 public class RockBottom extends CustomRelic implements OnAnyPowerAppliedRelic {
     public static final String ID = IsaacModExtend.makeID("RockBottom");
     public static final String IMG_PATH = "relics/rockBottom.png";
+    private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
 
     public RockBottom() {
-        super(ID, new Texture(IsaacModExtend.getResourcePath(IMG_PATH)),
-                RelicTier.RARE, LandingSound.HEAVY);
+        super(ID, IMG, RelicTier.RARE, LandingSound.HEAVY);
     }
 
     @Override

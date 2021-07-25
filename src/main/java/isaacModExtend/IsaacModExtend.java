@@ -17,12 +17,14 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.daily.mods.AbstractDailyMod;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.dungeons.Exordium;
 import com.megacrit.cardcrawl.dungeons.TheBeyond;
 import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
@@ -32,6 +34,7 @@ import com.megacrit.cardcrawl.relics.Circlet;
 import com.megacrit.cardcrawl.relics.IncenseBurner;
 import helpers.MinionHelper;
 import isaacModExtend.cards.Guilt;
+import isaacModExtend.daily.mods.Challenge45;
 import isaacModExtend.events.Planetarium;
 import isaacModExtend.monsters.BabyPlum;
 import isaacModExtend.relics.*;
@@ -44,6 +47,7 @@ import relics.Void;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @SpireInitializer
@@ -53,7 +57,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
                                        EditKeywordsSubscriber,
                                        PostUpdateSubscriber,
                                        PostRenderSubscriber,
-                                       EditCardsSubscriber {
+                                       EditCardsSubscriber,
+                                       PostDungeonInitializeSubscriber{
 
     private static List<AbstractGameAction> actionList = new ArrayList<>();
     private static List<AbstractRelic> planetariumRelics = new ArrayList<>();
@@ -105,6 +110,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.loadCustomStrings(EventStrings.class, eventStrings);
         String uiStrings = Gdx.files.internal("localization/" + language + "/IsaacExt-UIStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(UIStrings.class, uiStrings);
+        String runModStrings = Gdx.files.internal("localization/" + language + "/IsaacExt-RunModStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(RunModStrings.class, runModStrings);
     }
 
     @Override
@@ -199,6 +206,14 @@ public class IsaacModExtend implements EditStringsSubscriber,
         );
         settingsPanel.addUIElement(enableMonstroOption);
         BaseMod.registerModBadge(ImageMaster.loadImage(getResourcePath("ui/badge.png")), "IsaacMod Extend", "Everyone", "TODO", settingsPanel);
+        try {
+            Field field = ModHelper.class.getDeclaredField("starterMods");
+            field.setAccessible(true);
+            HashMap<String, AbstractDailyMod> mods = (HashMap<String, AbstractDailyMod>) field.get(null);
+            mods.put(Challenge45.ID, new Challenge45());
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void saveSettings() {
@@ -314,5 +329,12 @@ public class IsaacModExtend implements EditStringsSubscriber,
     @Override
     public void receiveEditCards() {
         BaseMod.addCard(new Guilt());
+    }
+
+    @Override
+    public void receivePostDungeonInitialize() {
+        if (ModHelper.isModEnabled("IsaacExt:Challenge45")) {
+            new TMTrainer().instantObtain(AbstractDungeon.player, 0, true);
+        }
     }
 }

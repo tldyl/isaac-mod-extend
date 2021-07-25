@@ -15,10 +15,10 @@ import relics.abstracrt.ChargeableRelic;
 public class BatteryPack extends CustomRelic {
     public static final String ID = IsaacModExtend.makeID("BatteryPack");
     public static final String IMG_PATH = "relics/batteryPack.png";
+    private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
 
     public BatteryPack() {
-        super(ID, new Texture(IsaacModExtend.getResourcePath(IMG_PATH)),
-                RelicTier.SHOP, LandingSound.FLAT);
+        super(ID, IMG, RelicTier.SHOP, LandingSound.FLAT);
     }
 
     @Override

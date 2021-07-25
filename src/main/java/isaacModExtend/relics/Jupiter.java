@@ -18,11 +18,11 @@ import isaacModExtend.IsaacModExtend;
 public class Jupiter extends CustomRelic {
     public static final String ID = IsaacModExtend.makeID("Jupiter");
     public static final String IMG_PATH = "relics/jupiter.png";
+    private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
     private boolean givePoison = false;
 
     public Jupiter() {
-        super(ID, new Texture(IsaacModExtend.getResourcePath(IMG_PATH)),
-                RelicTier.SPECIAL, LandingSound.HEAVY);
+        super(ID, IMG, RelicTier.SPECIAL, LandingSound.HEAVY);
     }
 
     @Override

@@ -14,10 +14,10 @@ import isaacModExtend.IsaacModExtend;
 public class RedStew extends CustomRelic {
     public static final String ID = IsaacModExtend.makeID("RedStew");
     public static final String IMG_PATH = "relics/redStew.png";
+    private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
 
     public RedStew() {
-        super(ID, new Texture(IsaacModExtend.getResourcePath(IMG_PATH)),
-                RelicTier.SHOP, LandingSound.FLAT);
+        super(ID, IMG, RelicTier.SHOP, LandingSound.FLAT);
     }
 
     @Override

@@ -15,10 +15,10 @@ import isaacModExtend.powers.MucormycosisPower;
 public class Mucormycosis extends CustomRelic {
     public static final String ID = IsaacModExtend.makeID("Mucormycosis");
     public static final String IMG_PATH = "relics/mucormycosis.png";
+    private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
 
     public Mucormycosis() {
-        super(ID, new Texture(IsaacModExtend.getResourcePath(IMG_PATH)),
-                RelicTier.COMMON, LandingSound.FLAT);
+        super(ID, IMG, RelicTier.COMMON, LandingSound.FLAT);
     }
 
     @Override

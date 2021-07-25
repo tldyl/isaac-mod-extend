@@ -12,10 +12,10 @@ import isaacModExtend.IsaacModExtend;
 public class Mercurius extends CustomRelic {
     public static final String ID = IsaacModExtend.makeID("Mercurius");
     public static final String IMG_PATH = "relics/mercurius.png";
+    private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
 
     public Mercurius() {
-        super(ID, new Texture(IsaacModExtend.getResourcePath(IMG_PATH)),
-                RelicTier.SPECIAL, LandingSound.MAGICAL);
+        super(ID, IMG, RelicTier.SPECIAL, LandingSound.MAGICAL);
     }
 
     @Override

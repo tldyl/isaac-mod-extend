@@ -19,10 +19,10 @@ import java.util.List;
 public class Sol extends CustomRelic {
     public static final String ID = IsaacModExtend.makeID("Sol");
     public static final String IMG_PATH = "relics/sol.png";
+    private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
 
     public Sol() {
-        super(ID, new Texture(IsaacModExtend.getResourcePath(IMG_PATH)),
-                RelicTier.SPECIAL, LandingSound.MAGICAL);
+        super(ID, IMG, RelicTier.SPECIAL, LandingSound.MAGICAL);
     }
 
     @Override
