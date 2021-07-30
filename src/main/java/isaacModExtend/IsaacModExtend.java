@@ -335,6 +335,10 @@ public class IsaacModExtend implements EditStringsSubscriber,
     public void receivePostDungeonInitialize() {
         if (ModHelper.isModEnabled("IsaacExt:Challenge45")) {
             new TMTrainer().instantObtain(AbstractDungeon.player, 0, true);
+            AbstractRelic relic = AbstractDungeon.player.relics.get(0);
+            AbstractDungeon.player.relics.set(0, AbstractDungeon.player.relics.get(AbstractDungeon.player.relics.size() - 1));
+            AbstractDungeon.player.relics.set(AbstractDungeon.player.relics.size() - 1, relic);
+            AbstractDungeon.player.reorganizeRelics();
         }
     }
 }
