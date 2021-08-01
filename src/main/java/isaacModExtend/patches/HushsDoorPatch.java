@@ -3,6 +3,7 @@ package isaacModExtend.patches;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
@@ -11,6 +12,8 @@ import isaacModExtend.monsters.pet.SatanicBibleWisp;
 import isaacModExtend.rooms.AngelRoom;
 import patches.player.PlayerAddFieldsPatch;
 import relics.HushsDoor;
+import rewards.BlackHeart;
+import rewards.SoulHeart;
 
 @SuppressWarnings("unused")
 public class HushsDoorPatch {
@@ -41,6 +44,23 @@ public class HushsDoorPatch {
                 AbstractDungeon.currMapNode.setRoom(angelRoom);
                 angelRoom.onPlayerEntry();
             }
+        }
+    }
+
+    @SpirePatch(
+            clz = HushsDoor.class,
+            method = "onVictory"
+    )
+    public static class PatchOnVictory {
+        @SpireInsertPatch(rloc = 9)
+        public static SpireReturn<Void> Insert(HushsDoor hushsDoor) {
+            int rnd = AbstractDungeon.aiRng.random(0, 99);
+            if (rnd < 15) {
+                AbstractDungeon.getCurrRoom().rewards.add(new SoulHeart());
+            } else if (rnd < 20) {
+                AbstractDungeon.getCurrRoom().rewards.add(new BlackHeart());
+            }
+            return SpireReturn.Return(null);
         }
     }
 }
