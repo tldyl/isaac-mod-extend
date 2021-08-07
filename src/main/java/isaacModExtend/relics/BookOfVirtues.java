@@ -7,6 +7,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
+import com.megacrit.cardcrawl.rooms.TreasureRoomBoss;
 import helpers.SummonHelper;
 import isaacModExtend.IsaacModExtend;
 import isaacModExtend.interfaces.PreRightClickRelicSubscriber;
@@ -117,6 +119,8 @@ public class BookOfVirtues extends ChargeableRelic implements PreRightClickRelic
                 wisp = new SatanicBibleWisp();
                 break;
             case "BloodDonationBag": //卖血袋
+                AbstractRoom room = AbstractDungeon.getCurrRoom();
+                if (room instanceof MonsterRoomBoss || room instanceof TreasureRoomBoss) return;
                 wisp = new IVBagWisp();
                 break;
             case "Diplopia": //复眼
