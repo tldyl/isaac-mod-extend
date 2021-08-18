@@ -47,13 +47,20 @@ public class Guilt extends CustomCard {
 
     @Override
     public void triggerWhenDrawn() {
-        for (AbstractCard card : AbstractDungeon.player.hand.group) {
-            if (card.cardID.equals(this.cardID) && card != this) {
-                addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand, true));
-                addToBot(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand, true));
-                addToBot(new MakeTempCardInHandAction(new Regret()));
+        addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                for (AbstractCard card : AbstractDungeon.player.hand.group) {
+                    if (card.cardID.equals(Guilt.this.cardID) && card != Guilt.this) {
+                        addToTop(new ExhaustSpecificCardAction(Guilt.this, AbstractDungeon.player.hand, true));
+                        addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand, true));
+                        addToTop(new MakeTempCardInHandAction(new Regret()));
+                        break;
+                    }
+                }
+                isDone = true;
             }
-        }
+        });
     }
 
     public void triggerOnEndOfTurnForPlayingCard() {

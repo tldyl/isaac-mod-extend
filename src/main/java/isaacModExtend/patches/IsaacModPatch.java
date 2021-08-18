@@ -8,6 +8,8 @@ import isaacModExtend.IsaacModExtend;
 import isaacModExtend.relics.*;
 import mymod.IsaacMod;
 
+import java.lang.reflect.Field;
+
 @SuppressWarnings("unused")
 public class IsaacModPatch {
     private static void addRelics() {
@@ -68,6 +70,13 @@ public class IsaacModPatch {
     public static class PatchPreSettings {
         public static void Postfix(IsaacMod mod) {
             addRelics();
+            try {
+                Field receivedCardField = IsaacMod.class.getDeclaredField("receivedCard");
+                receivedCardField.setAccessible(true);
+                receivedCardField.setBoolean(null, !IsaacModExtend.enableStartCardReward);
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
     }
 

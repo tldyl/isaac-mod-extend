@@ -1,7 +1,8 @@
 {
   "IsaacExt:ModPanel": {
     "TEXT": [
-      "将萌死戳(Monstro)加入各层的Boss池中(重启游戏后生效)。"
+      "将萌死戳(Monstro)加入各层的Boss池中(重启游戏后生效)。",
+      "启用初始卡牌奖励(如果与其他mod冲突可停用)。"
     ]
   }
 }

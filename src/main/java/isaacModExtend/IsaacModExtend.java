@@ -64,6 +64,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
     private static List<AbstractRelic> planetariumRelics = new ArrayList<>();
     private static SpriteBatch sb;
     private static boolean enableMonstro = true;
+    public static boolean enableStartCardReward = true;
     public static boolean isPlumFluteUnlocked = false;
     public static final List<AbstractRelic> angelOnlyRelics = new ArrayList<>();
 
@@ -204,7 +205,14 @@ public class IsaacModExtend implements EditStringsSubscriber,
                 saveSettings();
             }
         );
+        ModLabeledToggleButton enableStartCardRewardOption = new ModLabeledToggleButton(uiStrings.TEXT[1], 350.0F, 660.0F, Color.WHITE, FontHelper.buttonLabelFont, enableStartCardReward, settingsPanel, (me) -> {},
+                (me) -> {
+                    enableStartCardReward = me.enabled;
+                    saveSettings();
+                }
+        );
         settingsPanel.addUIElement(enableMonstroOption);
+        settingsPanel.addUIElement(enableStartCardRewardOption);
         BaseMod.registerModBadge(ImageMaster.loadImage(getResourcePath("ui/badge.png")), "IsaacMod Extend", "Everyone", "TODO", settingsPanel);
         try {
             Field field = ModHelper.class.getDeclaredField("starterMods");
@@ -221,6 +229,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
             SpireConfig config = new SpireConfig("IsaacModExtend", "settings");
             config.setBool("enableMonstro", enableMonstro);
             config.setBool("isPlumFluteUnlocked", isPlumFluteUnlocked);
+            config.setBool("enableStartCardReward", enableStartCardReward);
             config.save();
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,6 +245,9 @@ public class IsaacModExtend implements EditStringsSubscriber,
             }
             if (config.has("isPlumFluteUnlocked")) {
                 isPlumFluteUnlocked = config.getBool("isPlumFluteUnlocked");
+            }
+            if (config.has("enableStartCardReward")) {
+                enableStartCardReward = config.getBool("enableStartCardReward");
             }
         } catch (Exception e) {
             e.printStackTrace();
