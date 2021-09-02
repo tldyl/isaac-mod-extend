@@ -76,7 +76,16 @@ public class BabyPlumPet extends AbstractPet {
                                 int multi = 5;
                                 if (AbstractDungeon.ascensionLevel >= 4) multi++;
                                 for (int i=0;i<multi;i++) {
-                                    actions.add(new DamageAction(AbstractDungeon.player, damage.get(0), AttackEffect.BLUNT_LIGHT));
+                                    actions.add(new AbstractGameAction() {
+                                        @Override
+                                        public void update() {
+                                            AbstractMonster m = AbstractDungeon.getRandomMonster();
+                                            if (m != null) {
+                                                addToBot(new DamageAction(m, damage.get(0), AttackEffect.BLUNT_LIGHT));
+                                            }
+                                            isDone = true;
+                                        }
+                                    });
                                 }
                                 t = true;
                             }
@@ -318,8 +327,16 @@ public class BabyPlumPet extends AbstractPet {
                                 }
                             }
                             for (int i=0;i<multi;i++) {
-                                AbstractMonster target = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
-                                actions.add(new DamageAction(target, BabyPlumPet.this.damage.get(0), AttackEffect.BLUNT_LIGHT));
+                                actions.add(new AbstractGameAction() {
+                                    @Override
+                                    public void update() {
+                                        AbstractMonster target = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
+                                        if (target != null) {
+                                            addToBot(new DamageAction(target, BabyPlumPet.this.damage.get(0), AttackEffect.BLUNT_LIGHT));
+                                        }
+                                        isDone = true;
+                                    }
+                                });
                             }
                             t = true;
                         }

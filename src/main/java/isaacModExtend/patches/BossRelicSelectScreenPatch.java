@@ -74,13 +74,13 @@ public class BossRelicSelectScreenPatch {
             method = "update"
     )
     public static class PatchUpdate {
-        private static float switchTimer = 0.25F;
+        private static float switchTimer = 0.2F;
 
         public static void Prefix(BossRelicSelectScreen screen) {
             if (AbstractDungeon.player.hasRelic(GlitchedCrown.ID)) {
                 switchTimer -= Gdx.graphics.getDeltaTime();
                 if (switchTimer <= 0) {
-                    switchTimer = 0.25F;
+                    switchTimer = 0.2F;
                     List<List<AbstractRelic>> relics = AddFieldPatch.relics.get(screen);
                     for (int i=0;i<3;i++) {
                         relics.get(i).add(screen.relics.get(i));

@@ -3,9 +3,11 @@ package isaacModExtend.patches;
 import basemod.BaseMod;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
+import com.megacrit.cardcrawl.shop.ShopScreen;
 import isaacModExtend.monsters.pet.SoulWisp;
 import isaacModExtend.relics.BookOfVirtues;
 import patches.player.PlayerAddFieldsPatch;
@@ -32,6 +34,9 @@ public class SaveAndContinuePatch {
                 m.dispose();
             }
             minions.monsters.clear();
+            if (!AbstractDungeon.shopScreen.getClass().getSimpleName().equals("ShopScreen")) {
+                AbstractDungeon.shopScreen = new ShopScreen();
+            }
         }
     }
 }

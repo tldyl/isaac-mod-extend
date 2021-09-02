@@ -56,9 +56,9 @@ public class StoreRelicPatch {
 
         public static void Prefix(StoreRelic storeRelic, float rugY) {
             if (AbstractDungeon.player.hasRelic(GlitchedCrown.ID)) {
-                switchTimer.put(storeRelic, switchTimer.getOrDefault(storeRelic, 0.25F) - Gdx.graphics.getDeltaTime());
+                switchTimer.put(storeRelic, switchTimer.getOrDefault(storeRelic, 0.2F) - Gdx.graphics.getDeltaTime());
                 if (switchTimer.get(storeRelic) <= 0) {
-                    switchTimer.put(storeRelic, 0.25F);
+                    switchTimer.put(storeRelic, 0.2F);
                     List<AbstractRelic> relics = AddFieldPatch.relics.get(storeRelic);
                     relics.add(storeRelic.relic);
                     storeRelic.relic = relics.remove(0);

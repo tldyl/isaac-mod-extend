@@ -271,5 +271,47 @@
     "DESCRIPTIONS": [
       "#b4 充能，满充能时右击召唤梅子宝宝在当前房间为你战斗，将会在行动 #b3 次后离开。"
     ]
+  },
+  "IsaacExt:Birthright": {
+    "NAME": "长子权",
+    "FLAVOR": "？？？",
+    "DESCRIPTIONS": [
+      "对每个角色都有不同的效果。"
+    ]
+  },
+  "IsaacExt:EmptyBirthrightRelic": {
+    "NAME": "空",
+    "FLAVOR": "？？？",
+    "DESCRIPTIONS": [
+      "？？？"
+    ]
+  },
+  "IsaacExt:IroncladBirthrightRelic": {
+    "NAME": "",
+    "FLAVOR": "无可匹敌的力量！",
+    "DESCRIPTIONS": [
+      "每 #y消耗 #b3 张牌，获得 #b1 点 #y力量 。"
+    ]
+  },
+  "IsaacExt:SilentBirthrightRelic": {
+    "NAME": "",
+    "FLAVOR": "失而复得。",
+    "DESCRIPTIONS": [
+      "如果你丢弃了一张带有 #y消耗 或 #y虚无 的牌，将其打出并 #y消耗 。"
+    ]
+  },
+  "IsaacExt:DefectBirthrightRelic": {
+    "NAME": "",
+    "FLAVOR": "已检索到平衡。",
+    "DESCRIPTIONS": [
+      "每当你获得 [E] ，抽 #b1 张牌。"
+    ]
+  },
+  "IsaacExt:WatcherBirthrightRelic": {
+    "NAME": "",
+    "FLAVOR": "流转。",
+    "DESCRIPTIONS": [
+      "每当你转换 #y姿态 时，获得 #b1 层 #y真言 。"
+    ]
   }
 }

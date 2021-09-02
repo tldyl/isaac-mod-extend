@@ -66,9 +66,9 @@ public class RewardItemPatch {
 
         public static void Prefix(RewardItem item) {
             if (AbstractDungeon.player.hasRelic(GlitchedCrown.ID) && item.type == RewardItem.RewardType.RELIC) {
-                switchTimer.put(item, switchTimer.getOrDefault(item, 0.25F) - Gdx.graphics.getDeltaTime());
+                switchTimer.put(item, switchTimer.getOrDefault(item, 0.2F) - Gdx.graphics.getDeltaTime());
                 if (switchTimer.get(item) <= 0) {
-                    switchTimer.put(item, 0.25F);
+                    switchTimer.put(item, 0.2F);
                     List<AbstractRelic> relics = AddFieldPatch.relics.get(item);
                     relics.add(item.relic);
                     item.relic = relics.remove(0);

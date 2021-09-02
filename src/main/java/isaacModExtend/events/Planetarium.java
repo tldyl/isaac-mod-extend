@@ -23,6 +23,7 @@ public class Planetarium extends AbstractEvent {
 
     public Planetarium() {
         this.body = DESCRIPTIONS[0];
+        this.roomEventText.clear();
         this.roomEventText.addDialogOption(OPTIONS[0]);
         this.roomEventText.addDialogOption(OPTIONS[1]);
         this.hasDialog = true;

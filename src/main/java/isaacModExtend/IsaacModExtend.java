@@ -14,6 +14,10 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.characters.Defect;
+import com.megacrit.cardcrawl.characters.Ironclad;
+import com.megacrit.cardcrawl.characters.TheSilent;
+import com.megacrit.cardcrawl.characters.Watcher;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -38,6 +42,10 @@ import isaacModExtend.daily.mods.Challenge45;
 import isaacModExtend.events.Planetarium;
 import isaacModExtend.monsters.BabyPlum;
 import isaacModExtend.relics.*;
+import isaacModExtend.relics.birthrightRelics.DefectBirthrightRelic;
+import isaacModExtend.relics.birthrightRelics.IroncladBirthrightRelic;
+import isaacModExtend.relics.birthrightRelics.SilentBirthrightRelic;
+import isaacModExtend.relics.birthrightRelics.WatcherBirthrightRelic;
 import monsters.Monstro;
 import patches.player.PlayerAddFieldsPatch;
 import relics.Habit;
@@ -222,6 +230,11 @@ public class IsaacModExtend implements EditStringsSubscriber,
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
+
+        Birthright.birthrightEffects.put(Ironclad.class, new IroncladBirthrightRelic());
+        Birthright.birthrightEffects.put(TheSilent.class, new SilentBirthrightRelic());
+        Birthright.birthrightEffects.put(Defect.class, new DefectBirthrightRelic());
+        Birthright.birthrightEffects.put(Watcher.class, new WatcherBirthrightRelic());
     }
 
     public static void saveSettings() {

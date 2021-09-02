@@ -51,6 +51,7 @@ public class IsaacModPatch {
         IsaacMod.relics.add(BookOfVirtues.ID);
         IsaacMod.relics.add(EchoChamber.ID);
         IsaacMod.relics.add(PlumFlute.ID);
+        IsaacMod.relics.add(Birthright.ID);
     }
 
     @SpirePatch(
