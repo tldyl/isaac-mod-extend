@@ -1,8 +1,8 @@
 package isaacModExtend.relics.birthrightRelics;
 
 import basemod.abstracts.CustomRelic;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -11,7 +11,6 @@ import isaacModExtend.relics.Birthright;
 
 public class DefectBirthrightRelic extends CustomRelic {
     public static final String ID = IsaacModExtend.makeID("DefectBirthrightRelic");
-    public static boolean energyRecharge = true;
 
     public DefectBirthrightRelic() {
         super(ID, "", RelicTier.SPECIAL, LandingSound.CLINK);
@@ -23,21 +22,14 @@ public class DefectBirthrightRelic extends CustomRelic {
     }
 
     @Override
-    public void atTurnStart() {
-        energyRecharge = true;
-    }
-
-    @Override
-    public void onEnergyRecharge() {
+    public void onCardDraw(AbstractCard drawnCard) {
         AbstractPlayer p = AbstractDungeon.player;
-        if (!energyRecharge) {
-            if (p.hasRelic(Birthright.ID)) {
-                AbstractRelic relic = p.getRelic(Birthright.ID);
-                relic.flash();
-                addToBot(new RelicAboveCreatureAction(p, relic));
-                addToBot(new DrawCardAction(1));
-                energyRecharge = true;
-            }
+        if (p.hasRelic(Birthright.ID) && drawnCard.type == AbstractCard.CardType.POWER) {
+            AbstractRelic relic = p.getRelic(Birthright.ID);
+            relic.flash();
+            addToBot(new RelicAboveCreatureAction(p, relic));
+            drawnCard.selfRetain = true;
+            drawnCard.superFlash();
         }
     }
 }

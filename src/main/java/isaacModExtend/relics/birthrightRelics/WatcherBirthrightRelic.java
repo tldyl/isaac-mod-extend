@@ -30,7 +30,7 @@ public class WatcherBirthrightRelic extends CustomRelic {
             AbstractRelic relic = p.getRelic(Birthright.ID);
             relic.flash();
             addToBot(new RelicAboveCreatureAction(p, relic));
-            addToBot(new ApplyPowerAction(p, p, new MantraPower(p, 1)));
+            addToBot(new ApplyPowerAction(p, p, new MantraPower(p, 2)));
         }
     }
 }

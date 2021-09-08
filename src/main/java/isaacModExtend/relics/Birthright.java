@@ -335,7 +335,7 @@ public class Birthright extends CustomRelic {
 
     @Override
     public int getPrice() {
-        return this.delegate.getPrice();
+        return super.getPrice();
     }
 
     @Override

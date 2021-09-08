@@ -283,7 +283,7 @@
     "NAME": "空",
     "FLAVOR": "？？？",
     "DESCRIPTIONS": [
-      "？？？"
+      "对每个角色都有不同的效果。"
     ]
   },
   "IsaacExt:IroncladBirthrightRelic": {
@@ -297,21 +297,21 @@
     "NAME": "",
     "FLAVOR": "失而复得。",
     "DESCRIPTIONS": [
-      "如果你丢弃了一张带有 #y消耗 或 #y虚无 的牌，将其打出并 #y消耗 。"
+      "每回合第一次弃牌时，抽 #b1 张牌。"
     ]
   },
   "IsaacExt:DefectBirthrightRelic": {
     "NAME": "",
     "FLAVOR": "已检索到平衡。",
     "DESCRIPTIONS": [
-      "每当你获得 [E] ，抽 #b1 张牌。"
+      "你抽到的以及加入手牌的 #y能力牌 将获得 #y保留 。"
     ]
   },
   "IsaacExt:WatcherBirthrightRelic": {
     "NAME": "",
     "FLAVOR": "流转。",
     "DESCRIPTIONS": [
-      "每当你转换 #y姿态 时，获得 #b1 层 #y真言 。"
+      "每当你转换 #y姿态 时，获得 #b2 层 #y真言 。"
     ]
   }
 }

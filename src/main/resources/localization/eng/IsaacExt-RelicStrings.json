@@ -283,7 +283,7 @@
     "NAME": "Empty",
     "FLAVOR": "???",
     "DESCRIPTIONS": [
-      "???"
+      "It has different effects on each character."
     ]
   },
   "IsaacExt:IroncladBirthrightRelic": {
@@ -297,21 +297,21 @@
     "NAME": "",
     "FLAVOR": "Lost and recovered.",
     "DESCRIPTIONS": [
-      "Whenever you discard an #yExhaust or #yEthreal card, play and #yExhaust it."
+      "The first time you discard a card each turn, draw #b1."
     ]
   },
   "IsaacExt:DefectBirthrightRelic": {
     "NAME": "",
     "FLAVOR": "BALANCE RETRIEVED.",
     "DESCRIPTIONS": [
-      "Whenever you gain [E] , draw #b1."
+      "The #yPowers you draw or add to hand will be #yRetained."
     ]
   },
   "IsaacExt:WatcherBirthrightRelic": {
     "NAME": "",
     "FLAVOR": "Circulation.",
     "DESCRIPTIONS": [
-      "Whenever you change Stances, gain #b1 #yMantra."
+      "Whenever you change Stances, gain #b2 #yMantra."
     ]
   }
 }
