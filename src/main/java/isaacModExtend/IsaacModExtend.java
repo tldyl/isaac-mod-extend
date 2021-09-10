@@ -214,10 +214,10 @@ public class IsaacModExtend implements EditStringsSubscriber,
             }
         );
         ModLabeledToggleButton enableStartCardRewardOption = new ModLabeledToggleButton(uiStrings.TEXT[1], 350.0F, 660.0F, Color.WHITE, FontHelper.buttonLabelFont, enableStartCardReward, settingsPanel, (me) -> {},
-                (me) -> {
-                    enableStartCardReward = me.enabled;
-                    saveSettings();
-                }
+            (me) -> {
+                enableStartCardReward = me.enabled;
+                saveSettings();
+            }
         );
         settingsPanel.addUIElement(enableMonstroOption);
         settingsPanel.addUIElement(enableStartCardRewardOption);

@@ -71,9 +71,13 @@ public class Eraser extends ClickableRelic implements CustomSavable<Map<String, 
     }
 
     @Override
-    public void atBattleStart() {
-        if (this.erasedMonsters.size() > 0) this.flash();
+    public void atTurnStart() {
         eraseEnemy();
+    }
+
+    @Override
+    public void onPlayerEndTurn() {
+        atTurnStart();
     }
 
     @Override
@@ -83,6 +87,11 @@ public class Eraser extends ClickableRelic implements CustomSavable<Map<String, 
             this.counter++;
         }
         this.actName = AbstractDungeon.name;
+    }
+
+    @Override
+    public void onSpawnMonster(AbstractMonster monster) {
+        atTurnStart();
     }
 
     @Override

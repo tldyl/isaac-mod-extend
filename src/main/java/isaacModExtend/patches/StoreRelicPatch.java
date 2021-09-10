@@ -1,5 +1,6 @@
 package isaacModExtend.patches;
 
+import blood.BloodStoreRelic;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
@@ -51,8 +52,12 @@ public class StoreRelicPatch {
             clz = StoreRelic.class,
             method = "update"
     )
+    @SpirePatch(
+            clz = BloodStoreRelic.class,
+            method = "update"
+    )
     public static class PatchUpdate {
-        public static Map<StoreRelic, Float> switchTimer = new HashMap<>();
+        static Map<StoreRelic, Float> switchTimer = new HashMap<>();
 
         public static void Prefix(StoreRelic storeRelic, float rugY) {
             if (AbstractDungeon.player.hasRelic(GlitchedCrown.ID)) {
@@ -62,6 +67,9 @@ public class StoreRelicPatch {
                     List<AbstractRelic> relics = AddFieldPatch.relics.get(storeRelic);
                     relics.add(storeRelic.relic);
                     storeRelic.relic = relics.remove(0);
+                    if (storeRelic instanceof BloodStoreRelic) {
+                        ((BloodStoreRelic) storeRelic).relic = storeRelic.relic;
+                    }
                 }
             }
         }

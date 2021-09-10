@@ -41,7 +41,7 @@ public class MucormycosisPower extends AbstractPower {
     public void onInitialApplication() {
         for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!m.isDeadOrEscaped()) {
-                addToBot(new ApplyPowerAction(m, owner, new PoisonPower(m, owner, 4)));
+                addToBot(new ApplyPowerAction(m, AbstractDungeon.player, new PoisonPower(m, AbstractDungeon.player, 4)));
             }
         }
     }
@@ -54,7 +54,7 @@ public class MucormycosisPower extends AbstractPower {
             public void update() {
                 if (MucormycosisPower.this.amount <= 0) {
                     MucormycosisPower.this.flash();
-                    addToBot(new DamageAction(owner, new DamageInfo(owner, 5, DamageInfo.DamageType.NORMAL), AttackEffect.POISON));
+                    addToBot(new DamageAction(owner, new DamageInfo(owner, 5, DamageInfo.DamageType.THORNS), AttackEffect.POISON));
                     for (int i=0;i<2;i++) {
                         AbstractMonster m = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
                         addToBot(new ApplyPowerAction(m, owner, new MucormycosisPower(m, 2)));

@@ -123,6 +123,7 @@ public class RedKey extends ChargeableRelic implements CustomSavable<Map<String,
         if (!loadingData) {
             saveData.put(pos, saveData.getOrDefault(pos, 0) + 1);
         }
+        AbstractDungeon.dungeonMapScreen.updateImage();
         log.info("Create a red room: {}", newNode.toString());
     }
 

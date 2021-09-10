@@ -2,6 +2,7 @@ package isaacModExtend.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -31,20 +32,27 @@ public class FourPointFiveVolt extends CustomRelic {
 
     @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-        if (target instanceof AbstractMonster && (info.type == DamageInfo.DamageType.NORMAL || info.type == DamageInfo.DamageType.THORNS)) {
-            this.counter += target.lastDamageTaken;
-            if (this.counter >= 70) {
-                this.flash();
-                for (AbstractRelic relic : AbstractDungeon.player.relics) {
-                    if (relic instanceof ChargeableRelic) {
-                        ChargeableRelic chargeableRelic = (ChargeableRelic) relic;
-                        if (chargeableRelic.isMaxCharge()) continue;
-                        chargeableRelic.counter++;
-                        break;
+        AbstractCreature t = target;
+        IsaacModExtend.addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                if (t instanceof AbstractMonster && (info.type == DamageInfo.DamageType.NORMAL || info.type == DamageInfo.DamageType.THORNS)) {
+                    FourPointFiveVolt.this.counter += t.lastDamageTaken;
+                    if (FourPointFiveVolt.this.counter >= 70) {
+                        FourPointFiveVolt.this.flash();
+                        for (AbstractRelic relic : AbstractDungeon.player.relics) {
+                            if (relic instanceof ChargeableRelic) {
+                                ChargeableRelic chargeableRelic = (ChargeableRelic) relic;
+                                if (chargeableRelic.isMaxCharge()) continue;
+                                chargeableRelic.counter++;
+                                break;
+                            }
+                        }
+                        FourPointFiveVolt.this.counter %= 70;
                     }
                 }
-                this.counter %= 70;
+                isDone = true;
             }
-        }
+        });
     }
 }
