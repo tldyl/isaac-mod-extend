@@ -41,6 +41,7 @@ import isaacModExtend.cards.Guilt;
 import isaacModExtend.daily.mods.Challenge45;
 import isaacModExtend.events.Planetarium;
 import isaacModExtend.monsters.BabyPlum;
+import isaacModExtend.patches.ChaosPatch;
 import isaacModExtend.relics.*;
 import isaacModExtend.relics.birthrightRelics.DefectBirthrightRelic;
 import isaacModExtend.relics.birthrightRelics.IroncladBirthrightRelic;
@@ -69,7 +70,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
                                        PostDungeonInitializeSubscriber{
 
     private static List<AbstractGameAction> actionList = new ArrayList<>();
-    private static List<AbstractRelic> planetariumRelics = new ArrayList<>();
+    public static List<AbstractRelic> planetariumRelics = new ArrayList<>();
     private static SpriteBatch sb;
     private static boolean enableMonstro = true;
     public static boolean enableStartCardReward = true;
@@ -146,10 +147,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.addAudio("RELIC_PLUM_FLUTE", "IsaacAudio/sfx/relic_plum_flute.wav");
     }
 
-    @Override
-    public void receivePostInitialize() {
-        BaseMod.addEvent(Planetarium.ID, Planetarium.class);
-
+    public static void initPlanetariumRelics() {
+        planetariumRelics.clear();
         planetariumRelics.add(new Sol());
         planetariumRelics.add(new Luna());
         planetariumRelics.add(new Mercurius());
@@ -159,13 +158,10 @@ public class IsaacModExtend implements EditStringsSubscriber,
         planetariumRelics.add(new Jupiter());
 
         planetariumRelics.add(new Neptunus());
-        try {
-            Field field = CardCrawlGame.class.getDeclaredField("sb");
-            field.setAccessible(true);
-            sb = (SpriteBatch) field.get(Gdx.app.getApplicationListener());
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    }
+
+    public static void initAngelOnlyRelics() {
+        angelOnlyRelics.clear();
 
         angelOnlyRelics.add(new Void());
         angelOnlyRelics.add(new TheBible());
@@ -181,6 +177,22 @@ public class IsaacModExtend implements EditStringsSubscriber,
         angelOnlyRelics.add(new HolyMantle());
         angelOnlyRelics.add(new TheStairway());
         angelOnlyRelics.add(new BookOfVirtues());
+    }
+
+    @Override
+    public void receivePostInitialize() {
+        BaseMod.addEvent(Planetarium.ID, Planetarium.class);
+
+        initPlanetariumRelics();
+        try {
+            Field field = CardCrawlGame.class.getDeclaredField("sb");
+            field.setAccessible(true);
+            sb = (SpriteBatch) field.get(Gdx.app.getApplicationListener());
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        initAngelOnlyRelics();
 
         BaseMod.addMonster("Monstro" , Monstro.NAME, () -> new MonsterGroup(new AbstractMonster[]{
                 new Monstro(-50, 0)
@@ -235,6 +247,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
         Birthright.birthrightEffects.put(TheSilent.class, new SilentBirthrightRelic());
         Birthright.birthrightEffects.put(Defect.class, new DefectBirthrightRelic());
         Birthright.birthrightEffects.put(Watcher.class, new WatcherBirthrightRelic());
+
+        new ChaosPatch();
     }
 
     public static void saveSettings() {

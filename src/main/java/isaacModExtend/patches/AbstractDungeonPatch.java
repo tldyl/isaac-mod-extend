@@ -2,6 +2,7 @@ package isaacModExtend.patches;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -9,6 +10,7 @@ import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EmptyRoom;
+import isaacModExtend.IsaacModExtend;
 import isaacModExtend.interfaces.PostGenerateDungeonMapSubscriber;
 import isaacModExtend.relics.Luna;
 
@@ -74,6 +76,25 @@ public class AbstractDungeonPatch {
                     ((PostGenerateDungeonMapSubscriber) relic).receivePostGenerateDungeonMap();
                 }
             }
+        }
+    }
+
+    @SpirePatch(
+            clz = AbstractDungeon.class,
+            method = "initializeRelicList"
+    )
+    public static class PatchInitializeRelicList {
+        public static boolean shouldInitializeRelicList = true;
+
+        public static SpireReturn<Void> Prefix(AbstractDungeon dungeon) {
+            IsaacModExtend.addToBot(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    shouldInitializeRelicList = true;
+                    isDone = true;
+                }
+            });
+            return shouldInitializeRelicList ? SpireReturn.Continue() : SpireReturn.Return(null);
         }
     }
 }

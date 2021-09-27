@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
 import com.megacrit.cardcrawl.shop.ShopScreen;
+import isaacModExtend.IsaacModExtend;
 import isaacModExtend.monsters.pet.SoulWisp;
 import isaacModExtend.relics.BookOfVirtues;
 import patches.player.PlayerAddFieldsPatch;
@@ -37,6 +38,8 @@ public class SaveAndContinuePatch {
             if (!AbstractDungeon.shopScreen.getClass().getSimpleName().equals("ShopScreen")) {
                 AbstractDungeon.shopScreen = new ShopScreen();
             }
+            IsaacModExtend.initPlanetariumRelics();
+            IsaacModExtend.initAngelOnlyRelics();
         }
     }
 }

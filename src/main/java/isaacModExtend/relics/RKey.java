@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.vfx.GameSavedEffect;
 import isaacModExtend.IsaacModExtend;
+import isaacModExtend.patches.AbstractDungeonPatch;
 import relics.abstracrt.ClickableRelic;
 
 import java.lang.reflect.Field;
@@ -51,7 +52,8 @@ public class RKey extends ClickableRelic {
             AbstractDungeon.actNum = 0;
             AbstractDungeon.id = Exordium.ID;
             AbstractDungeon.player.masterDeck.removeCard(AscendersBane.ID);
-
+            AbstractDungeon.dungeonMapScreen.open(true);
+            AbstractDungeonPatch.PatchInitializeRelicList.shouldInitializeRelicList = false;
             IsaacModExtend.addToBot(new AbstractGameAction() {
                 @Override
                 public void update() {
@@ -60,6 +62,7 @@ public class RKey extends ClickableRelic {
                     SaveFile saveFile = new SaveFile(SaveFile.SaveType.ENTER_ROOM);
                     SaveAndContinue.save(saveFile);
                     AbstractDungeon.effectList.add(new GameSavedEffect());
+                    AbstractDungeon.bossRelicPool.remove(RKey.ID);
                     isDone = true;
                 }
             });
