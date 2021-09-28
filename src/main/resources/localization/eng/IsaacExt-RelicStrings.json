@@ -313,5 +313,12 @@
     "DESCRIPTIONS": [
       "Whenever you change Stances, gain #b2 #yMantra."
     ]
+  },
+  "IsaacExt:Metronome": {
+    "NAME": "Metronome",
+    "FLAVOR": "Waggles a finger.",
+    "DESCRIPTIONS": [
+      "#b1 charge, when fully charged, right-click to obtain a random relic for the current room. NL Using this relic multiple times in the same room will replace the previous relic with a new one."
+    ]
   }
 }

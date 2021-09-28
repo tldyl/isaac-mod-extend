@@ -1,11 +1,18 @@
 package isaacModExtend.patches;
 
+import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import isaacModExtend.interfaces.NeutralCreature;
+import patches.ui.SoulHeartPatch;
 
 import java.lang.reflect.Field;
 
@@ -35,6 +42,24 @@ public class AbstractPlayerPatch {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @SpirePatch(
+            clz = AbstractPlayer.class,
+            method = "damage"
+    )
+    public static class PatchDamage {
+        @SpireInsertPatch(rloc = 85, localvars = {"damageAmount"})
+        public static void Insert(AbstractPlayer p, DamageInfo info, @ByRef int[] damageAmount) {
+            if (info.owner == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) {
+                if (SoulHeartPatch.blackHeart > 0) {
+                    SoulHeartPatch.blackHeart = SoulHeartPatch.blackHeart <= damageAmount[0] ? 0 : SoulHeartPatch.blackHeart - damageAmount[0];
+                } else if (SoulHeartPatch.soulHeart > 0) {
+                    SoulHeartPatch.soulHeart = SoulHeartPatch.soulHeart <= damageAmount[0] ? 0 : SoulHeartPatch.soulHeart - damageAmount[0];
+                }
+                damageAmount[0] = 0;
             }
         }
     }

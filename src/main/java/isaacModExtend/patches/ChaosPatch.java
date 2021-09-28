@@ -68,7 +68,7 @@ public class ChaosPatch implements CustomSavable<Map<String, List<String>>> {
             method = "onEquip"
     )
     public static class PatchOnEquip {
-        public static SpireReturn<Void> Prefix(Chaos chaos) {
+        public static Set<String> getAllRelics() {
             Set<String> all = new LinkedHashSet<>();
             for (AbstractRelic relic : RelicLibrary.redList) {
                 all.add(relic.relicId);
@@ -80,6 +80,9 @@ public class ChaosPatch implements CustomSavable<Map<String, List<String>>> {
                 all.add(relic.relicId);
             }
             for (AbstractRelic relic : RelicLibrary.whiteList) {
+                all.add(relic.relicId);
+            }
+            for (AbstractRelic relic : RelicLibrary.specialList) {
                 all.add(relic.relicId);
             }
             try {
@@ -101,16 +104,21 @@ public class ChaosPatch implements CustomSavable<Map<String, List<String>>> {
                 all.add(relic.relicId);
             }
             all.addAll(AbstractDungeon.commonRelicPool);
-            AbstractDungeon.commonRelicPool.clear();
             all.addAll(AbstractDungeon.uncommonRelicPool);
-            AbstractDungeon.uncommonRelicPool.clear();
             all.addAll(AbstractDungeon.rareRelicPool);
-            AbstractDungeon.rareRelicPool.clear();
             all.addAll(AbstractDungeon.bossRelicPool);
-            AbstractDungeon.bossRelicPool.clear();
             all.addAll(AbstractDungeon.shopRelicPool);
-            AbstractDungeon.shopRelicPool.clear();
             all.addAll(IsaacMod.devilOnlyRelics);
+            return all;
+        }
+
+        public static SpireReturn<Void> Prefix(Chaos chaos) {
+            Set<String> all = getAllRelics();
+            AbstractDungeon.commonRelicPool.clear();
+            AbstractDungeon.uncommonRelicPool.clear();
+            AbstractDungeon.rareRelicPool.clear();
+            AbstractDungeon.bossRelicPool.clear();
+            AbstractDungeon.shopRelicPool.clear();
             IsaacMod.devilOnlyRelics.clear();
             IsaacModExtend.angelOnlyRelics.clear();
             IsaacModExtend.planetariumRelics.clear();

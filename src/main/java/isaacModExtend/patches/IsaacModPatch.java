@@ -52,6 +52,7 @@ public class IsaacModPatch {
         IsaacMod.relics.add(EchoChamber.ID);
         IsaacMod.relics.add(PlumFlute.ID);
         IsaacMod.relics.add(Birthright.ID);
+        IsaacMod.relics.add(Metronome.ID);
     }
 
     @SpirePatch(
