@@ -1,6 +1,7 @@
 package isaacModExtend.relics;
 
 import basemod.abstracts.CustomBottleRelic;
+import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class Metronome extends ChargeableRelic {
+public class Metronome extends ChargeableRelic implements CustomSavable<String> {
     public static final String ID = IsaacModExtend.makeID("Metronome");
     public static final String IMG_PATH = "relics/metronome.png";
     private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
@@ -102,6 +103,18 @@ public class Metronome extends ChargeableRelic {
                     isDone = true;
                 }
             });
+        }
+    }
+
+    @Override
+    public String onSave() {
+        return relic != null ? relic.relicId : null;
+    }
+
+    @Override
+    public void onLoad(String s) {
+        if (s != null) {
+            relic = RelicLibrary.getRelic(s);
         }
     }
 }

@@ -30,3 +30,4 @@ src/test/
 *.lnk
 .idea/vcs.xml
 *.iml
+idea.txt

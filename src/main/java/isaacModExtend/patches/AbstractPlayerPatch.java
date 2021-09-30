@@ -53,13 +53,26 @@ public class AbstractPlayerPatch {
     public static class PatchDamage {
         @SpireInsertPatch(rloc = 85, localvars = {"damageAmount"})
         public static void Insert(AbstractPlayer p, DamageInfo info, @ByRef int[] damageAmount) {
-            if (info.owner == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) {
+            if (info.owner == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT ||
+                    (info.owner != null && info.owner.powers.size() == 0 && info.owner != p)) {
                 if (SoulHeartPatch.blackHeart > 0) {
-                    SoulHeartPatch.blackHeart = SoulHeartPatch.blackHeart <= damageAmount[0] ? 0 : SoulHeartPatch.blackHeart - damageAmount[0];
+                    if ((info.owner != null && info.owner.powers.size() == 0 && info.owner != p) || AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+                        if (damageAmount[0] > SoulHeartPatch.blackHeart % 10) {
+                            SoulHeartPatch.blackHeart = SoulHeartPatch.blackHeart <= damageAmount[0] ? 0 : SoulHeartPatch.blackHeart - damageAmount[0];
+                            if (AbstractDungeon.getMonsters() != null) {
+                                AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, DamageInfo.createDamageMatrix(40, false), DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.FIRE));
+                            }
+                        } else {
+                            SoulHeartPatch.blackHeart -= damageAmount[0];
+                        }
+                    } else {
+                        SoulHeartPatch.blackHeart = SoulHeartPatch.blackHeart <= damageAmount[0] ? 0 : SoulHeartPatch.blackHeart - damageAmount[0];
+                    }
+                    damageAmount[0] = 0;
                 } else if (SoulHeartPatch.soulHeart > 0) {
                     SoulHeartPatch.soulHeart = SoulHeartPatch.soulHeart <= damageAmount[0] ? 0 : SoulHeartPatch.soulHeart - damageAmount[0];
+                    damageAmount[0] = 0;
                 }
-                damageAmount[0] = 0;
             }
         }
     }
