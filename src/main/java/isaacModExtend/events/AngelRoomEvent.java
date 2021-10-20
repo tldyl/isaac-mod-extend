@@ -91,7 +91,6 @@ public class AngelRoomEvent extends AbstractEvent {
                     }
                 }
                 if (!obtainedRelic) {
-                    screenNum = 1;
                     this.roomEventText.updateBodyText(DESCRIPTIONS[2]);
                 }
                 RoomEventDialog.optionList.clear();

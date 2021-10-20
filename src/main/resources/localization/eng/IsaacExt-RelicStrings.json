@@ -290,7 +290,7 @@
     "NAME": "",
     "FLAVOR": "Unmatched power!",
     "DESCRIPTIONS": [
-      "Every time you play #b3 #yAttacks, gain #b1 #yStrength."
+      "Every time you #yExhaust #b3 cards, gain #b1 #yStrength."
     ]
   },
   "IsaacExt:SilentBirthrightRelic": {

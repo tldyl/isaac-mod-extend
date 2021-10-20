@@ -44,5 +44,11 @@
     "DESCRIPTIONS": [
       "每对目标造成一次未被 #y格挡 的伤害，给予 #b1 层 #y慌乱 。"
     ]
+  },
+  "IsaacExt:FamiliarBarrierPower": {
+    "NAME": "环绕物",
+    "DESCRIPTIONS": [
+      "存在跟班时，将 #b50% 的 #y攻击 伤害转移到第一个存活的跟班上(可抵消溢出伤害)。"
+    ]
   }
 }

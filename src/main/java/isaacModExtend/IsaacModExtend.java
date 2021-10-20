@@ -3,6 +3,7 @@ package isaacModExtend;
 import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
+import basemod.devcommands.ConsoleCommand;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -38,9 +39,11 @@ import com.megacrit.cardcrawl.relics.Circlet;
 import com.megacrit.cardcrawl.relics.IncenseBurner;
 import helpers.MinionHelper;
 import isaacModExtend.cards.Guilt;
+import isaacModExtend.commands.RewindCommand;
 import isaacModExtend.daily.mods.Challenge45;
 import isaacModExtend.events.Planetarium;
 import isaacModExtend.monsters.BabyPlum;
+import isaacModExtend.monsters.Siren;
 import isaacModExtend.patches.ChaosPatch;
 import isaacModExtend.relics.*;
 import isaacModExtend.relics.birthrightRelics.DefectBirthrightRelic;
@@ -53,6 +56,7 @@ import relics.Habit;
 import relics.TheBible;
 import relics.Void;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -67,7 +71,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
                                        PostUpdateSubscriber,
                                        PostRenderSubscriber,
                                        EditCardsSubscriber,
-                                       PostDungeonInitializeSubscriber{
+                                       PostDungeonInitializeSubscriber {
 
     private static List<AbstractGameAction> actionList = new ArrayList<>();
     public static List<AbstractRelic> planetariumRelics = new ArrayList<>();
@@ -145,6 +149,16 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.addAudio("MEAT_JUMPS_0", "IsaacAudio/sfx/meat_jumps_0.wav");
         BaseMod.addAudio("BOSS_BABY_PLUM_BUBBLE_LOOP", "IsaacAudio/sfx/boss_baby_plum_bubble_loop.wav");
         BaseMod.addAudio("RELIC_PLUM_FLUTE", "IsaacAudio/sfx/relic_plum_flute.wav");
+        BaseMod.addAudio("BOSS_SIREN_LUNGEATTACK", "IsaacAudio/sfx/boss_siren_lungeattack.wav");
+        BaseMod.addAudio("BOSS_SIREN_MINIONSBLACKSMOKE", "IsaacAudio/sfx/boss_siren_minionsblacksmoke.wav");
+        BaseMod.addAudio("BOSS_SIREN_SCREAM_ATTACK_1", "IsaacAudio/sfx/boss_siren_scream_attack_1.wav");
+        BaseMod.addAudio("BOSS_SIREN_SCREAM_ATTACK_2", "IsaacAudio/sfx/boss_siren_scream_attack_2.wav");
+        BaseMod.addAudio("BOSS_SIREN_SCREAM_ATTACK_3", "IsaacAudio/sfx/boss_siren_scream_attack_3.wav");
+        BaseMod.addAudio("BOSS_SIREN_SCREAM_ATTACK_LAYER", "IsaacAudio/sfx/boss_siren_scream_attack_layer.wav");
+        BaseMod.addAudio("BOSS_SIREN_SING_1", "IsaacAudio/sfx/boss_siren_sing_1.wav");
+        BaseMod.addAudio("BOSS_SIREN_SING_2", "IsaacAudio/sfx/boss_siren_sing_2.wav");
+        BaseMod.addAudio("BOSS_SIREN_SING_3", "IsaacAudio/sfx/boss_siren_sing_3.wav");
+        BaseMod.addAudio("BOSS_SIREN_SINGINGATTACK", "IsaacAudio/sfx/boss_siren_singingattack.wav");
     }
 
     public static void initPlanetariumRelics() {
@@ -210,6 +224,9 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.addMonster("BabyPlum", BabyPlum.NAME, () -> new MonsterGroup(new AbstractMonster[]{
                 new BabyPlum(-50, 0)
         }));
+        BaseMod.addMonster("Siren", BabyPlum.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+                new Siren(-50, 0)
+        }));
         loadSettings();
         if (enableMonstro) {
             BaseMod.addBoss(Exordium.ID, "Monstro", getResourcePath("map/monstro.png"), getResourcePath("map/monstroOutline.png"));
@@ -217,6 +234,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
             BaseMod.addBoss(TheBeyond.ID, "4_Monstro", getResourcePath("map/monstro.png"), getResourcePath("map/monstroOutline.png"));
         }
         BaseMod.addBoss(Exordium.ID, "BabyPlum", getResourcePath("map/babyPlum.png"), getResourcePath("map/babyPlumOutline.png"));
+        BaseMod.addBoss(TheCity.ID, "Siren", getResourcePath("map/siren.png"), getResourcePath("map/sirenOutline.png"));
         UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModPanel"));
         ModPanel settingsPanel = new ModPanel();
         ModLabeledToggleButton enableMonstroOption = new ModLabeledToggleButton(uiStrings.TEXT[0], 350.0F, 700.0F, Color.WHITE, FontHelper.buttonLabelFont, enableMonstro, settingsPanel, (me) -> {},
@@ -249,6 +267,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
         Birthright.birthrightEffects.put(Watcher.class, new WatcherBirthrightRelic());
 
         new ChaosPatch();
+
+        ConsoleCommand.addCommand("rewind", RewindCommand.class);
     }
 
     public static void saveSettings() {
@@ -374,10 +394,29 @@ public class IsaacModExtend implements EditStringsSubscriber,
     public void receivePostDungeonInitialize() {
         if (ModHelper.isModEnabled("IsaacExt:Challenge45")) {
             new TMTrainer().instantObtain(AbstractDungeon.player, 0, true);
-            AbstractRelic relic = AbstractDungeon.player.relics.get(0);
-            AbstractDungeon.player.relics.set(0, AbstractDungeon.player.relics.get(AbstractDungeon.player.relics.size() - 1));
-            AbstractDungeon.player.relics.set(AbstractDungeon.player.relics.size() - 1, relic);
+            List<String> startRelics = AbstractDungeon.player.getStartingRelics();
+            if (startRelics != null) {
+                List<AbstractRelic> toRemove = new ArrayList<>();
+                for (AbstractRelic relic : AbstractDungeon.player.relics) {
+                    if (startRelics.contains(relic.relicId)) {
+                        toRemove.add(relic);
+                        relic.onUnequip();
+                    }
+                }
+                AbstractDungeon.player.relics.removeAll(toRemove);
+            }
+            AbstractRelic relic = AbstractDungeon.player.relics.remove(0);
+            AbstractDungeon.player.relics.add(relic);
             AbstractDungeon.player.reorganizeRelics();
+        }
+
+        String filepath = AbstractDungeon.player.getSaveFilePath();
+        if (Settings.isBeta) {
+            filepath = filepath + "BETA";
+        }
+        File rewindFile = new File(filepath + "REWIND");
+        if (rewindFile.exists()) {
+            rewindFile.delete();
         }
     }
 }

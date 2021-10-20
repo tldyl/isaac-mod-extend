@@ -44,5 +44,11 @@
     "DESCRIPTIONS": [
       "Whenever target receive attack damage from this enemy, apply #b1 #yFrantic."
     ]
+  },
+  "IsaacExt:FamiliarBarrierPower": {
+    "NAME": "Familiar Barrier",
+    "DESCRIPTIONS": [
+      "When any familiar alive, transfer #b50% of the #yattack damage to the first alive familiar (which can offset the overflow damage)."
+    ]
   }
 }

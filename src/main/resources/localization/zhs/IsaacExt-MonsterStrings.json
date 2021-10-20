@@ -108,5 +108,19 @@
     "NAME": "唤梅笛魂火",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "IsaacExt:Siren": {
+    "NAME": "塞壬",
+    "DIALOG": [],
+    "MOVES": [
+      "唱歌",
+      "化为泥淖",
+      "尖啸"
+    ]
+  },
+  "IsaacExt:SirenHelper": {
+    "NAME": "塞壬助手",
+    "DIALOG": [],
+    "MOVES": []
   }
 }

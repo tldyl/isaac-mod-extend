@@ -108,5 +108,19 @@
     "NAME": "Plum Flute Wisp",
     "DIALOG": [""],
     "MOVES": [""]
+  },
+  "IsaacExt:Siren": {
+    "NAME": "Siren",
+    "DIALOG": [],
+    "MOVES": [
+      "Singing",
+      "Form Of Puddle",
+      "Piercing Wail"
+    ]
+  },
+  "IsaacExt:SirenHelper": {
+    "NAME": "Siren Helper",
+    "DIALOG": [],
+    "MOVES": []
   }
 }

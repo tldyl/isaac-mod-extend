@@ -381,9 +381,11 @@ public class BabyPlumPet extends AbstractPet {
             setMove((byte) 1, Intent.ATTACK, this.damage.get(1).base);
         } else if (lastMove((byte) 1)) {
             int multi = 5;
-            if (AbstractDungeon.player.hasPower(FranticPower.POWER_ID)) {
-                AbstractPower power = AbstractDungeon.player.getPower(FranticPower.POWER_ID);
-                multi += power.amount;
+            for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                if (!m.isDeadOrEscaped() && m.hasPower(FranticPower.POWER_ID)) {
+                    AbstractPower power = m.getPower(FranticPower.POWER_ID);
+                    multi += power.amount;
+                }
             }
             setMove((byte) 2, Intent.ATTACK, this.damage.get(2).base, multi, true);
         } else {

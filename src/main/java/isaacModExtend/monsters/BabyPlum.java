@@ -16,10 +16,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FrailPower;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import demoMod.anm2player.AnimatedActor;
 import isaacModExtend.IsaacModExtend;
 import isaacModExtend.actions.BabyPlumAttack1Action;
@@ -33,17 +31,13 @@ import isaacModExtend.powers.GoodbyePower;
 import isaacModExtend.relics.PlumFlute;
 import utils.Point;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("Duplicates")
-public class BabyPlum extends AbstractMonster {
+public class BabyPlum extends AbstractAnm2Monster {
     public static final String ID = IsaacModExtend.makeID("BabyPlum");
     public static final String NAME;
-    private AnimatedActor animation;
-    private boolean resetPosition = true;
     private boolean renderHealthBar = false;
 
     public BabyPlum(float offsetX, float offsetY) {
@@ -233,52 +227,6 @@ public class BabyPlum extends AbstractMonster {
     }
 
     @Override
-    public void render(SpriteBatch sb) {
-        Method method;
-        if (!this.isDead && !this.escaped) {
-            if (resetPosition) {
-                animation.flipX = this.flipHorizontal;
-                animation.flipY = this.flipVertical;
-            }
-            animation.render(sb);
-
-            if (!this.isDying && !this.isEscaping && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.player.isDead && !AbstractDungeon.player.hasRelic("Runic Dome") && this.intent != AbstractMonster.Intent.NONE && !Settings.hideCombatElements) {
-                try {
-                    method = AbstractMonster.class.getDeclaredMethod("renderIntentVfxBehind", SpriteBatch.class);
-                    method.setAccessible(true);
-                    method.invoke(this, sb);
-                    method = AbstractMonster.class.getDeclaredMethod("renderIntent", SpriteBatch.class);
-                    method.setAccessible(true);
-                    method.invoke(this, sb);
-                    method = AbstractMonster.class.getDeclaredMethod("renderIntentVfxAfter", SpriteBatch.class);
-                    method.setAccessible(true);
-                    method.invoke(this, sb);
-                    method = AbstractMonster.class.getDeclaredMethod("renderDamageRange", SpriteBatch.class);
-                    method.setAccessible(true);
-                    method.invoke(this, sb);
-                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            this.hb.render(sb);
-            this.intentHb.render(sb);
-            this.healthHb.render(sb);
-        }
-
-        if (!AbstractDungeon.player.isDead) {
-            this.renderHealth(sb);
-            try {
-                method = AbstractMonster.class.getDeclaredMethod("renderName", SpriteBatch.class);
-                method.setAccessible(true);
-                method.invoke(this, sb);
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
     public void takeTurn() {
         switch (this.nextMove) {
             case 0:
@@ -392,6 +340,7 @@ public class BabyPlum extends AbstractMonster {
     public void die() {
         super.die();
         this.animation.setCurAnimation("Death");
+        this.onBossVictoryLogic();
     }
 
     @Override
