@@ -23,6 +23,15 @@ public class TempMusicPatch {
             if (key.equals("ARCADE")) {
                 return SpireReturn.Return(MainMusic.newMusic("IsaacAudio/music/arcade.ogg"));
             }
+            if (key.equals("ISAAC_BOSS_INTRO")) {
+                return SpireReturn.Return(MainMusic.newMusic("IsaacAudio/music/boss_intro.ogg"));
+            }
+            if (key.equals("ISAAC_BOSS_LOOP")) {
+                return SpireReturn.Return(MainMusic.newMusic("IsaacAudio/music/boss_loop.ogg"));
+            }
+            if (key.equals("ISAAC_BOSS_BEATEN")) {
+                return SpireReturn.Return(MainMusic.newMusic("IsaacAudio/music/boss_beaten.ogg"));
+            }
             return SpireReturn.Continue();
         }
     }

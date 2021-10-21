@@ -31,19 +31,31 @@ public class FamiliarBarrierPower extends AbstractPower {
         updateDescription();
     }
 
+    @Override
     public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
         if (info.type != DamageInfo.DamageType.HP_LOSS) {
             for (AbstractMonster m : controlledPets) {
                 if (!m.isDeadOrEscaped()) {
                     this.flash();
-                    info.output /= 2;
                     if (damageAmount % 2 != 0) info.output++;
                     m.damage(info);
-                    return damageAmount / 2;
+                    break;
                 }
             }
         }
         return damageAmount;
+    }
+
+    @Override
+    public float atDamageReceive(float damage, DamageInfo.DamageType type) {
+        if (type != DamageInfo.DamageType.HP_LOSS) {
+            for (AbstractMonster m : controlledPets) {
+                if (!m.isDeadOrEscaped()) {
+                    return damage / 2;
+                }
+            }
+        }
+        return damage;
     }
 
     @Override

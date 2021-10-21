@@ -3,9 +3,12 @@ package isaacModExtend.monsters;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.actions.utility.HideHealthBarAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.blights.AbstractBlight;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -19,6 +22,8 @@ import com.megacrit.cardcrawl.powers.IntangiblePower;
 import com.megacrit.cardcrawl.powers.SlowPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.screens.stats.StatsScreen;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;
@@ -143,8 +148,23 @@ public class Siren extends AbstractAnm2Monster {
     public void usePreBattleAction() {
         CardCrawlGame.music.unsilenceBGM();
         AbstractDungeon.scene.fadeOutAmbiance();
-        AbstractDungeon.getCurrRoom().playBgmInstantly("BOSS_CITY");
         addToBot(new ApplyPowerAction(this, this, new FamiliarBarrierPower(this, allHelpers)));
+        IsaacModExtend.addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                AbstractDungeon.getCurrRoom().playBgmInstantly("ISAAC_BOSS_INTRO");
+                isDone = true;
+            }
+        });
+        IsaacModExtend.addToBot(new Anm2WaitAction(5.8F));
+        IsaacModExtend.addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                CardCrawlGame.music.silenceTempBgmInstantly();
+                AbstractDungeon.getCurrRoom().playBgmInstantly("ISAAC_BOSS_LOOP");
+                isDone = true;
+            }
+        });
     }
 
     @Override
@@ -218,7 +238,7 @@ public class Siren extends AbstractAnm2Monster {
                 addToBot(new Anm2WaitAction(0.7F));
                 allHelpers.clear();
                 for (AbstractMonster m1 : AbstractDungeon.getMonsters().monsters) {
-                    if (m1 instanceof SirenHelper) {
+                    if (m1 instanceof SirenHelper && !m1.isDeadOrEscaped()) {
                         allHelpers.add(m1);
                     }
                 }
@@ -240,8 +260,6 @@ public class Siren extends AbstractAnm2Monster {
                     this.stopLoop = false;
                     this.animation.setCurAnimation("TeleportEnd");
                     this.animationQueue.add("SlashLeft");
-                    IsaacModExtend.addToBot(new Anm2WaitAction(3.3F));
-                    IsaacModExtend.addToBot(new RemoveSpecificPowerAction(p, this, SlowPower.POWER_ID));
                     addToBot(new Anm2WaitAction(1.3F));
                 } else {
                     this.animation.setCurAnimation("SlashLeft");
@@ -252,6 +270,9 @@ public class Siren extends AbstractAnm2Monster {
                 addToBot(new DamageAction(p, this.damage.get(0), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
                 addToBot(new DamageAction(p, this.damage.get(0), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
                 addToBot(new DamageAction(p, this.damage.get(0), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+                if (this.lastMoveBefore((byte) 4)) {
+                    addToBot(new RemoveSpecificPowerAction(p, this, SlowPower.POWER_ID));
+                }
                 break;
             case 4: //化为泥淖(debuff)
                 this.stopLoop = true;
@@ -335,7 +356,7 @@ public class Siren extends AbstractAnm2Monster {
             setMove((byte) 1, Intent.BUFF);
             return;
         }
-        if (aiRng < 70 && controlledPets.size() > 0) {
+        if (aiRng < 65 && controlledPets.size() > 0) {
             useSuicideSlam = true;
             for (AbstractMonster m : controlledPets) {
                 addToBot(new RollMoveAction(m));
@@ -352,7 +373,7 @@ public class Siren extends AbstractAnm2Monster {
             }
         }
         if (controlledPets.size() < 3) {
-            if (!this.lastMove((byte) 0) && !this.lastMoveBefore((byte) 0) && availablePets.size() > 0) {
+            if (!this.lastMove((byte) 0) && !this.lastMoveBefore((byte) 0) && availablePets.size() > 0 && aiRng < 30) {
                 setMove(MOVES[0], (byte) 0, Intent.STRONG_DEBUFF);
                 return;
             } else if (aiRng < 50 && !this.lastMove((byte) 6) && !this.lastMoveBefore((byte) 6)) {
@@ -362,7 +383,7 @@ public class Siren extends AbstractAnm2Monster {
         }
         if (aiRng < 67) {
             setMove((byte) 3, Intent.ATTACK, 3, 5, true);
-        } else if (aiRng < 79) {
+        } else if (aiRng < 84) {
             setMove(MOVES[1], (byte) 4, Intent.DEBUFF);
         } else {
             setMove(MOVES[2], (byte) 5, Intent.ATTACK_DEFEND, 2, 9, true);
@@ -389,6 +410,38 @@ public class Siren extends AbstractAnm2Monster {
                 AbstractDungeon.actionManager.addToTop(new SuicideAction(m));
                 AbstractDungeon.actionManager.addToTop(new VFXAction(m, new InflameEffect(m), 0.2F));
             }
+        }
+    }
+
+    @Override
+    protected void onBossVictoryLogic() {
+        if (Settings.FAST_MODE) {
+            this.deathTimer += 0.7F;
+        } else {
+            ++this.deathTimer;
+        }
+
+        AbstractDungeon.scene.fadeInAmbiance();
+        if (AbstractDungeon.getCurrRoom().event == null) {
+            ++AbstractDungeon.bossCount;
+            StatsScreen.incrementBossSlain();
+            if (GameActionManager.turn <= 1) {
+                UnlockTracker.unlockAchievement("YOU_ARE_NOTHING");
+            }
+
+            if (GameActionManager.damageReceivedThisCombat - GameActionManager.hpLossThisCombat <= 0) {
+                UnlockTracker.unlockAchievement("PERFECT");
+                ++CardCrawlGame.perfect;
+            }
+        }
+
+        CardCrawlGame.music.silenceTempBgmInstantly();
+        CardCrawlGame.music.silenceBGMInstantly();
+        CardCrawlGame.sound.play("BOSS_VICTORY_STINGER");
+        CardCrawlGame.music.playTempBgmInstantly("ISAAC_BOSS_BEATEN", false);
+
+        for (AbstractBlight b : AbstractDungeon.player.blights) {
+            b.onBossDefeat();
         }
     }
 
