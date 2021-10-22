@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.actions.utility.HideHealthBarAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.blights.AbstractBlight;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -226,11 +225,14 @@ public class Siren extends AbstractAnm2Monster {
                 } else {
                     this.animation.setCurAnimation("HoverLoop");
                 }
+                int block = 0;
                 for (AbstractMonster m1 : AbstractDungeon.getMonsters().monsters) {
                     if (m1 != this && !m1.isDeadOrEscaped()) {
                         addToBot(new ApplyPowerAction(m1, Siren.this, new StrengthPower(m1, 2)));
+                        block += 8;
                     }
                 }
+                if (block > 0) addToBot(new GainBlockAction(this, block));
                 break;
             case 2: //猛击销毁跟班(unknown)
                 this.animation.setCurAnimation("HoverEnd");
@@ -352,13 +354,13 @@ public class Siren extends AbstractAnm2Monster {
             setMove((byte) 3, Intent.ATTACK, 3, 5, true);
             return;
         }
-        if (!this.lastTwoMoves((byte) 1) && controlledPets.size() > 0) {
-            setMove((byte) 1, Intent.BUFF);
+        if (!this.lastTwoMoves((byte) 1) && controlledPets.size() > 0 && aiRng < 40) {
+            setMove((byte) 1, Intent.DEFEND_BUFF);
             return;
         }
-        if (aiRng < 65 && controlledPets.size() > 0) {
+        if (aiRng < 60 && allHelpers.size() > 0) {
             useSuicideSlam = true;
-            for (AbstractMonster m : controlledPets) {
+            for (AbstractMonster m : allHelpers) {
                 addToBot(new RollMoveAction(m));
             }
             setMove((byte) 2, Intent.UNKNOWN);
@@ -372,18 +374,18 @@ public class Siren extends AbstractAnm2Monster {
                 availablePets.add(monster);
             }
         }
-        if (controlledPets.size() < 3) {
+        if (controlledPets.size() < 2) {
             if (!this.lastMove((byte) 0) && !this.lastMoveBefore((byte) 0) && availablePets.size() > 0 && aiRng < 30) {
                 setMove(MOVES[0], (byte) 0, Intent.STRONG_DEBUFF);
                 return;
-            } else if (aiRng < 50 && !this.lastMove((byte) 6) && !this.lastMoveBefore((byte) 6)) {
+            } else if (aiRng < 40 && !this.lastMove((byte) 6) && !this.lastMoveBefore((byte) 6)) {
                 setMove((byte) 6, Intent.UNKNOWN);
                 return;
             }
         }
-        if (aiRng < 67) {
+        if (aiRng < 60) {
             setMove((byte) 3, Intent.ATTACK, 3, 5, true);
-        } else if (aiRng < 84) {
+        } else if (aiRng < 80) {
             setMove(MOVES[1], (byte) 4, Intent.DEBUFF);
         } else {
             setMove(MOVES[2], (byte) 5, Intent.ATTACK_DEFEND, 2, 9, true);

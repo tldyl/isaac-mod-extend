@@ -224,7 +224,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.addMonster("BabyPlum", BabyPlum.NAME, () -> new MonsterGroup(new AbstractMonster[]{
                 new BabyPlum(-50, 0)
         }));
-        BaseMod.addMonster("Siren", BabyPlum.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+        BaseMod.addMonster("Siren", Siren.NAME, () -> new MonsterGroup(new AbstractMonster[]{
                 new Siren(-50, 0)
         }));
         loadSettings();
