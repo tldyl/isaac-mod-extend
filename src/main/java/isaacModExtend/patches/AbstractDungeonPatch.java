@@ -26,14 +26,17 @@ public class AbstractDungeonPatch {
     public static class PatchGenerateRoomTypes {
         public static void Prefix(ArrayList<AbstractRoom> roomList, int availableRoomCount) {
             if (AbstractDungeon.player.hasRelic(Luna.ID)) {
-                try {
-                    Field field = AbstractDungeon.class.getDeclaredField("eventRoomChance");
-                    field.setAccessible(true);
-                    float eventRoomChance = field.getFloat(null);
-                    eventRoomChance *= 2.0F;
-                    field.setFloat(null, eventRoomChance);
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    e.printStackTrace();
+                Luna luna = (Luna) AbstractDungeon.player.getRelic(Luna.ID);
+                if (luna.changeEventRoomChance()) {
+                    try {
+                        Field field = AbstractDungeon.class.getDeclaredField("eventRoomChance");
+                        field.setAccessible(true);
+                        float eventRoomChance = field.getFloat(null);
+                        eventRoomChance *= 2.0F;
+                        field.setFloat(null, eventRoomChance);
+                    } catch (NoSuchFieldException | IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

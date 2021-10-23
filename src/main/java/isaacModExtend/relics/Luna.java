@@ -1,6 +1,7 @@
 package isaacModExtend.relics;
 
 import basemod.abstracts.CustomRelic;
+import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
@@ -12,10 +13,11 @@ import com.megacrit.cardcrawl.rooms.EventRoom;
 import isaacModExtend.IsaacModExtend;
 import patches.ui.SoulHeartPatch;
 
-public class Luna extends CustomRelic {
+public class Luna extends CustomRelic implements CustomSavable<Integer> {
     public static final String ID = IsaacModExtend.makeID("Luna");
     public static final String IMG_PATH = "relics/luna.png";
     private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
+    private int obtainedActNum;
 
     public Luna() {
         super(ID, IMG, RelicTier.SPECIAL, LandingSound.MAGICAL);
@@ -29,6 +31,7 @@ public class Luna extends CustomRelic {
     @Override
     public void onEquip() {
         this.counter = 0;
+        obtainedActNum = AbstractDungeon.actNum;
     }
 
     @Override
@@ -49,6 +52,24 @@ public class Luna extends CustomRelic {
             addToBot(new RelicAboveCreatureAction(p, this));
             addToBot(new ApplyPowerAction(p, p, new DexterityPower(p, this.counter)));
             this.counter = 0;
+        }
+    }
+
+    public boolean changeEventRoomChance() {
+        return this.obtainedActNum != AbstractDungeon.actNum;
+    }
+
+    @Override
+    public Integer onSave() {
+        return this.obtainedActNum;
+    }
+
+    @Override
+    public void onLoad(Integer i) {
+        if (i != null) {
+            this.obtainedActNum = i;
+        } else {
+            this.obtainedActNum = AbstractDungeon.actNum;
         }
     }
 }

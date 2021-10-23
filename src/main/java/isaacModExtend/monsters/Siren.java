@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.IntangiblePower;
 import com.megacrit.cardcrawl.powers.SlowPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
@@ -232,7 +233,11 @@ public class Siren extends AbstractAnm2Monster {
                         block += 8;
                     }
                 }
-                if (block > 0) addToBot(new GainBlockAction(this, block));
+                if (block > 0) {
+                    addToBot(new GainBlockAction(this, block));
+                } else {
+                    addToBot(new ApplyPowerAction(this, this, new StrengthPower(this, 1)));
+                }
                 break;
             case 2: //猛击销毁跟班(unknown)
                 this.animation.setCurAnimation("HoverEnd");
@@ -307,6 +312,13 @@ public class Siren extends AbstractAnm2Monster {
                 IsaacModExtend.addToBot(new DamageAction(p, this.damage.get(1), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
                 IsaacModExtend.addToBot(new DamageAction(p, this.damage.get(1), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
                 IsaacModExtend.addToBot(new GainBlockAction(this, 20));
+                if (this.hasPower(StrengthPower.POWER_ID)) {
+                    AbstractPower power = this.getPower(StrengthPower.POWER_ID);
+                    if (power.amount < 0) {
+                        IsaacModExtend.addToBot(new RemoveSpecificPowerAction(this, this, StrengthPower.POWER_ID));
+                        IsaacModExtend.addToBot(new RemoveSpecificPowerAction(this, this, "Shackled"));
+                    }
+                }
                 break;
             case 6: //召唤助手(unknown)
                 this.animation.setCurAnimation("Recall");
@@ -354,7 +366,7 @@ public class Siren extends AbstractAnm2Monster {
             setMove((byte) 3, Intent.ATTACK, 3, 5, true);
             return;
         }
-        if (!this.lastTwoMoves((byte) 1) && controlledPets.size() > 0 && aiRng < 40) {
+        if (!this.lastTwoMoves((byte) 1) && controlledPets.size() > 0 && aiRng < 45) {
             setMove((byte) 1, Intent.DEFEND_BUFF);
             return;
         }
@@ -376,7 +388,7 @@ public class Siren extends AbstractAnm2Monster {
         }
         if (controlledPets.size() < 2) {
             if (!this.lastMove((byte) 0) && !this.lastMoveBefore((byte) 0) && availablePets.size() > 0 && aiRng < 30) {
-                setMove(MOVES[0], (byte) 0, Intent.STRONG_DEBUFF);
+                setMove(MOVES[0], (byte) 0, Intent.MAGIC);
                 return;
             } else if (aiRng < 40 && !this.lastMove((byte) 6) && !this.lastMoveBefore((byte) 6)) {
                 setMove((byte) 6, Intent.UNKNOWN);
@@ -385,7 +397,7 @@ public class Siren extends AbstractAnm2Monster {
         }
         if (aiRng < 60) {
             setMove((byte) 3, Intent.ATTACK, 3, 5, true);
-        } else if (aiRng < 80) {
+        } else if (aiRng < 80 && !this.lastMoveBefore((byte) 4)) {
             setMove(MOVES[1], (byte) 4, Intent.DEBUFF);
         } else {
             setMove(MOVES[2], (byte) 5, Intent.ATTACK_DEFEND, 2, 9, true);
