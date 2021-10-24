@@ -2,7 +2,8 @@
   "IsaacExt:ModPanel": {
     "TEXT": [
       "Add Monstro to the boss pool of each act(It will take effect after the game is restarted).",
-      "Enable card reward in neow room(You can disable it if this mod conflicts with other mods)."
+      "Enable card reward in neow room(You can disable it if this mod conflicts with other mods).",
+      "Increase the chance of encounter the boss from this mod(It will take effect after the game is restarted)."
     ]
   }
 }

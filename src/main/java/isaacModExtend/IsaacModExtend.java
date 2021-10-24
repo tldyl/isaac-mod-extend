@@ -79,6 +79,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
     private static boolean enableMonstro = true;
     public static boolean enableStartCardReward = true;
     public static boolean isPlumFluteUnlocked = false;
+    public static boolean increaseModBossChance = true;
     public static final List<AbstractRelic> angelOnlyRelics = new ArrayList<>();
 
     public static void initialize() {
@@ -235,6 +236,24 @@ public class IsaacModExtend implements EditStringsSubscriber,
         }
         BaseMod.addBoss(Exordium.ID, "BabyPlum", getResourcePath("map/babyPlum.png"), getResourcePath("map/babyPlumOutline.png"));
         BaseMod.addBoss(TheCity.ID, "Siren", getResourcePath("map/siren.png"), getResourcePath("map/sirenOutline.png"));
+        if (increaseModBossChance) {
+            BaseMod.addMonster("BabyPlum_2", BabyPlum.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+                    new BabyPlum(-50, 0)
+            }));
+            BaseMod.addMonster("BabyPlum_3", BabyPlum.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+                    new BabyPlum(-50, 0)
+            }));
+            BaseMod.addMonster("Siren_2", Siren.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+                    new Siren(-50, 0)
+            }));
+            BaseMod.addMonster("Siren_3", Siren.NAME, () -> new MonsterGroup(new AbstractMonster[]{
+                    new Siren(-50, 0)
+            }));
+            BaseMod.addBoss(Exordium.ID, "BabyPlum_2", getResourcePath("map/babyPlum.png"), getResourcePath("map/babyPlumOutline.png"));
+            BaseMod.addBoss(Exordium.ID, "BabyPlum_3", getResourcePath("map/babyPlum.png"), getResourcePath("map/babyPlumOutline.png"));
+            BaseMod.addBoss(TheCity.ID, "Siren_2", getResourcePath("map/siren.png"), getResourcePath("map/sirenOutline.png"));
+            BaseMod.addBoss(TheCity.ID, "Siren_3", getResourcePath("map/siren.png"), getResourcePath("map/sirenOutline.png"));
+        }
         UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModPanel"));
         ModPanel settingsPanel = new ModPanel();
         ModLabeledToggleButton enableMonstroOption = new ModLabeledToggleButton(uiStrings.TEXT[0], 350.0F, 700.0F, Color.WHITE, FontHelper.buttonLabelFont, enableMonstro, settingsPanel, (me) -> {},
@@ -249,8 +268,15 @@ public class IsaacModExtend implements EditStringsSubscriber,
                 saveSettings();
             }
         );
+        ModLabeledToggleButton increaseModBossChanceOption = new ModLabeledToggleButton(uiStrings.TEXT[2], 350.0F, 620.0F, Color.WHITE, FontHelper.buttonLabelFont, increaseModBossChance, settingsPanel, (me) -> {},
+            (me) -> {
+                increaseModBossChance = me.enabled;
+                saveSettings();
+            }
+        );
         settingsPanel.addUIElement(enableMonstroOption);
         settingsPanel.addUIElement(enableStartCardRewardOption);
+        settingsPanel.addUIElement(increaseModBossChanceOption);
         BaseMod.registerModBadge(ImageMaster.loadImage(getResourcePath("ui/badge.png")), "IsaacMod Extend", "Everyone", "TODO", settingsPanel);
         try {
             Field field = ModHelper.class.getDeclaredField("starterMods");
@@ -277,6 +303,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
             config.setBool("enableMonstro", enableMonstro);
             config.setBool("isPlumFluteUnlocked", isPlumFluteUnlocked);
             config.setBool("enableStartCardReward", enableStartCardReward);
+            config.setBool("increaseModBossChance", increaseModBossChance);
             config.save();
         } catch (Exception e) {
             e.printStackTrace();
@@ -295,6 +322,9 @@ public class IsaacModExtend implements EditStringsSubscriber,
             }
             if (config.has("enableStartCardReward")) {
                 enableStartCardReward = config.getBool("enableStartCardReward");
+            }
+            if (config.has("increaseModBossChance")) {
+                increaseModBossChance = config.getBool("increaseModBossChance");
             }
         } catch (Exception e) {
             e.printStackTrace();
