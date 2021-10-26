@@ -16,7 +16,7 @@ public class AbstractMonsterPatch {
     public static class PatchDamage {
         @SpireInsertPatch(rloc = 69, localvars = {"damageAmount"})
         public static void Insert(AbstractMonster m, DamageInfo info, @ByRef int[] _damageAmount) {
-            if (info.owner != null) {
+            if (info.owner != null && info.owner != m) {
                 for (AbstractPower power : info.owner.powers) {
                     power.onInflictDamage(info, _damageAmount[0], m);
                 }

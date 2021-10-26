@@ -75,5 +75,12 @@ public class AbstractPlayerPatch {
                 }
             }
         }
+
+        @SpireInsertPatch(rloc = 62, localvars = {"damageAmount"})
+        public static void Insert2(AbstractPlayer p, DamageInfo info, @ByRef int[] damageAmount) {
+            if (SuicideKingPatch.usingSuicideKing) {
+                damageAmount[0] = 1;
+            }
+        }
     }
 }

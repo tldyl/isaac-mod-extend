@@ -86,6 +86,7 @@ public class SaveAndContinuePatch {
             }
             IsaacModExtend.initPlanetariumRelics();
             IsaacModExtend.initAngelOnlyRelics();
+            SuicideKingPatch.usingSuicideKing = false;
         }
     }
 }

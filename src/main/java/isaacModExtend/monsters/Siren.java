@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("WeakerAccess")
 public class Siren extends AbstractAnm2Monster {
     public static final String ID = IsaacModExtend.makeID("Siren");
     public static final String NAME;
