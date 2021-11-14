@@ -320,5 +320,12 @@
     "DESCRIPTIONS": [
       "#b1 charge, when fully charged, right-click to obtain a random relic for the current room. NL Using this relic multiple times in the same room will replace the previous relic with a new one."
     ]
+  },
+  "IsaacExt:Hemoptysis": {
+    "NAME": "Hemoptysis",
+    "FLAVOR": "Double tap sneeze.",
+    "DESCRIPTIONS": [
+      "The first time you play #Attack in each combat, apply #b3 #yVulnerable to the enemy. NL Whenever an enemy dies with #yVulnerable, deal the damage equals to the last damage it was taken to ALL enemies and apply #b2 #yVulnerable to them."
+    ]
   }
 }

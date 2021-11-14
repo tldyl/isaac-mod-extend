@@ -71,7 +71,7 @@ public class BloodPuppy extends CustomRelic implements NeutralCreature, CustomSa
 
     @Override
     public boolean isEnemy() {
-        return bloodPuppyPet.getPhase() > 0;
+        return bloodPuppyPet != null && bloodPuppyPet.getPhase() > 0;
     }
 
     @Override
