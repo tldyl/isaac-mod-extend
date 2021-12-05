@@ -43,6 +43,9 @@ public class EchoChamber extends CustomRelic {
                 @Override
                 public void update() {
                     cardsToRepeat.add(c);
+                    if (cardsToRepeat.size() > 3) {
+                        cardsToRepeat.remove(0);
+                    }
                     if (sb.length() == 0) {
                         sb.append(" NL #g").append(c.name.replace(" ", " #g"));
                     } else {

@@ -32,7 +32,8 @@ public class Metronome extends ChargeableRelic implements CustomSavable<String> 
                 !(relic instanceof CallingBell) &&
                 !(relic instanceof Orrery) &&
                 !(relic instanceof Cauldron) &&
-                !(relic instanceof Metronome);
+                !(relic instanceof Metronome) &&
+                !(relic instanceof EmptyCage);
     };
 
     public Metronome() {

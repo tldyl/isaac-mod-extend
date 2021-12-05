@@ -255,7 +255,7 @@
     "NAME": "Echo Chamber",
     "FLAVOR": "I can see see the future future future...",
     "DESCRIPTIONS": [
-      "The first card you play in each turn will trigger the effect of the first card you play in each turn of the combat once."
+      "The first card you play in each turn will trigger the effect of the first card you play in recent #b3 turns of the combat once."
     ]
   },
   "IsaacExt:Damocles": {
@@ -326,6 +326,13 @@
     "FLAVOR": "Double tap sneeze.",
     "DESCRIPTIONS": [
       "The first time you play #Attack in each combat, apply #b3 #yVulnerable to the enemy. NL Whenever an enemy dies with #yVulnerable, deal the damage equals to the last damage it was taken to ALL enemies and apply #b2 #yVulnerable to them."
+    ]
+  },
+  "IsaacExt:SpiritLink": {
+    "NAME": "Spirit Link",
+    "FLAVOR": "Placeholder.",
+    "DESCRIPTIONS": [
+      "Whenever you play a #yPower card, remove it from your master deck, then trigger the effect of these #yPower cards at the start of each combat(the #yPower cards added during the combat are not included, the card with the same name only retains the one with the most #yUpgrade times)."
     ]
   }
 }
