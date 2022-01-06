@@ -81,6 +81,7 @@ public class AlabasterBox extends ClickableRelic implements SpecialActiveItem {
                     }
                     AbstractDungeon.player.relics.remove(AlabasterBox.this);
                     AbstractDungeon.player.reorganizeRelics();
+                    IsaacModExtend.removeRelicFromVoid(AlabasterBox.this);
                     isDone = true;
                 }
             });

@@ -63,6 +63,7 @@ public class RKey extends ClickableRelic {
                     SaveAndContinue.save(saveFile);
                     AbstractDungeon.effectList.add(new GameSavedEffect());
                     AbstractDungeon.bossRelicPool.remove(RKey.ID);
+                    IsaacModExtend.removeRelicFromVoid(RKey.this);
                     isDone = true;
                 }
             });

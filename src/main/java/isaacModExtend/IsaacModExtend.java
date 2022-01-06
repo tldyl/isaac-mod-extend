@@ -55,6 +55,7 @@ import patches.player.PlayerAddFieldsPatch;
 import relics.Habit;
 import relics.TheBible;
 import relics.Void;
+import relics.abstracrt.ClickableRelic;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -453,6 +454,17 @@ public class IsaacModExtend implements EditStringsSubscriber,
         File rewindFile = new File(filepath + "REWIND");
         if (rewindFile.exists()) {
             rewindFile.delete();
+        }
+    }
+
+    public static void removeRelicFromVoid(ClickableRelic relicToRemove) {
+        if (AbstractDungeon.player.hasRelic(Void.ID)) {
+            for (AbstractRelic relic : AbstractDungeon.player.relics) { //防止玩家复眼虚空
+                if (relic instanceof Void) {
+                    Void voidRelic = (Void) relic;
+                    voidRelic.relicList.remove(relicToRemove);
+                }
+            }
         }
     }
 }
