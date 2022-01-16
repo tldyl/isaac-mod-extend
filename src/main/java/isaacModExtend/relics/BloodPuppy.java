@@ -94,9 +94,7 @@ public class BloodPuppy extends CustomRelic implements NeutralCreature, CustomSa
 
     @Override
     public void onLoad(BloodPuppySaveData data) {
-        if (data != null) {
-            saveData = data;
-        }
+        saveData = data;
     }
 
     @Override
