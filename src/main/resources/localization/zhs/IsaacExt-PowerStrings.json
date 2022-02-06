@@ -36,7 +36,7 @@
     "NAME": "慌乱",
     "DESCRIPTIONS": [
       "梅子宝宝的弹跳攻击段数增加 #b",
-      " 。慌乱层数在你的回合开始时减少 #b1 。"
+      " 。慌乱层数在你获得 #y格挡 或回合开始时减少 #b1 。"
     ]
   },
   "IsaacExt:BarrageBlockadePower": {

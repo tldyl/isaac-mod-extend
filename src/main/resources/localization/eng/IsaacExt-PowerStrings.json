@@ -36,7 +36,7 @@
     "NAME": "Frantic",
     "DESCRIPTIONS": [
       "Increase the attack times of Baby Plum's diagonal attack by #b",
-      ". At the start of your turn, reduce #yFrantic by #b1."
+      ". At the start of your turn, reduce #yFrantic by #b1. #yFrantic also decreases when you gain #yBlock."
     ]
   },
   "IsaacExt:BarrageBlockadePower": {

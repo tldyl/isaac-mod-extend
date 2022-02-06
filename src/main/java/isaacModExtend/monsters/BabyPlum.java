@@ -39,6 +39,7 @@ public class BabyPlum extends AbstractAnm2Monster {
     public static final String ID = IsaacModExtend.makeID("BabyPlum");
     public static final String NAME;
     private boolean renderHealthBar = false;
+    private boolean shouldRefreshIntent = false;
 
     public BabyPlum(float offsetX, float offsetY) {
         super(NAME, ID, 234, -8.0F, 10.0F, 256.0F, 256.0F, null, offsetX, offsetY);
@@ -70,7 +71,7 @@ public class BabyPlum extends AbstractAnm2Monster {
                         public void update() {
                             duration -= Gdx.graphics.getDeltaTime();
                             if (duration <= 1.4F && !t) {
-                                int multi = 5;
+                                int multi = 4;
                                 if (AbstractDungeon.ascensionLevel >= 4) multi++;
                                 for (int i=0;i<multi;i++) {
                                     actions.add(new DamageAction(AbstractDungeon.player, damage.get(0), AttackEffect.BLUNT_LIGHT));
@@ -187,12 +188,12 @@ public class BabyPlum extends AbstractAnm2Monster {
         this.deathTimer = 1.3F;
         if (AbstractDungeon.ascensionLevel >= 4) {
             this.damage.add(new DamageInfo(this, 3, DamageInfo.DamageType.NORMAL));
-            this.damage.add(new DamageInfo(this, 26, DamageInfo.DamageType.NORMAL));
-            this.damage.add(new DamageInfo(this, 4, DamageInfo.DamageType.NORMAL));
+            this.damage.add(new DamageInfo(this, 16, DamageInfo.DamageType.NORMAL));
+            this.damage.add(new DamageInfo(this, 3, DamageInfo.DamageType.NORMAL));
         } else {
             this.damage.add(new DamageInfo(this, 3, DamageInfo.DamageType.NORMAL));
-            this.damage.add(new DamageInfo(this, 24, DamageInfo.DamageType.NORMAL));
-            this.damage.add(new DamageInfo(this, 3, DamageInfo.DamageType.NORMAL));
+            this.damage.add(new DamageInfo(this, 14, DamageInfo.DamageType.NORMAL));
+            this.damage.add(new DamageInfo(this, 2, DamageInfo.DamageType.NORMAL));
         }
     }
 
@@ -267,7 +268,7 @@ public class BabyPlum extends AbstractAnm2Monster {
                             animation.setCurAnimation("Attack3");
                         }
                         if (duration <= 2.7F && !t) {
-                            int multi = 5;
+                            int multi = 4;
                             if (AbstractDungeon.player.hasPower(FranticPower.POWER_ID)) {
                                 AbstractPower power = AbstractDungeon.player.getPower(FranticPower.POWER_ID);
                                 multi += power.amount;
@@ -307,6 +308,7 @@ public class BabyPlum extends AbstractAnm2Monster {
 
     @Override
     protected void getMove(int i) {
+        shouldRefreshIntent = false;
         if (hasPower(GoodbyePower.POWER_ID)) {
             AbstractPower power = getPower(GoodbyePower.POWER_ID);
             if (power.amount == 1) {
@@ -321,18 +323,25 @@ public class BabyPlum extends AbstractAnm2Monster {
                 setMove((byte) 1, Intent.ATTACK, this.damage.get(1).base);
             }
         } else if (lastMove((byte) 1)) {
+            shouldRefreshIntent = true;
+            refreshMultiAttackIntent();
+        } else {
+            if (AbstractDungeon.ascensionLevel >= 4) {
+                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 5, true);
+            } else {
+                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 4, true);
+            }
+        }
+    }
+
+    public void refreshMultiAttackIntent() {
+        if (shouldRefreshIntent) {
             int multi = 5;
             if (AbstractDungeon.player.hasPower(FranticPower.POWER_ID)) {
                 AbstractPower power = AbstractDungeon.player.getPower(FranticPower.POWER_ID);
                 multi += power.amount;
             }
             setMove((byte) 2, Intent.ATTACK, this.damage.get(2).base, --multi, true);
-        } else {
-            if (AbstractDungeon.ascensionLevel >= 4) {
-                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 6, true);
-            } else {
-                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 5, true);
-            }
         }
     }
 

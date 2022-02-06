@@ -36,9 +36,7 @@ public class OfCourse extends AbstractCard {
             CardCrawlGame.music.playTempBgmInstantly("ARCADE", true);
             addToBot(new ApplyPowerAction(this.owner, this.owner, new PlayTimePower(this.owner)));
             addToBot(new ApplyPowerAction(this.owner, this.owner, new GoodbyePower(this.owner, 7)));
-            if (AbstractDungeon.ascensionLevel < 19) {
-                addToBot(new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -1)));
-            }
+            addToBot(new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -1)));
         }
     }
 

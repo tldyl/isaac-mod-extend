@@ -12,18 +12,19 @@ import isaacModExtend.IsaacModExtend;
 import isaacModExtend.actions.SuplexRushAction;
 import isaacModExtend.interfaces.NeutralCreature;
 import isaacModExtend.monsters.pet.BloodPuppyPet;
-import isaacModExtend.saves.BloodPuppySaveData;
 import utils.Point;
 import utils.Utils;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
-public class BloodPuppy extends CustomRelic implements NeutralCreature, CustomSavable<BloodPuppySaveData> {
+public class BloodPuppy extends CustomRelic implements NeutralCreature, CustomSavable<Map<String, Integer>> {
     public static final String ID = IsaacModExtend.makeID("BloodPuppy");
     public static final String IMG_PATH = "relics/bloodPuppy.png";
     private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
     private BloodPuppyPet bloodPuppyPet;
-    private BloodPuppySaveData saveData = new BloodPuppySaveData();
+    private Map<String, Integer> saveData = new HashMap<>();
 
     public BloodPuppy() {
         super(ID, IMG, RelicTier.UNCOMMON, LandingSound.FLAT);
@@ -46,10 +47,8 @@ public class BloodPuppy extends CustomRelic implements NeutralCreature, CustomSa
         Point point = Utils.getCirclePoint(center, angle, 250.0D);
         if (this.bloodPuppyPet == null) {
             this.bloodPuppyPet = new BloodPuppyPet((float) point.x, (float) point.y);
-            if (saveData.phase > 0) {
-                bloodPuppyPet.setPhase(saveData.phase);
-                bloodPuppyPet.currentHealth = saveData.health;
-            }
+            bloodPuppyPet.setPhase(saveData.getOrDefault("phase", 0));
+            bloodPuppyPet.currentHealth = saveData.getOrDefault("health", 1);
         }
         this.bloodPuppyPet.setLeftSide(true);
         SuplexRushAction.movePosition(Settings.WIDTH * 0.75F + (float) point.x * Settings.xScale, AbstractDungeon.floorY + (float) point.y * Settings.yScale, this.bloodPuppyPet);
@@ -80,12 +79,12 @@ public class BloodPuppy extends CustomRelic implements NeutralCreature, CustomSa
     }
 
     @Override
-    public BloodPuppySaveData onSave() {
-        BloodPuppySaveData saveData;
+    public Map<String, Integer> onSave() {
+        Map<String, Integer> saveData;
         if (bloodPuppyPet != null) {
-            saveData = new BloodPuppySaveData();
-            saveData.health = bloodPuppyPet.currentHealth;
-            saveData.phase = bloodPuppyPet.getPhase();
+            saveData = new HashMap<>();
+            saveData.put("health", bloodPuppyPet.currentHealth);
+            saveData.put("phase", bloodPuppyPet.getPhase());
         } else {
             saveData = this.saveData;
         }
@@ -93,12 +92,12 @@ public class BloodPuppy extends CustomRelic implements NeutralCreature, CustomSa
     }
 
     @Override
-    public void onLoad(BloodPuppySaveData data) {
+    public void onLoad(Map<String, Integer> data) {
         saveData = data;
     }
 
     @Override
     public Type savedType() {
-        return new TypeToken<BloodPuppySaveData>(){}.getType();
+        return new TypeToken<Map<String, Integer>>(){}.getType();
     }
 }

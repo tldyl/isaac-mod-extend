@@ -5,8 +5,12 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import isaacModExtend.IsaacModExtend;
+import isaacModExtend.monsters.BabyPlum;
+import isaacModExtend.monsters.pet.BabyPlumPet;
+import patches.player.PlayerAddFieldsPatch;
 
 public class FranticPower extends AbstractPower {
     public static final String POWER_ID = IsaacModExtend.makeID("FranticPower");
@@ -32,6 +36,33 @@ public class FranticPower extends AbstractPower {
     @Override
     public void atStartOfTurn() {
         addToBot(new ReducePowerAction(this.owner, this.owner, this, 1));
+        AbstractMonster monster = AbstractDungeon.getMonsters().getMonster(BabyPlum.ID);
+        if (monster != null) {
+            ((BabyPlum) monster).refreshMultiAttackIntent();
+            monster.createIntent();
+        }
+        monster = PlayerAddFieldsPatch.f_minions.get(AbstractDungeon.player).getMonster(BabyPlumPet.ID);
+        if (monster != null) {
+            ((BabyPlumPet) monster).refreshMultiAttackIntent();
+            monster.createIntent();
+        }
+    }
+
+    @Override
+    public void onDeath() {
+        atStartOfTurn();
+    }
+
+    @Override
+    public void onRemove() {
+        atStartOfTurn();
+    }
+
+    @Override
+    public void onGainedBlock(float blockAmount) {
+        if (blockAmount > 0) {
+            atStartOfTurn();
+        }
     }
 
     static {

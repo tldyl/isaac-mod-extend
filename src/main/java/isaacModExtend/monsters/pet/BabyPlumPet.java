@@ -41,6 +41,7 @@ public class BabyPlumPet extends AbstractPet {
     private AnimatedActor animation;
     private boolean resetPosition = true;
     private boolean renderHealthBar = false;
+    private boolean shouldRefreshIntent = false;
 
     public BabyPlumPet(float x, float y) {
         super(NAME, ID, 234, -8.0F, 10.0F, 58.0F, 38.0F, null, x, y);
@@ -370,6 +371,7 @@ public class BabyPlumPet extends AbstractPet {
 
     @Override
     protected void getMove(int i) {
+        shouldRefreshIntent = false;
         if (hasPower(GoodbyePower.POWER_ID)) {
             AbstractPower power = getPower(GoodbyePower.POWER_ID);
             if (power.amount == 1) {
@@ -380,6 +382,19 @@ public class BabyPlumPet extends AbstractPet {
         if (lastMove((byte) 0)) {
             setMove((byte) 1, Intent.ATTACK, this.damage.get(1).base);
         } else if (lastMove((byte) 1)) {
+            shouldRefreshIntent = true;
+            refreshMultiAttackIntent();
+        } else {
+            if (AbstractDungeon.ascensionLevel >= 4) {
+                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 6, true);
+            } else {
+                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 5, true);
+            }
+        }
+    }
+
+    public void refreshMultiAttackIntent() {
+        if (shouldRefreshIntent) {
             int multi = 5;
             for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (!m.isDeadOrEscaped() && m.hasPower(FranticPower.POWER_ID)) {
@@ -388,12 +403,6 @@ public class BabyPlumPet extends AbstractPet {
                 }
             }
             setMove((byte) 2, Intent.ATTACK, this.damage.get(2).base, multi, true);
-        } else {
-            if (AbstractDungeon.ascensionLevel >= 4) {
-                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 6, true);
-            } else {
-                setMove((byte) 0, Intent.ATTACK, this.damage.get(0).base, 5, true);
-            }
         }
     }
 
