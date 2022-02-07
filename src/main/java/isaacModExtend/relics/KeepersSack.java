@@ -52,6 +52,17 @@ public class KeepersSack extends CustomRelic implements CustomSavable<Map<String
                 this.focusCounter++;
                 break;
         }
+        if (this.strengthCounter > 6) {
+            this.dexterityCounter++;
+            this.strengthCounter = 6;
+        }
+        if (this.dexterityCounter > 5) {
+            this.focusCounter++;
+            this.dexterityCounter = 5;
+        }
+        if (this.focusCounter > 4) {
+            this.focusCounter = 4;
+        }
     }
 
     @Override

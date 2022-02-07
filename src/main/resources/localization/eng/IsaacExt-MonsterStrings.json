@@ -109,6 +109,11 @@
     "DIALOG": [""],
     "MOVES": [""]
   },
+  "IsaacExt:GlassCannonWisp": {
+    "NAME": "Glass Cannon Wisp",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
   "IsaacExt:Siren": {
     "NAME": "Siren",
     "DIALOG": [],

@@ -109,6 +109,11 @@
     "DIALOG": [""],
     "MOVES": [""]
   },
+  "IsaacExt:GlassCannonWisp": {
+    "NAME": "玻璃大炮魂火",
+    "DIALOG": [""],
+    "MOVES": [""]
+  },
   "IsaacExt:Siren": {
     "NAME": "塞壬",
     "DIALOG": [],

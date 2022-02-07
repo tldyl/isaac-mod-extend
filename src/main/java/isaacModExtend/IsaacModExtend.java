@@ -167,6 +167,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.addAudio("BABY_BRIM_4", "IsaacAudio/sfx/baby_brim_4.wav");
         BaseMod.addAudio("DEATH_BURST_LARGE_0", "IsaacAudio/sfx/death_burst_large_0.wav");
         BaseMod.addAudio("DEATH_BURST_LARGE_1", "IsaacAudio/sfx/death_burst_large_1.wav");
+        BaseMod.addAudio("GLASS_BREAK_01", "IsaacAudio/sfx/glass_break_01.wav");
+        BaseMod.addAudio("GLASS_CANNON_FIRE", "IsaacAudio/sfx/glass_cannon_fire.wav");
     }
 
     public static void initPlanetariumRelics() {

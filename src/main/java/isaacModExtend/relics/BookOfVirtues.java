@@ -183,6 +183,9 @@ public class BookOfVirtues extends ChargeableRelic implements PreRightClickRelic
                 break;
             case "UnicornStump": //断角
                 if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() > 0) return;
+            case "IsaacExt:GlassCannon": //玻璃大炮
+                wisp = new GlassCannonWisp();
+                break;
             default:
                 wisp = new SoulWisp();
                 break;

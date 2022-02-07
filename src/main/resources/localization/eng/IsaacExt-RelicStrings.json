@@ -157,7 +157,7 @@
     "NAME": "Keeper's Sack",
     "FLAVOR": "Spending power.",
     "DESCRIPTIONS": [
-      "Whenever you spend gold in the shop, at the start of each combat, gain #b1 #yStrength or #b1 #yDexterity or #b1 #yFocus."
+      "Whenever you spend gold in the shop, at the start of each combat, gain #b1 #yStrength or #b1 #yDexterity or #b1 #yFocus. NL You can gain up to #b6 #yStrength, #b5 #yDexterity and #b4 #yFocus from this relic."
     ]
   },
   "IsaacExt:TMTrainer": {
@@ -333,6 +333,14 @@
     "FLAVOR": "Placeholder.",
     "DESCRIPTIONS": [
       "Whenever you play a #yPower card, remove it from your master deck, then trigger the effect of these #yPower cards at the start of each combat(the #yPower cards added during the combat are not included, the card with the same name only retains the one with the most #yUpgrade times)."
+    ]
+  },
+  "IsaacExt:GlassCannon": {
+    "NAME": "Glass Cannon",
+    "FLAVOR": "Be gentle...",
+    "DESCRIPTIONS": [
+      "#b1 charge, when fully charged, right-click to deal #b30 damage to ALL enemies. NL After use, triple your next unblocked damage.  NL Whenever you received an unblocked damage after use, this relic will be broken. NL Repairing this relic requires #b4 charges.",
+      "This relic has been broken, fully charge to repair."
     ]
   }
 }
