@@ -60,7 +60,7 @@ public class BossRelicSelectScreenPatch {
                     for (int i = 0; i < 4; i++) {
                         AbstractRelic relic = AbstractDungeon.returnRandomRelic(AbstractRelic.RelicTier.BOSS);
                         relic.spawn(slots[slot][0], slots[slot][1]);
-                        relic.hb.move(relic.currentX, relic.currentY);
+                        relic.hb = null;
                         relicList.add(relic);
                     }
                     slot++;
@@ -83,8 +83,12 @@ public class BossRelicSelectScreenPatch {
                     switchTimer = 0.2F;
                     List<List<AbstractRelic>> relics = AddFieldPatch.relics.get(screen);
                     for (int i=0;i<3;i++) {
-                        relics.get(i).add(screen.relics.get(i));
-                        screen.relics.set(i, relics.get(i).remove(0));
+                        AbstractRelic currentRelic = screen.relics.get(i);
+                        relics.get(i).add(currentRelic);
+                        AbstractRelic newRelic = relics.get(i).remove(0);
+                        newRelic.hb = currentRelic.hb;
+                        currentRelic.hb = null;
+                        screen.relics.set(i, newRelic);
                     }
                 }
             }

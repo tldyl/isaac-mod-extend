@@ -30,7 +30,7 @@ public class StoreRelicPatch {
             method = SpirePatch.CONSTRUCTOR
     )
     public static class PatchConstructor {
-        public static void Prefix(StoreRelic storeRelic, AbstractRelic relic, int slot, ShopScreen screenRef) {
+        public static void Postfix(StoreRelic storeRelic, AbstractRelic relic, int slot, ShopScreen screenRef) {
             if (AbstractDungeon.player.hasRelic(GlitchedCrown.ID)) {
                 List<AbstractRelic> relics = AddFieldPatch.relics.get(storeRelic);
                 if (relic.tier != AbstractRelic.RelicTier.SHOP) {
@@ -43,6 +43,9 @@ public class StoreRelicPatch {
                         AbstractRelic.RelicTier tier = RewardItemPatch.PatchConstructor.returnRandomRelicTier();
                         relics.add(AbstractDungeon.returnRandomRelic(AbstractRelic.RelicTier.SHOP));
                     }
+                }
+                for (AbstractRelic relic1 : relics) {
+                    relic1.hb = storeRelic.relic.hb;
                 }
             }
         }
