@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public interface AbstractTargetingRelic {
+public interface AbstractTargetingRelic extends SpecialActiveItem {
     void setHidden(boolean hidden);
 
     boolean isHidden();

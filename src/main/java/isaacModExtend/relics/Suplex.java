@@ -3,6 +3,7 @@ package isaacModExtend.relics;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -82,6 +83,11 @@ public class Suplex extends ChargeableRelic implements AbstractTargetingRelic {
     @Override
     public void onLeftClick() {
         addToBot(new SuplexRushAction(this.hoveredCreature));
+        AbstractPlayer p = AbstractDungeon.player;
+        if (p.hasRelic(BookOfVirtues.ID)) {
+            BookOfVirtues bookOfVirtues = (BookOfVirtues) p.getRelic(BookOfVirtues.ID);
+            bookOfVirtues.use(ID);
+        }
         resetCharge();
         this.stopPulse();
     }
@@ -147,5 +153,15 @@ public class Suplex extends ChargeableRelic implements AbstractTargetingRelic {
         if (!this.isHidden()) {
             this.renderArrows(sb);
         }
+    }
+
+    @Override
+    public void preUse() {
+
+    }
+
+    @Override
+    public boolean triggered() {
+        return false;
     }
 }

@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import isaacModExtend.IsaacModExtend;
 import isaacModExtend.interfaces.AbstractTargetingRelic;
-import isaacModExtend.interfaces.SpecialActiveItem;
 import relics.abstracrt.ClickableRelic;
 
 import java.util.ArrayList;
@@ -22,8 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Eraser extends ClickableRelic implements CustomSavable<Map<String, Object>>,
-                                                      AbstractTargetingRelic,
-                                                      SpecialActiveItem {
+                                                      AbstractTargetingRelic {
     public static final String ID = IsaacModExtend.makeID("Eraser");
     public static final String IMG_PATH = "relics/eraser.png";
     private static final Texture IMG = new Texture(IsaacModExtend.getResourcePath(IMG_PATH));
