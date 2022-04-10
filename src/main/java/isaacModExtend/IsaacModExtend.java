@@ -201,6 +201,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
         angelOnlyRelics.add(new HolyMantle());
         angelOnlyRelics.add(new TheStairway());
         angelOnlyRelics.add(new BookOfVirtues());
+        angelOnlyRelics.add(new LazarusRags());
     }
 
     @Override

@@ -342,5 +342,12 @@
       "#b1 charge, when fully charged, right-click to deal #b30 damage to ALL enemies. NL After use, triple your next unblocked damage.  NL Whenever you received an unblocked damage after use, this relic will be broken. NL Repairing this relic requires #b4 charges.",
       "This relic has been broken, fully charge to repair."
     ]
+  },
+  "IsaacExt:LazarusRags": {
+    "NAME": "Lazarus' Rags",
+    "FLAVOR": "Eternal life?",
+    "DESCRIPTIONS": [
+      "There's #b1 resurrection chance on each act. NL After resurrection through this relic, lose #b10 max health(if your max health is less than #b10, set it to #b10 ), heal #b10, gain #b1 #yStrength at the start of each combat and multiply your attack damage by #b1.6 at the current act. NL If you resurrect in combat through this relic, it will be deemed that you have not received any damage before resurrection."
+    ]
   }
 }

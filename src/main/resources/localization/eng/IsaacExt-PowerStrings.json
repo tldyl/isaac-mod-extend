@@ -9,7 +9,7 @@
   "IsaacExt:SacredHeartPower": {
     "NAME": "Sacred Heart",
     "DESCRIPTIONS": [
-      "Attack damage increased by #b230% in this combat."
+      "Attack damage increased by #b130% in this combat."
     ]
   },
   "IsaacExt:GoodbyePower": {
@@ -49,6 +49,12 @@
     "NAME": "Familiar Barrier",
     "DESCRIPTIONS": [
       "When any familiar alive, transfer #b50% of the #yattack damage to the first alive familiar (which can offset the overflow damage)."
+    ]
+  },
+  "IsaacExt:LazarusRagsPower": {
+    "NAME": "Lazarus' Rags",
+    "DESCRIPTIONS": [
+      "Attack damage increased by #b60% in this combat."
     ]
   }
 }

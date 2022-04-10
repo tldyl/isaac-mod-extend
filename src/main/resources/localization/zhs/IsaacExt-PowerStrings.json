@@ -9,7 +9,7 @@
   "IsaacExt:SacredHeartPower": {
     "NAME": "圣心",
     "DESCRIPTIONS": [
-      "在本场战斗，造成的攻击伤害增加 #b230% 。"
+      "在本场战斗，造成的攻击伤害增加 #b130% 。"
     ]
   },
   "IsaacExt:GoodbyePower": {
@@ -49,6 +49,12 @@
     "NAME": "环绕物",
     "DESCRIPTIONS": [
       "存在跟班时，将 #b50% 的 #y攻击 伤害转移到第一个存活的跟班上(可抵消溢出伤害)。"
+    ]
+  },
+  "IsaacExt:LazarusRagsPower": {
+    "NAME": "拉撒路的绷带",
+    "DESCRIPTIONS": [
+      "在本场战斗，造成的攻击伤害增加 #b60% 。"
     ]
   }
 }

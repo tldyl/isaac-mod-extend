@@ -4,7 +4,9 @@ import blood.BloodStoreRelic;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import com.megacrit.cardcrawl.shop.StoreRelic;
@@ -96,6 +98,9 @@ public class StoreRelicPatch {
 
         static void putRelicsBackToPools(List<AbstractRelic> relics) {
             for (AbstractRelic relic : relics) {
+                if (relic.hb == null) {
+                    relic.hb = new Hitbox(72.0F * Settings.scale, 72.0F * Settings.scale);
+                }
                 switch (relic.tier) {
                     case COMMON:
                         AbstractDungeon.commonRelicPool.add(relic.relicId);

@@ -56,6 +56,7 @@ public class IsaacModPatch {
         IsaacMod.relics.add(Hemoptysis.ID);
         IsaacMod.relics.add(SpiritLink.ID);
         IsaacMod.relics.add(GlassCannon.ID);
+        IsaacMod.relics.add(LazarusRags.ID);
     }
 
     @SpirePatch(
