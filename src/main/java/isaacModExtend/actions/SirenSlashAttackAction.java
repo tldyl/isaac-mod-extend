@@ -35,8 +35,8 @@ public class SirenSlashAttackAction extends AbstractGameAction {
             if (duration == 1.6F && tearEffect) {
                 float angleRad = MathUtils.PI * 0.95F;
                 for (int i=0;i<5;i++) {
-                    Point startPos = new Point(animation.xPosition - 16.0F * Settings.scale, animation.yPosition + 32.0F * animation.scale);
-                    AbstractDungeon.effectList.add(new BloodTearEffect(startPos, angleRad, 18.0F, 1.2F, 2.0F * Settings.scale, 9));
+                    Point startPos = new Point(animation.xPosition - 16.0F * Settings.scale, animation.yPosition + 32.0F * animation.scale * Settings.scale);
+                    AbstractDungeon.effectList.add(new BloodTearEffect(startPos, angleRad, 18.0F, 1.2F, 2.0F, 9));
                     angleRad += MathUtils.PI / 24.0F;
                 }
             }

@@ -52,6 +52,7 @@ public class BloodOathEffect extends AbstractGameEffect {
         }
         if (this.duration <= 0) {
             this.isDone = true;
+            dispose();
         }
     }
 

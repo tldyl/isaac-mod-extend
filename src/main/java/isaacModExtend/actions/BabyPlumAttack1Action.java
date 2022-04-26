@@ -37,8 +37,8 @@ public class BabyPlumAttack1Action extends AbstractGameAction {
             animation.yPosition = Interpolation.exp5Out.apply(startY, targetY, 2.0F - this.duration);
             effectTimer -= Gdx.graphics.getDeltaTime();
             if (effectTimer <= 0 && angleRad > -1.6F * MathUtils.PI) {
-                Point startPos = new Point(animation.xPosition - (velocity - 4.0F) * 16.0F * Settings.scale, animation.yPosition + 32.0F * animation.scale);
-                AbstractDungeon.effectList.add(new BloodTearEffect(startPos, angleRad, this.velocity, 2.2F, 2.0F * Settings.scale, 9));
+                Point startPos = new Point(animation.xPosition - (velocity - 4.0F) * 16.0F * Settings.scale, animation.yPosition);
+                AbstractDungeon.effectList.add(new BloodTearEffect(startPos, angleRad, this.velocity, 2.2F, 2.0F, 9));
                 angleRad -= angleDelta;
                 angleDelta -= MathUtils.PI / 56.0F;
                 if (angleDelta < MathUtils.PI / 9.0F) {

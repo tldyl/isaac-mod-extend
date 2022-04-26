@@ -76,14 +76,14 @@ public class Siren extends AbstractAnm2Monster {
             this.setHp(600);
         }
         this.animation = new AnimatedActor(IsaacModExtend.getResourcePath("monsters/904.000_siren.xml"));
-        animation.scale = Settings.scale * 4.0F;
+        animation.scale = 4.0F;
         animation.setCurAnimation("Appear");
         animation.addTriggerEvent("0", a -> { //Explosion
             switch (animation.getCurAnimationName()) {
                 case "Death":
                     animation.dispose();
                     animation = new AnimatedActor(IsaacModExtend.getResourcePath("monsters/904.001_siren skull.xml"));
-                    animation.scale = Settings.scale * 4.0F;
+                    animation.scale = 4.0F;
                     animation.setCurAnimation("Appear");
                     break;
             }
@@ -172,8 +172,8 @@ public class Siren extends AbstractAnm2Monster {
     public void update() {
         super.update();
         if (resetPosition) {
-            animation.xPosition = this.hb.cX + this.animX - 76.0F * Settings.scale;
-            animation.yPosition = this.hb.cY + this.animY - 96.0F * Settings.scale;
+            animation.xPosition = this.hb.cX + this.animX;
+            animation.yPosition = this.hb.cY + this.animY;
         }
         animation.update();
         if (animation.isCurAnimationDone() && !this.isDying && !this.isEscaping && !this.stopLoop) {
@@ -367,7 +367,7 @@ public class Siren extends AbstractAnm2Monster {
             setMove((byte) 3, Intent.ATTACK, 3, 5, true);
             return;
         }
-        if (!this.lastTwoMoves((byte) 1) && controlledPets.size() > 0 && aiRng < 45) {
+        if (!this.lastTwoMoves((byte) 1) && controlledPets.size() > 0 && aiRng < 30) {
             setMove((byte) 1, Intent.DEFEND_BUFF);
             return;
         }
@@ -388,10 +388,10 @@ public class Siren extends AbstractAnm2Monster {
             }
         }
         if (controlledPets.size() < 2) {
-            if (!this.lastMove((byte) 0) && !this.lastMoveBefore((byte) 0) && availablePets.size() > 0 && aiRng < 30) {
+            if (!this.lastMove((byte) 0) && !this.lastMoveBefore((byte) 0) && availablePets.size() > 0 && aiRng < 40) {
                 setMove(MOVES[0], (byte) 0, Intent.MAGIC);
                 return;
-            } else if (aiRng < 40 && !this.lastMove((byte) 6) && !this.lastMoveBefore((byte) 6)) {
+            } else if (aiRng < 50 && !this.lastMove((byte) 6) && !this.lastMoveBefore((byte) 6)) {
                 setMove((byte) 6, Intent.UNKNOWN);
                 return;
             }

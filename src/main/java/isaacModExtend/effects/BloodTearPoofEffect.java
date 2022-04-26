@@ -21,6 +21,7 @@ public class BloodTearPoofEffect extends AbstractGameEffect {
     public void update() {
         tearPoof.update();
         this.isDone = tearPoof.isCurAnimationDone();
+        if (isDone) dispose();
     }
 
     @Override

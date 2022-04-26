@@ -24,6 +24,7 @@ public class RevelationEffect extends AbstractGameEffect {
         this.duration -= Gdx.graphics.getDeltaTime();
         if (this.duration <= 0) {
             this.isDone = true;
+            dispose();
         }
         if (this.duration > 0.6F) {
             this.a = (float) (Math.sin((1.8F - this.duration) * 31.4159F) * 0.3F) + 0.7F;

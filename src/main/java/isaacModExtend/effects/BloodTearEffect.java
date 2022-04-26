@@ -56,6 +56,7 @@ public class BloodTearEffect extends AbstractGameEffect {
         this.duration -= Gdx.graphics.getDeltaTime();
         if (this.duration <= 0) {
             this.isDone = true;
+            dispose();
             Point endPos = new Point(tear.xPosition, tear.yPosition);
             AbstractDungeon.effectsQueue.add(new BloodTearPoofEffect(endPos, scale, size));
         }

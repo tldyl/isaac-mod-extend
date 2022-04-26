@@ -32,10 +32,10 @@ public class Mars extends ChargeableRelic {
         if (this.isUsable()) {
             this.flash();
             AbstractPlayer p = AbstractDungeon.player;
-            addToBot(new ApplyPowerAction(p, p, new InvinciblePower(p, 0)));
-            addToBot(new SFXAction("RELIC_MARS_RUSH_" + MathUtils.random(1, 2)));
-            addToBot(new MarsRushAction());
-            addToBot(new RemoveSpecificPowerAction(p, p, InvinciblePower.POWER_ID));
+            IsaacModExtend.addToBot(new ApplyPowerAction(p, p, new InvinciblePower(p, 0)));
+            IsaacModExtend.addToBot(new SFXAction("RELIC_MARS_RUSH_" + MathUtils.random(1, 2)));
+            IsaacModExtend.addToBot(new MarsRushAction());
+            IsaacModExtend.addToBot(new RemoveSpecificPowerAction(p, p, InvinciblePower.POWER_ID));
             resetCharge();
             this.stopPulse();
         }

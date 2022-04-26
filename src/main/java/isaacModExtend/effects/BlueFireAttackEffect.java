@@ -31,6 +31,14 @@ public class BlueFireAttackEffect extends AbstractGameEffect {
     }
 
     @Override
+    public void update() {
+        super.update();
+        if (isDone) {
+            dispose();
+        }
+    }
+
+    @Override
     public void render(SpriteBatch sb) {
         if (this.img != null) {
             sb.setColor(this.color);

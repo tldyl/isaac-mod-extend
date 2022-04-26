@@ -33,6 +33,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @SuppressWarnings("Duplicates")
 public class BabyPlumPet extends AbstractPet {
@@ -44,14 +45,14 @@ public class BabyPlumPet extends AbstractPet {
     private boolean shouldRefreshIntent = false;
 
     public BabyPlumPet(float x, float y) {
-        super(NAME, ID, 234, -8.0F, 10.0F, 58.0F, 38.0F, null, x, y);
+        super(NAME, ID, 234, -8.0F, 10.0F, 256.0F, 256.0F, null, x, y);
         if (AbstractDungeon.ascensionLevel >= 9) {
             this.setHp(250);
         } else {
             this.setHp(234);
         }
         this.animation = new AnimatedActor(IsaacModExtend.getResourcePath("monsters/908.000_baby plum.xml"));
-        animation.scale = Settings.scale * 4.0F;
+        animation.scale = 4.0F;
         animation.setCurAnimation("Descend");
         animation.addTriggerEvent("0", a -> { //Explosion
             switch (animation.getCurAnimationName()) {
@@ -112,7 +113,7 @@ public class BabyPlumPet extends AbstractPet {
                     break;
                 case "Attack3":
                     animation.setCurAnimation("Attack3Loop");
-                    IsaacModExtend.addToBot(new BabyPlumAttack3Action(this.animation, this.hb.cX - 44.0F * Settings.scale, this.hb.cY - 64.0F * animation.scale));
+                    IsaacModExtend.addToBot(new BabyPlumAttack3Action(this.animation, this.hb.cX, this.hb.cY));
                     break;
                 case "Descend": //降落
                     animation.setCurAnimation("Appear");
@@ -161,29 +162,23 @@ public class BabyPlumPet extends AbstractPet {
             resetPosition = false;
             IsaacModExtend.addToBot(new AbstractGameAction() {
                 float duration = 0.9F;
-                float startY = BabyPlumPet.this.hb.cY - 64.0F * animation.scale;
                 boolean playEffect = false;
 
                 @Override
                 public void update() {
-                    if (duration > 0.6F) {
-                        BabyPlumPet.this.animation.yPosition = Interpolation.exp10In.apply(startY, startY + 256.0F * Settings.scale, (0.9F - duration) / 0.3F);
-                    } else if (duration > 0.3F) {
-                        BabyPlumPet.this.animation.yPosition = startY + 256.0F * Settings.scale;
-                    } else {
-                        BabyPlumPet.this.animation.yPosition = Interpolation.exp10Out.apply(startY + 256.0F * Settings.scale, startY + 64.0F * Settings.scale, (0.3F - duration) / 0.3F);
+                    if (duration <= 0.3F) {
                         if (!playEffect) {
                             playEffect = true;
                             float angleRad = MathUtils.PI / 3.0F;
                             for (int i=0;i<6;i++) {
                                 Point startPos = new Point(animation.xPosition, animation.yPosition - 56.0F * animation.scale);
-                                AbstractDungeon.effectList.add(new BloodTearEffect(startPos, angleRad, 5.0F, 1.8F, 2.0F * Settings.scale, 9));
+                                AbstractDungeon.effectList.add(new BloodTearEffect(startPos, angleRad, 5.0F, 1.8F, 2.0F, 9));
                                 angleRad -= MathUtils.PI / 3.0F;
                             }
                             angleRad = MathUtils.PI / 2.0F;
                             for (int i=0;i<12;i++) {
                                 Point startPos = new Point(animation.xPosition, animation.yPosition - 56.0F * animation.scale);
-                                AbstractDungeon.effectList.add(new BloodTearEffect(startPos, angleRad, 3.0F, 1.8F, 2.0F * Settings.scale, 9));
+                                AbstractDungeon.effectList.add(new BloodTearEffect(startPos, angleRad, 3.0F, 1.8F, 2.0F, 9));
                                 angleRad -= MathUtils.PI / 6.0F;
                             }
                         }
@@ -219,8 +214,8 @@ public class BabyPlumPet extends AbstractPet {
     public void update() {
         super.update();
         if (resetPosition) {
-            animation.xPosition = this.hb.cX - 44.0F * Settings.scale;
-            animation.yPosition = this.hb.cY - 64.0F * animation.scale;
+            animation.xPosition = this.hb.cX + this.animX;
+            animation.yPosition = this.hb.cY + this.animY;
         }
         animation.update();
         if (animation.isCurAnimationDone() && !this.isDying && !this.isEscaping) {

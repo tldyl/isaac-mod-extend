@@ -43,16 +43,16 @@ public class BabyPlumAttack3Action extends AbstractGameAction {
                 if ("Attack3Loop".equals(animation.getCurAnimationName())) {
                     distX = 1.0F;
                     distY = 1.0F;
-                    if (animation.xPosition >= Settings.WIDTH - 64.0F * animation.scale) {
+                    if (animation.xPosition >= Settings.WIDTH - 64.0F * animation.scale * Settings.scale) {
                         animation.flipX = true;
                     }
-                    if (animation.yPosition >= Settings.HEIGHT - 64.0F * animation.scale && !endAttack) {
+                    if (animation.yPosition >= Settings.HEIGHT - 64.0F * animation.scale * Settings.scale && !endAttack) {
                         animation.setCurAnimation("Attack3BackLoop");
                     }
                 } else if ("Attack3BackLoop".equals(animation.getCurAnimationName())) {
                     distX = 1.0F;
                     distY = -1.0F;
-                    if (animation.xPosition >= Settings.WIDTH - 64.0F * animation.scale) {
+                    if (animation.xPosition >= Settings.WIDTH - 64.0F * animation.scale * Settings.scale) {
                         animation.flipX = true;
                     }
                     if (animation.yPosition <= 0 && !endAttack) {
@@ -66,7 +66,7 @@ public class BabyPlumAttack3Action extends AbstractGameAction {
                     if (animation.xPosition <= 0) {
                         animation.flipX = false;
                     }
-                    if (animation.yPosition >= Settings.HEIGHT - 64.0F * animation.scale && !endAttack) {
+                    if (animation.yPosition >= Settings.HEIGHT - 64.0F * animation.scale * Settings.scale && !endAttack) {
                         animation.setCurAnimation("Attack3BackLoop");
                     }
                 } else if ("Attack3BackLoop".equals(animation.getCurAnimationName())) {
@@ -80,8 +80,8 @@ public class BabyPlumAttack3Action extends AbstractGameAction {
                     }
                 }
             }
-            animation.xPosition += v * animation.scale * distX;
-            animation.yPosition += v * animation.scale * distY;
+            animation.xPosition += v * animation.scale * distX * Settings.scale;
+            animation.yPosition += v * animation.scale * distY * Settings.scale;
         } else {
             if (!t) {
                 startX = animation.xPosition;
@@ -111,9 +111,9 @@ public class BabyPlumAttack3Action extends AbstractGameAction {
             effectTimer -= Gdx.graphics.getDeltaTime();
             if (effectTimer <= 0) {
                 effectTimer = 0.03F;
-                Point startPos = new Point(animation.xPosition, animation.yPosition + 32.0F * animation.scale);
-                Point targetPos = new Point(animation.xPosition - (v + MathUtils.random(2 * v)) * distX, animation.yPosition + 32.0F * animation.scale - (2 * (v + MathUtils.random(v))) * distY);
-                AbstractDungeon.effectList.add(new BloodTearEffect(startPos, targetPos, MathUtils.random(0.6F * v), MathUtils.random(2.0F, 3.0F), 2.0F * Settings.scale, MathUtils.random(3, 13)));
+                Point startPos = new Point(animation.xPosition, animation.yPosition + 32.0F * Settings.scale);
+                Point targetPos = new Point(animation.xPosition - (v + MathUtils.random(2 * v)) * distX, animation.yPosition + 32.0F * Settings.scale - (2 * (v + MathUtils.random(v))) * distY);
+                AbstractDungeon.effectList.add(new BloodTearEffect(startPos, targetPos, MathUtils.random(0.6F * v), MathUtils.random(2.0F, 3.0F), 2.0F, MathUtils.random(3, 13)));
             }
         }
         this.tickDuration();

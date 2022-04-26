@@ -27,6 +27,7 @@ public class BlurEffect extends AbstractGameEffect {
         this.duration -= Gdx.graphics.getDeltaTime();
         if (this.duration <= 0) {
             this.isDone = true;
+            dispose();
         }
     }
 
