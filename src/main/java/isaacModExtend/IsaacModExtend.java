@@ -7,6 +7,7 @@ import basemod.devcommands.ConsoleCommand;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
@@ -37,6 +38,7 @@ import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Circlet;
 import com.megacrit.cardcrawl.relics.IncenseBurner;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import helpers.MinionHelper;
 import isaacModExtend.cards.Guilt;
 import isaacModExtend.commands.RewindCommand;
@@ -75,6 +77,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
                                        PostDungeonInitializeSubscriber {
 
     private static List<AbstractGameAction> actionList = new ArrayList<>();
+    public static List<AbstractGameEffect> globalEffect = new ArrayList<>(); //这里的特效只能用shader
     public static List<AbstractRelic> planetariumRelics = new ArrayList<>();
     private static SpriteBatch sb;
     private static boolean enableMonstro = true;
@@ -82,6 +85,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
     public static boolean isPlumFluteUnlocked = false;
     public static boolean increaseModBossChance = true;
     public static final List<AbstractRelic> angelOnlyRelics = new ArrayList<>();
+    public static FrameBuffer globalFrame;
 
     public static void initialize() {
         new IsaacModExtend();
@@ -305,6 +309,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
         new ChaosPatch();
 
         ConsoleCommand.addCommand("rewind", RewindCommand.class);
+        globalFrame = new FrameBuffer(Pixmap.Format.RGBA8888, Settings.WIDTH, Settings.HEIGHT, false);
     }
 
     public static void saveSettings() {
@@ -393,6 +398,17 @@ public class IsaacModExtend implements EditStringsSubscriber,
             if (actionList.get(0).isDone) {
                 actionList.remove(0);
             }
+        }
+        if (globalEffect.size() > 0) {
+            List<AbstractGameEffect> toRemove = new ArrayList<>();
+            for (AbstractGameEffect effect : globalEffect) {
+                effect.update();
+                if (effect.isDone) {
+                    effect.dispose();
+                    toRemove.add(effect);
+                }
+            }
+            globalEffect.removeAll(toRemove);
         }
     }
 
