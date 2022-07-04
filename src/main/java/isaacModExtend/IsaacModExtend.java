@@ -4,12 +4,12 @@ import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.devcommands.ConsoleCommand;
+import basemod.helpers.ScreenPostProcessorManager;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
@@ -74,7 +74,8 @@ public class IsaacModExtend implements EditStringsSubscriber,
                                        PostUpdateSubscriber,
                                        PostRenderSubscriber,
                                        EditCardsSubscriber,
-                                       PostDungeonInitializeSubscriber {
+                                       PostDungeonInitializeSubscriber,
+                                       ScreenPostProcessor {
 
     private static List<AbstractGameAction> actionList = new ArrayList<>();
     public static List<AbstractGameEffect> globalEffect = new ArrayList<>(); //这里的特效只能用shader
@@ -85,7 +86,6 @@ public class IsaacModExtend implements EditStringsSubscriber,
     public static boolean isPlumFluteUnlocked = false;
     public static boolean increaseModBossChance = true;
     public static final List<AbstractRelic> angelOnlyRelics = new ArrayList<>();
-    public static FrameBuffer globalFrame;
 
     public static void initialize() {
         new IsaacModExtend();
@@ -113,6 +113,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
 
     private IsaacModExtend() {
         BaseMod.subscribe(this);
+        ScreenPostProcessorManager.addPostProcessor(this);
     }
 
     @Override
@@ -309,7 +310,6 @@ public class IsaacModExtend implements EditStringsSubscriber,
         new ChaosPatch();
 
         ConsoleCommand.addCommand("rewind", RewindCommand.class);
-        globalFrame = new FrameBuffer(Pixmap.Format.RGBA8888, Settings.WIDTH, Settings.HEIGHT, false);
     }
 
     public static void saveSettings() {
@@ -426,6 +426,17 @@ public class IsaacModExtend implements EditStringsSubscriber,
         }
         frameBuffer.end();
         return frameBuffer.getColorBufferTexture();
+    }
+
+    @Override
+    public void postProcess(SpriteBatch sb, TextureRegion region, OrthographicCamera camera) {
+        sb.setColor(Color.WHITE);
+        sb.setBlendFunction(GL20.GL_ONE, GL20.GL_ZERO);
+        for (AbstractGameEffect effect : IsaacModExtend.globalEffect) {
+            effect.render(sb);
+        }
+        sb.draw(region, 0, 0);
+        sb.setProjectionMatrix(camera.combined);
     }
 
     @Override
