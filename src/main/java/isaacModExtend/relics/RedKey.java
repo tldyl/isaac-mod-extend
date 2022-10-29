@@ -68,10 +68,7 @@ public class RedKey extends ChargeableRelic implements CustomSavable<Map<String,
         MapRoomNode newNode = availableNodes.get(AbstractDungeon.mapRng.random(availableNodes.size() - 1));
         newNode = new RedMapRoomNode(newNode.x, newNode.y);
         AbstractDungeon.map.get(newNode.y).set(newNode.x, newNode);
-        boolean connectToBoss = false;
-        if (newNode.y == AbstractDungeon.map.size() - 1) {
-            connectToBoss = true;
-        }
+        boolean connectToBoss = newNode.y == AbstractDungeon.map.size() - 1;
         newNode.addParent(currNode);
         MapEdge edge = new RedMapEdge(currNode.x, currNode.y, 0, 0, newNode.x, newNode.y, 0, 0, false);
         currNode.addEdge(edge);
@@ -99,17 +96,17 @@ public class RedKey extends ChargeableRelic implements CustomSavable<Map<String,
             }
         }
         int roll = AbstractDungeon.mapRng.random(99);
-        if (roll < 5) {
+        if (roll < 7) {
             newNode.room = new BloodShopRoom();
-        } else if (roll < 10) {
+        } else if (roll < 14) {
             newNode.room = new AngelRoom();
-        } else if (roll < 20) {
+        } else if (roll < 29) {
             newNode.room = new TreasureRoom();
-        } else if (roll < 45) {
+        } else if (roll < 54) {
             newNode.room = new CustomEventRoom();
-        } else if (roll < 65) {
+        } else if (roll < 69) {
             newNode.room = new ShopRoom();
-        } else if (roll < 80) {
+        } else if (roll < 79) {
             newNode.room = new MonsterRoom();
         } else if (roll < 90) {
             newNode.room = new RestRoom();

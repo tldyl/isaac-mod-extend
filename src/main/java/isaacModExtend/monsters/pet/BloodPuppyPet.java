@@ -127,17 +127,7 @@ public class BloodPuppyPet extends AbstractPet {
                         });
                     }
                 }
-                if (leftSide) {
-                    IsaacModExtend.addToTop(new AbstractGameAction() {
-                        @Override
-                        public void update() {
-                            BloodPuppyPet.this.heal(p.lastDamageTaken);
-                            isDone = true;
-                        }
-                    });
-                    IsaacModExtend.addToTop(new DamageAction(p, this.damage.get(1)));
-                    IsaacModExtend.addToTop(new VFXAction(new BiteEffect(p.hb.cX, p.hb.cY)));
-                } else {
+                if (!leftSide) {
                     IsaacModExtend.addToBot(new VFXAction(new BiteEffect(p.hb.cX, p.hb.cY)));
                     IsaacModExtend.addToBot(new DamageAction(p, this.damage.get(1)));
                     IsaacModExtend.addToBot(new AbstractGameAction() {
@@ -188,17 +178,7 @@ public class BloodPuppyPet extends AbstractPet {
                         });
                     }
                 }
-                if (leftSide) {
-                    IsaacModExtend.addToTop(new AbstractGameAction() {
-                        @Override
-                        public void update() {
-                            BloodPuppyPet.this.heal(p.lastDamageTaken);
-                            isDone = true;
-                        }
-                    });
-                    IsaacModExtend.addToTop(new DamageAction(p, this.damage.get(2)));
-                    IsaacModExtend.addToTop(new VFXAction(new BiteEffect(p.hb.cX, p.hb.cY)));
-                } else {
+                if (!leftSide) {
                     IsaacModExtend.addToBot(new VFXAction(new BiteEffect(p.hb.cX, p.hb.cY)));
                     IsaacModExtend.addToBot(new DamageAction(p, this.damage.get(2)));
                     IsaacModExtend.addToBot(new AbstractGameAction() {

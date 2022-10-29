@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -37,6 +38,9 @@ public class FamiliarBarrierPower extends AbstractPower {
             for (AbstractMonster m : controlledPets) {
                 if (!m.isDeadOrEscaped()) {
                     this.flash();
+                    if (AbstractDungeon.ascensionLevel >= 19) {
+                        info.output *= 3;
+                    }
                     if (damageAmount % 2 != 0) info.output++;
                     m.damage(info);
                     break;
@@ -51,6 +55,9 @@ public class FamiliarBarrierPower extends AbstractPower {
         if (type != DamageInfo.DamageType.HP_LOSS) {
             for (AbstractMonster m : controlledPets) {
                 if (!m.isDeadOrEscaped()) {
+                    if (AbstractDungeon.ascensionLevel >= 19) {
+                        return damage * 0.25F;
+                    }
                     return damage / 2;
                 }
             }
@@ -60,7 +67,7 @@ public class FamiliarBarrierPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0];
+        this.description = String.format(DESCRIPTIONS[0], AbstractDungeon.ascensionLevel >= 19 ? 75 : 50);
     }
 
     static {

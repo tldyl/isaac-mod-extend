@@ -48,7 +48,7 @@
   "IsaacExt:FamiliarBarrierPower": {
     "NAME": "Familiar Barrier",
     "DESCRIPTIONS": [
-      "When any familiar alive, transfer #b50% of the #yattack damage to the first alive familiar (which can offset the overflow damage)."
+      "When any familiar alive, transfer #b%d%% of the #yattack damage to the first alive familiar (which can offset the overflow damage)."
     ]
   },
   "IsaacExt:LazarusRagsPower": {
