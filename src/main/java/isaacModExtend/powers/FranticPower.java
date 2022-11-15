@@ -43,7 +43,11 @@ public class FranticPower extends AbstractPower {
         }
         monster = PlayerAddFieldsPatch.f_minions.get(AbstractDungeon.player).getMonster(BabyPlumPet.ID);
         if (monster != null) {
-            ((BabyPlumPet) monster).refreshMultiAttackIntent();
+            if (monster instanceof BabyPlumPet) {
+                ((BabyPlumPet) monster).refreshMultiAttackIntent();
+            } else if (monster instanceof BabyPlum) {
+                ((BabyPlum) monster).refreshMultiAttackIntent();
+            }
             monster.createIntent();
         }
     }
