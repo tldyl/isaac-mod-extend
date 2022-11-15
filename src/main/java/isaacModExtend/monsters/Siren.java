@@ -17,10 +17,7 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.IntangiblePower;
-import com.megacrit.cardcrawl.powers.SlowPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.screens.stats.StatsScreen;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -35,6 +32,7 @@ import isaacModExtend.actions.SirenDestroyPetsAction;
 import isaacModExtend.actions.SirenSlashAttackAction;
 import isaacModExtend.monsters.pet.BloodPuppyPet;
 import isaacModExtend.powers.FamiliarBarrierPower;
+import isaacModExtend.relics.RockBottom;
 import patches.player.PlayerAddFieldsPatch;
 import relics.NineLifeCat;
 import utils.Point;
@@ -219,6 +217,7 @@ public class Siren extends AbstractAnm2Monster {
                     }
                 });
                 addToBot(new Anm2SwitchAction(this.animation, "Attack2BEnd"));
+                addToBot(new ApplyPowerAction(p, this, new WeakPower(p, 2, true)));
                 break;
             case 1: //带跟班滑翔(unknown)
                 if (!this.lastMove((byte) 1)) {
@@ -230,14 +229,24 @@ public class Siren extends AbstractAnm2Monster {
                 int block = 0;
                 for (AbstractMonster m1 : AbstractDungeon.getMonsters().monsters) {
                     if (m1 != this && !m1.isDeadOrEscaped()) {
-                        addToBot(new ApplyPowerAction(m1, Siren.this, new StrengthPower(m1, 2)));
+                        if (AbstractDungeon.ascensionLevel >= 19) {
+                            addToBot(new ApplyPowerAction(m1, Siren.this, new StrengthPower(m1, 5)));
+                            addToBot(new ApplyPowerAction(this, this, new StrengthPower(this, 1)));
+                        } else {
+                            addToBot(new ApplyPowerAction(m1, Siren.this, new StrengthPower(m1, 3)));
+                        }
                         block += 8;
                     }
                 }
-                if (block > 0) {
-                    addToBot(new GainBlockAction(this, block));
+                if (AbstractDungeon.ascensionLevel >= 19) {
+                    addToBot(new GainBlockAction(this, 24));
+                    addToBot(new ApplyPowerAction(this, this, new StrengthPower(this, 3)));
                 } else {
-                    addToBot(new ApplyPowerAction(this, this, new StrengthPower(this, 1)));
+                    if (block > 0) {
+                        addToBot(new GainBlockAction(this, block));
+                    } else {
+                        addToBot(new ApplyPowerAction(this, this, new StrengthPower(this, 2)));
+                    }
                 }
                 break;
             case 2: //猛击销毁跟班(unknown)
@@ -312,13 +321,21 @@ public class Siren extends AbstractAnm2Monster {
                 IsaacModExtend.addToBot(new DamageAction(p, this.damage.get(1), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
                 IsaacModExtend.addToBot(new DamageAction(p, this.damage.get(1), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
                 IsaacModExtend.addToBot(new DamageAction(p, this.damage.get(1), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-                IsaacModExtend.addToBot(new GainBlockAction(this, 20));
+                if (AbstractDungeon.ascensionLevel >= 19) {
+                    IsaacModExtend.addToBot(new GainBlockAction(this, 30));
+                } else {
+                    IsaacModExtend.addToBot(new GainBlockAction(this, 20));
+                }
                 if (this.hasPower(StrengthPower.POWER_ID)) {
                     AbstractPower power = this.getPower(StrengthPower.POWER_ID);
                     if (power.amount < 0) {
                         IsaacModExtend.addToBot(new RemoveSpecificPowerAction(this, this, StrengthPower.POWER_ID));
                         IsaacModExtend.addToBot(new RemoveSpecificPowerAction(this, this, "Shackled"));
                     }
+                }
+                addToBot(new ApplyPowerAction(p, this, new StrengthPower(p, -6)));
+                if (!p.hasPower(ArtifactPower.POWER_ID) && !p.hasRelic(RockBottom.ID)) {
+                    addToBot(new ApplyPowerAction(p, this, new GainStrengthPower(p, 6)));
                 }
                 break;
             case 6: //召唤助手(unknown)
@@ -342,6 +359,15 @@ public class Siren extends AbstractAnm2Monster {
                 break;
         }
         addToBot(new RollMoveAction(this));
+    }
+
+    @Override
+    public void damage(DamageInfo info) {
+        if (info.output > 0 && this.hasPower("Intangible")) {
+            info.output = 1;
+        }
+
+        super.damage(info);
     }
 
     public void returnControlledPet(String id) {

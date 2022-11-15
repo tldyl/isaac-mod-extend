@@ -16,10 +16,10 @@ public final class SirenHelper extends AbstractMonster {
     public static final String ID = IsaacModExtend.makeID("SirenHelper");
     public static final String NAME;
     private boolean mimicked = false;
-    private Siren siren;
+    private final Siren siren;
 
     public SirenHelper(float offsetX, float offsetY, AbstractMonster mimicSource) {
-        super(NAME, ID + UUID.randomUUID().toString(), 40, -8.0F, 10.0F, 36.0F, 44.0F, IsaacModExtend.getResourcePath("monsters/sirenHelper.png"), offsetX, offsetY);
+        super(NAME, ID + UUID.randomUUID(), 40, -8.0F, 10.0F, 36.0F, 44.0F, IsaacModExtend.getResourcePath("monsters/sirenHelper.png"), offsetX, offsetY);
         if (mimicSource != null) {
             setHp(mimicSource.maxHealth);
             this.currentHealth = mimicSource.currentHealth;
@@ -33,8 +33,16 @@ public final class SirenHelper extends AbstractMonster {
             this.refreshHitboxLocation();
             this.refreshIntentHbLocation();
         }
-        this.damage.add(new DamageInfo(this, 6));
-        this.damage.add(new DamageInfo(this, 12));
+        if (AbstractDungeon.ascensionLevel >= 7) {
+            this.setHp(50);
+        }
+        if (AbstractDungeon.ascensionLevel >= 2) {
+            this.damage.add(new DamageInfo(this, 7));
+            this.damage.add(new DamageInfo(this, 14));
+        } else {
+            this.damage.add(new DamageInfo(this, 6));
+            this.damage.add(new DamageInfo(this, 12));
+        }
         siren = (Siren) AbstractDungeon.getMonsters().getMonster(Siren.ID);
     }
 
