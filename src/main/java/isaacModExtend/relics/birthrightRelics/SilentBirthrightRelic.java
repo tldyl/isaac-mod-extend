@@ -36,7 +36,7 @@ public class SilentBirthrightRelic extends CustomRelic {
                 AbstractRelic relic = p.getRelic(Birthright.ID);
                 relic.flash();
                 addToBot(new RelicAboveCreatureAction(p, relic));
-                addToBot(new DrawCardAction(1));
+                addToBot(new DrawCardAction(2));
             }
         }
     }

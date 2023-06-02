@@ -127,5 +127,10 @@
     "NAME": "塞壬助手",
     "DIALOG": [],
     "MOVES": []
+  },
+  "IsaacExt:Delirium": {
+    "NAME": "精神错乱",
+    "DIALOG": [],
+    "MOVES": []
   }
 }

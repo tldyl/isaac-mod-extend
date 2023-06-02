@@ -297,7 +297,7 @@
     "NAME": "",
     "FLAVOR": "Lost and recovered.",
     "DESCRIPTIONS": [
-      "The first time you discard a card each turn, draw #b1."
+      "The first time you discard a card each turn, draw #b2."
     ]
   },
   "IsaacExt:DefectBirthrightRelic": {

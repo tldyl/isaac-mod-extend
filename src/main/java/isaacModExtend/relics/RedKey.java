@@ -154,9 +154,12 @@ public class RedKey extends ChargeableRelic implements CustomSavable<Map<String,
             int x = Integer.parseInt(e.getKey().split(",")[0]);
             int y = Integer.parseInt(e.getKey().split(",")[1]);
             log.info("amount: {}", e.getValue());
-            for (int i=0;i<e.getValue();i++) {
-                log.info("creating red room...");
-                createNewRoom(AbstractDungeon.map.get(y).get(x), true);
+            try {
+                for (int i = 0; i < e.getValue(); i++) {
+                    log.info("creating red room...");
+                    createNewRoom(AbstractDungeon.map.get(y).get(x), true);
+                }
+            } catch (Exception ignored) {
             }
         }
     }

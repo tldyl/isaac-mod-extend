@@ -56,5 +56,17 @@
     "DESCRIPTIONS": [
       "Attack damage increased by #b60% in this combat."
     ]
+  },
+  "IsaacExt:PhantomPower": {
+    "NAME": "Phantom",
+    "DESCRIPTIONS": [
+      "每打出 #b%d 张牌，变化为本局游戏内出现过的一个随机敌人。 NL 偶尔会变回原形，不在原形时受到的所有伤害减少 #b50%% 。 NL (再打出 #b%d 张牌，变化为本局游戏内出现过的一个随机敌人。)"
+    ]
+  },
+  "IsaacExt:DerangedPower": {
+    "NAME": "Deranged",
+    "DESCRIPTIONS": [
+      "For every #b%d intents created, take an extra action. NL (Will take an extra action after #b%d intents created.)"
+    ]
   }
 }

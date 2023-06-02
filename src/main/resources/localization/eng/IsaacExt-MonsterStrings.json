@@ -127,5 +127,10 @@
     "NAME": "Siren Helper",
     "DIALOG": [],
     "MOVES": []
+  },
+  "IsaacExt:Delirium": {
+    "NAME": "Delirium",
+    "DIALOG": [],
+    "MOVES": []
   }
 }

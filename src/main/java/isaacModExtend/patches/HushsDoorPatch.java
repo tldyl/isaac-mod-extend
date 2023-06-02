@@ -8,16 +8,21 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.dungeons.TheEnding;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
+import isaacModExtend.monsters.Delirium;
 import isaacModExtend.monsters.pet.SatanicBibleWisp;
 import isaacModExtend.rooms.AngelRoom;
 import patches.player.PlayerAddFieldsPatch;
 import relics.HushsDoor;
 import rewards.BlackHeart;
 import rewards.SoulHeart;
+import room.MonsterRoomMyBoss;
 
 @SuppressWarnings("unused")
 public class HushsDoorPatch {
@@ -88,6 +93,21 @@ public class HushsDoorPatch {
                 });
             }
             return SpireReturn.Return(null);
+        }
+    }
+
+    @SpirePatch(
+            clz = HushsDoor.class,
+            method = "makeHeartToHush"
+    )
+    public static class PatchMakeHeartToHush {
+        public static SpireReturn<Void> Prefix(HushsDoor hushsDoor) {
+            if (HushsDoor.toHush == 0 && AbstractDungeon.nextRoom.room instanceof MonsterRoomBoss && CardCrawlGame.dungeon instanceof TheEnding) {
+                AbstractDungeon.nextRoom.room = new MonsterRoomMyBoss(new MonsterGroup(new Delirium(-50.0F, 30.0F)));
+                AbstractDungeon.lastCombatMetricKey = "Delirium";
+                return SpireReturn.Return(null);
+            }
+            return SpireReturn.Continue();
         }
     }
 }
