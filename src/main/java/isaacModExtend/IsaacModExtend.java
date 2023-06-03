@@ -65,6 +65,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 
 @SpireInitializer
 public class IsaacModExtend implements EditStringsSubscriber,
@@ -79,6 +80,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
 
     private static List<AbstractGameAction> actionList = new ArrayList<>();
     public static List<AbstractGameEffect> globalEffect = new ArrayList<>(); //这里的特效只能用shader
+    public static List<Consumer<Texture>> screenShotRequests = new ArrayList<>(); //截图请求
     public static List<AbstractRelic> planetariumRelics = new ArrayList<>();
     private static SpriteBatch sb;
     private static boolean enableMonstro = true;
@@ -86,6 +88,7 @@ public class IsaacModExtend implements EditStringsSubscriber,
     public static boolean isPlumFluteUnlocked = false;
     public static boolean increaseModBossChance = true;
     public static final List<AbstractRelic> angelOnlyRelics = new ArrayList<>();
+    public static boolean renderPostProcessRegion = true;
 
     public static void initialize() {
         new IsaacModExtend();
@@ -174,6 +177,10 @@ public class IsaacModExtend implements EditStringsSubscriber,
         BaseMod.addAudio("DEATH_BURST_LARGE_1", "IsaacAudio/sfx/death_burst_large_1.wav");
         BaseMod.addAudio("GLASS_BREAK_01", "IsaacAudio/sfx/glass_break_01.wav");
         BaseMod.addAudio("GLASS_CANNON_FIRE", "IsaacAudio/sfx/glass_cannon_fire.wav");
+        BaseMod.addAudio("ANGRY_GURGLE_1", "IsaacAudio/sfx/angry_gurgle_1.wav");
+        BaseMod.addAudio("DEATH_CARD_MIX", "IsaacAudio/sfx/death_card_mix.wav");
+        BaseMod.addAudio("HELL_PORTAL", "IsaacAudio/sfx/hell_portal.wav");
+        BaseMod.addAudio("HELL_PORTAL_2", "IsaacAudio/sfx/hell_portal_2.wav");
     }
 
     public static void initPlanetariumRelics() {
@@ -391,6 +398,10 @@ public class IsaacModExtend implements EditStringsSubscriber,
         actionList.add(0, action);
     }
 
+    public static void clearAllActions() {
+        actionList.clear();
+    }
+
     @Override
     public void receivePostUpdate() {
         if (actionList.size() > 0) {
@@ -430,12 +441,39 @@ public class IsaacModExtend implements EditStringsSubscriber,
 
     @Override
     public void postProcess(SpriteBatch sb, TextureRegion region, OrthographicCamera camera) {
+        List<FrameBuffer> frameBuffers = new ArrayList<>();
+        if (!screenShotRequests.isEmpty()) {
+            sb.end();
+            for (Consumer<Texture> ignored : screenShotRequests) {
+                FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),  false);
+                frameBuffer.begin();
+                frameBuffers.add(frameBuffer);
+            }
+            Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
+            Gdx.gl.glClear(16384);
+            sb.begin();
+        }
         sb.setColor(Color.WHITE);
         sb.setBlendFunction(GL20.GL_ONE, GL20.GL_ZERO);
         for (AbstractGameEffect effect : IsaacModExtend.globalEffect) {
             effect.render(sb);
         }
-        sb.draw(region, 0, 0);
+        if (renderPostProcessRegion) {
+            sb.draw(region, 0, 0);
+        }
+        if (!screenShotRequests.isEmpty()) {
+            int index = 0;
+            sb.flush();
+            for (FrameBuffer frameBuffer : frameBuffers) {
+                frameBuffer.end();
+                screenShotRequests.get(index).accept(frameBuffer.getColorBufferTexture());
+                index++;
+            }
+            if (renderPostProcessRegion) {
+                sb.draw(region, 0, 0);
+            }
+            screenShotRequests.clear();
+        }
         sb.setProjectionMatrix(camera.combined);
     }
 

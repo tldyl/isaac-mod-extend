@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.dungeons.Exordium;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FrailPower;
@@ -197,7 +198,9 @@ public class BabyPlum extends AbstractAnm2Monster {
         ArrayList<AbstractCard> playChoices = new ArrayList<>();
         playChoices.add(new OfCourse());
         playChoices.add(new InNoMood());
-        addToBot(new ChooseOneAction(playChoices));
+        if (CardCrawlGame.dungeon instanceof Exordium) {
+            addToBot(new ChooseOneAction(playChoices));
+        }
         addToBot(new ApplyPowerAction(this, this, new BarrageBlockadePower(this)));
     }
 

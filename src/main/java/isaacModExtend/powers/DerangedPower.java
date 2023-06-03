@@ -2,6 +2,7 @@ package isaacModExtend.powers;
 
 import com.evacipated.cardcrawl.mod.stslib.powers.abstracts.TwoAmountPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
@@ -36,8 +37,8 @@ public class DerangedPower extends TwoAmountPower implements PreSetMoveIntent {
             return;
         }
         this.amount2 += stackAmount;
-        if (this.amount2 < 3) {
-            this.amount2 = 3;
+        if (this.amount2 < 2) {
+            this.amount2 = 2;
         }
         if (this.amount > this.amount2) {
             this.amount = this.amount2;
@@ -61,6 +62,9 @@ public class DerangedPower extends TwoAmountPower implements PreSetMoveIntent {
             });
             updateDescription();
             return true;
+        }
+        if (this.amount == 1) {
+            addToBot(new TalkAction(this.owner, DESCRIPTIONS[1]));
         }
         updateDescription();
         return false;

@@ -23,6 +23,7 @@ public class SacredHeartPower extends AbstractPower {
         this.region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage(IsaacModExtend.getResourcePath("powers/SacredHeart84.png")), 0, 0, 84, 84);
         this.region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage(IsaacModExtend.getResourcePath("powers/SacredHeart32.png")), 0, 0, 32, 32);
         updateDescription();
+        this.priority = 99;
     }
 
     @Override
