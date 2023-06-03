@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -106,7 +105,7 @@ public class PhantomPower extends TwoAmountPower {
     }
 
     private AbstractMonster getMonster() {
-        if (this.owner != this.initialOwner && AbstractDungeon.monsterRng.randomBoolean(0.15F)) {
+        if (this.owner != this.initialOwner && AbstractDungeon.monsterRng.randomBoolean(0.2F)) {
             return this.initialOwner;
         }
         if (monsterPool.isEmpty()) {
@@ -132,15 +131,6 @@ public class PhantomPower extends TwoAmountPower {
     @Override
     public void updateDescription() {
         this.description = String.format(DESCRIPTIONS[0], this.amount2, this.amount);
-    }
-
-    @Override
-    public float atDamageFinalReceive(float damage, DamageInfo.DamageType type) {
-        return this.calculateDamageTakenAmount(damage);
-    }
-
-    private float calculateDamageTakenAmount(float damage) {
-        return owner instanceof Delirium ? damage : damage / 2.0F;
     }
 
     @Override

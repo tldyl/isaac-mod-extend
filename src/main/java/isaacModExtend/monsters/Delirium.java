@@ -38,7 +38,7 @@ public class Delirium extends AbstractAnm2Monster {
     public void usePreBattleAction() {
         addToBot(new ApplyPowerAction(this, this, new ReactivePower(this)));
         addToBot(new ApplyPowerAction(this, this, new PhantomPower(this, 13)));
-        addToBot(new ApplyPowerAction(this, this, new DerangedPower(this, 5)));
+        addToBot(new ApplyPowerAction(this, this, new DerangedPower(this, 6)));
     }
 
     @Override

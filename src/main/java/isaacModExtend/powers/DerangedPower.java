@@ -37,8 +37,8 @@ public class DerangedPower extends TwoAmountPower implements PreSetMoveIntent {
             return;
         }
         this.amount2 += stackAmount;
-        if (this.amount2 < 2) {
-            this.amount2 = 2;
+        if (this.amount2 < 4) {
+            this.amount2 = 4;
         }
         if (this.amount > this.amount2) {
             this.amount = this.amount2;

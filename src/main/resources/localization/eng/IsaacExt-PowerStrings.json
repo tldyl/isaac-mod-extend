@@ -60,7 +60,7 @@
   "IsaacExt:PhantomPower": {
     "NAME": "Phantom",
     "DESCRIPTIONS": [
-      "For every #b%d cards played, transform to a random enemy that has appeared in the game. NL Occasionally reverts to its original form. All damage taken when not in its original form is reduced by #b50%%. NL (Play another #b%d cards and transform to a random enemy that has appeared in the game.)",
+      "For every #b%d cards played, transform to a random enemy that has appeared in the game. NL Occasionally reverts to its original form. NL (Play another #b%d cards and transform to a random enemy that has appeared in the game.)",
       "I'm Transforming~~"
     ]
   },
