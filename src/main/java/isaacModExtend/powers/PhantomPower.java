@@ -18,6 +18,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import isaacModExtend.IsaacModExtend;
 import isaacModExtend.actions.Anm2WaitAction;
 import isaacModExtend.effects.TVNoSignalEffect;
@@ -193,6 +194,8 @@ public class PhantomPower extends TwoAmountPower {
         addToTop(new CreateIntentAction((AbstractMonster) PhantomPower.this.owner));
         if (isDying) {
             ((AbstractMonster) this.owner).die();
+        } else {
+            AbstractDungeon.player.relics.forEach(relic -> relic.onSpawnMonster((AbstractMonster) this.owner));
         }
     }
 

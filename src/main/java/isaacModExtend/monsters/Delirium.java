@@ -21,7 +21,7 @@ public class Delirium extends AbstractAnm2Monster {
     private boolean playDeathSfx = false;
 
     public Delirium(float x, float y) {
-        super(NAME, "Delirium", 10000, -8.0F, 0.0F, 360.0F, 240.0F, null, x, y);
+        super(NAME, ID, 10000, -8.0F, 0.0F, 360.0F, 240.0F, null, x, y);
         this.img = new Texture("images/monsters/Delirium.png");
         this.type = EnemyType.BOSS;
         this.setHp(10000);
@@ -91,7 +91,7 @@ public class Delirium extends AbstractAnm2Monster {
 
     @Override
     protected void getMove(int aiRng) {
-        if (reduceDerangedCount < 3 && aiRng < 50) {
+        if (reduceDerangedCount < 2 && aiRng < 50) {
             setMove((byte) 0, Intent.UNKNOWN);
             reduceDerangedCount++;
         } else {
