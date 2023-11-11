@@ -18,7 +18,6 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
 import isaacModExtend.IsaacModExtend;
 import isaacModExtend.actions.Anm2WaitAction;
 import isaacModExtend.effects.TVNoSignalEffect;
@@ -176,7 +175,11 @@ public class PhantomPower extends TwoAmountPower {
         if (ReflectionHacks.getPrivate(monster, AbstractMonster.class, "move") == null) {
             ReflectionHacks.setPrivate(monster, AbstractMonster.class, "move", new EnemyMoveInfo((byte) -1, AbstractMonster.Intent.UNKNOWN, 0, 1, false));
         }
-        monster.usePreBattleAction();
+        try {
+            monster.usePreBattleAction();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
         oldOwner.powers.forEach(power -> PhantomPower.this.owner.addPower(power));
         addToTop(new AbstractGameAction() {
             @Override
