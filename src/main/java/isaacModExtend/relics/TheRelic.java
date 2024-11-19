@@ -27,7 +27,7 @@ public class TheRelic extends CustomRelic {
         if (this.counter == 4) this.beginLongPulse();
         if (this.counter >= 5) {
             this.flash();
-            SoulHeartPatch.soulHeart += 10;
+            SoulHeartPatch.soulHeart += 14;
             this.stopPulse();
             this.counter = 0;
         }

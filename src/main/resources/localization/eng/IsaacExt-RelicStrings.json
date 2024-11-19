@@ -349,5 +349,16 @@
     "DESCRIPTIONS": [
       "There's #b1 resurrection chance on each act. NL After resurrection through this relic, lose #b10 max health(if your max health is less than #b10, set it to #b10 ), heal #b10, gain #b1 #yStrength at the start of each combat and multiply your attack damage by #b1.6 at the current act. NL If you resurrect in combat through this relic, it will be deemed that you have not received any damage before resurrection."
     ]
+  },
+  "IsaacExt:Void": {
+    "NAME": "Void",
+    "FLAVOR": "Consume",
+    "DESCRIPTIONS": [
+      "#b6 charges, at #b2 or #b4 charge can inhale relics from the relic list by right-click, gain #b1 charge when inhale relic(cannot inhale the bloom mark, passive relics get random initial attributes, clickable relics get its effect, and gain the effect immediately when full charge), if full charge,right-click can trigger all effect it already gains. NL ",
+      "#rStrength: #b",
+      "#gDexterity: #b",
+      "#bFocus: #b",
+      " NL "
+    ]
   }
 }
