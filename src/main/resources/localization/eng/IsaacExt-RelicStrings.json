@@ -360,5 +360,12 @@
       "#bFocus: #b",
       " NL "
     ]
+  },
+  "IsaacExt:VanishingTwin": {
+    "NAME": "Vanishing Twin",
+    "FLAVOR": "He wants revenge.",
+    "DESCRIPTIONS": [
+      "At the start of Boss combats, copy a random boss enemy in the room, which has #b25% less HP and has #ySlow. NL At the end of combat, drop an additional card reward and a random boss relic. NL Works once per act."
+    ]
   }
 }

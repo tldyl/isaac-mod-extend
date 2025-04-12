@@ -3,7 +3,7 @@
   "name": "IsaacMod Extend",
   "author_list": ["Temple9"],
   "description": "加入了忏悔新增的道具，需要同以撒mod一起使用。",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "mts_version": "3.22.0",
   "dependencies": ["basemod", "stslib", "IsaacMod", "Anm2Player"]
 }
